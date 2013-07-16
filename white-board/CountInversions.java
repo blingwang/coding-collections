@@ -1,8 +1,9 @@
 // Given array A[1...n], for every i<j, find all inversion pairs such that A[i]>A[j]
+// Solution: insertion sort or merge sort
 class CountInversions {
     public int count(int[] a) {
         int[] aux = new int[a.length];
-        count(a, aux, 0, a.length - 1);
+        return count(a, aux, 0, a.length - 1);
     }
 
     private int count(int[] a, int[] aux, int lo, int hi) {
@@ -32,10 +33,12 @@ class CountInversions {
                 a[k] = aux[i++];
             } else if (aux[i].compareTo(aux[j]) > 0) {
                 a[k] = aux[j++];
-                count += mid - i + 1;
+                count += mid - i + 1; // # of elements left in low half
             } else {
                 a[k] = aux[i++];
             }
         }
+        
+        return count;
     }
 }
