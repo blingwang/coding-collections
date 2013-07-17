@@ -1,7 +1,12 @@
 public class Palindrome {
+  boolean isPalindrome(String str) {    
+    int n = str.length;
+    for( int i = 0; i < n/2; i++ )
+        if (str.charAt(i) != str.charAt(n-i-1)) return false;
+    return true;    
+  }
 
-  public static boolean isPalindrome(String str)
-  {
+  public static boolean isPalindrome(String str){
       //test for end of recursion
       if(str.length() < 2) {return true;}
   
@@ -12,8 +17,7 @@ public class Palindrome {
       return isPalindrome(str.substring(1, str.length() - 1));
   }
   
-  public static void main(String[] args)
-  {
+  public static void main(String[] args){
       System.out.print(isPalindrome("deed"));
   }
 }
