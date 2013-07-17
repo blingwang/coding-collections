@@ -31,7 +31,7 @@ class CountInversions {
                 a[k] = aux[j++];
             } else if (j > hi) {
                 a[k] = aux[i++];
-            } else if (aux[i].compareTo(aux[j]) > 0) {
+            } else if (aux[i] > aux[j]) {
                 a[k] = aux[j++];
                 count += mid - i + 1; // # of elements left in low half
             } else {
