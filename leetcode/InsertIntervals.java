@@ -4,6 +4,7 @@ public class InsertIntervals {
        ArrayList<Interval> mergedList = new ArrayList<Interval>();
        
        int i = 0;
+       // if origion data structure can be efficently inserted, use binary search
        while (i < intervals.size() && newInterval.start > intervals.get(i).end) {
            mergedList.add(intervals.get(i++));
        }
