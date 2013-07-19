@@ -29,4 +29,26 @@ public class DecodeWays {
         if (s.charAt(beginIndex) == '2' && s.charAt(beginIndex+1) < '7') return true;
         return false;
     }
+    
+    public int numDecodingsDP(String s) {// similar to fibonacci
+        if (s.length() == 0) return 0;
+        int pre1 = 1, pre2 = 1; // we consider start as valid
+        
+        for (int i = 0; i < s.length(); i++) {
+            int cur = 0;
+            if (s.charAt(i) > '0') cur += pre1;
+            if (isValidTwoDigits(s, i-1)) cur += pre2;
+            if (cur == 0) return 0; // also solves s starting with 0
+            pre2 = pre1;
+            pre1 = cur;        
+        }
+        return pre1;
+    }
+    
+    private boolean isValidTwoDigits(String s, int curIndex) {
+        if (curIndex < 0 || curIndex+1 >= s.length()) return false;
+        if (s.charAt(curIndex) == '1') return true;
+        if (s.charAt(curIndex) == '2' && s.charAt(curIndex+1) < '7') return true;
+        return false;
+    }
 }
