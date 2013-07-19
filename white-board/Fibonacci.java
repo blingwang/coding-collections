@@ -5,10 +5,10 @@ public class Fibonacci {
     }
     
     public static int fib(int n) {
-        int f = 0;
-        int g = 1;
+        int f = 0; // f(0)
+        int g = 1; // f(-1)
       
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < n; i++){// fib(1) to fib(n)
           f = f + g;
           g = f - g;
         } 
