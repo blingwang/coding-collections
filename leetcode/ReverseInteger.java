@@ -20,4 +20,13 @@ public class ReverseInteger {
         
         return (int)result * sign;
     }
+    
+    public int reverse2(int x) {// let java do overflow check
+        long result = 0;
+        while(x != 0) { // java module returns negative
+            result = result * 10 + x % 10;
+            x /= 10;
+        }
+        return (int)result;
+    }
 }
