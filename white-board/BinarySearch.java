@@ -26,7 +26,7 @@ public class BinarySearch {
         int lo = 0, hi = a.length - 1;
         int bestSoFar = -1;
         while (lo <= hi) {
-            int mid = lo + (hi - lo + 1) / 2;
+            int mid = lo + (hi - lo) / 2;
             if (p.predicate(a[mid], target)) {
                 // we found a potential maximum x, 
                 // but we should still check to see 
