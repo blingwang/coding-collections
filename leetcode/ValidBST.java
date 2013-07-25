@@ -1,6 +1,6 @@
 public class ValidBST {
     int pre;
-
+    /// what if left-most leaf = Integer.MIN_VALUE?
     public boolean isValidBST(TreeNode root) {
         //pre = Integer.MIN_VALUE;
         //return inOrder(root); 
