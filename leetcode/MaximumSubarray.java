@@ -13,7 +13,16 @@ public class MaximumSubarray {
         return maxSum;
     }
     
-    public int maxSubArray2(int[] A) {// divide and conquer
+    public int maxSubArray2(int[] A) { // modified Kadane's algorithm
+        int maxEndingHere = 0, maxSoFar = A[0];
+        for (int i = 0; i < A.length; i++) {
+            maxEndingHere = Math.max(A[i], maxEndingHere + A[i]);
+            maxSoFar      = Math.max(maxSoFar, maxEndingHere);
+        }
+        return maxSoFar;
+    }
+    
+    public int maxSubArray3(int[] A) {// divide and conquer
         return maxSubArray(A, 0, A.length-1);
     }
     
