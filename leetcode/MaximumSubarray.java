@@ -14,8 +14,8 @@ public class MaximumSubarray {
     }
     
     public int maxSubArray2(int[] A) { // modified Kadane's algorithm
-        int maxEndingHere = 0, maxSoFar = A[0];
-        for (int i = 0; i < A.length; i++) {
+        int maxEndingHere = A[0], maxSoFar = A[0];
+        for (int i = 1; i < A.length; i++) {
             maxEndingHere = Math.max(A[i], maxEndingHere + A[i]);
             maxSoFar      = Math.max(maxSoFar, maxEndingHere);
         }
