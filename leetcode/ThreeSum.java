@@ -9,7 +9,7 @@ public class ThreeSum {
             // Do two sum
             int start = i + 1; 
             int end = num.length - 1;
-            while (start < end) {
+            while (start < end) {// possible optimization: num[i] <= 0 && num[end] >= 0
                 int sum = num[i] + num[start] + num[end];
                 if (sum < 0) {
                     start++;

@@ -18,6 +18,16 @@ public class Triangle {
         
         return min(minTotals);
     }
+    
+    public int minimumTotalBottomUp(ArrayList<ArrayList<Integer>> triangle) {
+        int[] pathSum = new int[triangle.size()+1];
+        for (int i = triangle.size() - 1; i >= 0; i--) {
+            for (int j = 0; j <= i; j++) {
+                pathSum[j] = triangle.get(i).get(j) + Math.min(pathSum[j], pathSum[j+1]);
+            }
+        }
+        return pathSum[0];
+    }
 
     private int min(int[] a) {
         int minValue = a[0];
