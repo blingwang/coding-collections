@@ -21,7 +21,7 @@ public class UniquePaths {
         return pathCount;
     }
     
-    // Solution 4 using combinatorics 
+    // Solution 4 using combinatorics: C(m+n-2, m-1)
     public int uniquePaths(int m, int n) {
         if (m < n) return uniquePaths(n, m);
         
