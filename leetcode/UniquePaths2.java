@@ -52,4 +52,24 @@ public class UniquePaths2 {
         
         return pathCounts[m-1][n-1];
     }
+    
+    // Solution 3 using DP: store in array
+    public int uniquePathsWithObstaclesDP1(int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        if (m == 0) return 0;
+        int n = obstacleGrid[0].length;
+        if (n == 0) return 0;
+        int[] rowPaths = new int[n];
+        if (obstacleGrid[0][0] != 1) rowPaths[0] = 1;
+        
+        for (int i = 0; i < m; i++) {
+            if (obstacleGrid[i][0] == 1) rowPaths[0] = 0;
+            for (int j = 1; j < n; j++) {
+                if (obstacleGrid[i][j] == 1) rowPaths[j] = 0;
+                else rowPaths[j] += rowPaths[j-1];
+            }
+        }
+        
+        return rowPaths[n-1];
+    }
 }
