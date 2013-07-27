@@ -22,7 +22,7 @@ public class UniquePaths {
     }
     
     // Solution 2 using DP: store in matrix
-    public int uniquePaths(int m, int n) {
+    public int uniquePathsDP2(int m, int n) {
         assert(m > 0 && n > 0);
         int[][] pathCounts = new int[m+1][n+1];
         pathCounts[1][0] = 1;
