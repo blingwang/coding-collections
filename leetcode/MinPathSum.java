@@ -52,4 +52,28 @@ public class MinPathSum {
         
         return pathSums[m-1][n-1];
     }
+    
+    // Solution 3 using DP: store in array
+    public int minPathSumDP1(int[][] grid) {
+        int m = grid.length;
+        if (m == 0) return 0;
+        int n = grid[0].length;
+        if (n == 0) return 0;
+        
+        int[] pathSums = new int[n];
+        
+        pathSums[0] = grid[0][0];
+        for (int j = 1; j < n; j++) {
+            pathSums[j] = pathSums[j-1] + grid[0][j];
+        }
+        
+        for (int i = 1; i < m; i++) {
+            pathSums[0] += grid[i][0];
+            for (int j = 1; j < n; j++) {
+                pathSums[j] = Math.min(pathSums[j], pathSums[j-1]) + grid[i][j];
+            }
+        }
+        
+        return pathSums[n-1];
+    }
 }
