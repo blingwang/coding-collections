@@ -21,6 +21,21 @@ public class UniquePaths {
         return pathCount;
     }
     
+    // Solution 2 using DP: store in matrix
+    public int uniquePaths(int m, int n) {
+        assert(m > 0 && n > 0);
+        int[][] pathCounts = new int[m+1][n+1];
+        pathCounts[1][0] = 1;
+        
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                pathCounts[i][j] = pathCounts[i-1][j] + pathCounts[i][j-1];
+            }
+        }
+        
+        return pathCounts[m][n];
+    }
+    
     // Solution 4 using combinatorics: C(m+n-2, m-1)
     public int uniquePaths(int m, int n) {
         if (m < n) return uniquePaths(n, m);
