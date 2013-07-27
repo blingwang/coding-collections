@@ -1,31 +1,27 @@
 public class MinPathSum {
-    private int[][] grid;
-    int m, n;
-    private int[][] cache;
-
+    // Solution 1 using memorization
+    private int m, n;
+    private Map<Integer, Integer> cache;
     public int minPathSum(int[][] grid) {
-        this.grid = grid;
         m = grid.length;
+        if (m == 0) return 0;
         n = grid[0].length;
-        cache = new int[m][n];
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                cache[i][j] = -1;
-            }
-        }
         
-        return minPathSum(m-1, n-1);  
+        cache = new HashMap<Integer, Integer>();
+        return minPathSum(grid, m - 1, n - 1);
     }
-
-    private int minPathSum(int i, int j) {
-        if ((i == 0 && j < 0) || (i < 0 && j == 0)) return 0;      
-        if (i < 0 || j < 0) return Integer.MAX_VALUE;       
-        if (cache[i][j] >= 0) return cache[i][j];
+    
+    private int minPathSum(int[][] grid, int x, int y) {
+        if (x < 0 || y < 0) return Integer.MAX_VALUE;
+        if (x == 0 && y == 0) return grid[0][0];
         
-        int num = grid[i][j];
-        int min = Math.min(minPathSum(i-1, j), minPathSum(i, j-1)) + num;
-        cache[i][j] = min;
+        int key = x * n + y;
+        if (cache.containsKey(key)) return cache.get(key);
         
-        return min;
+        int minSum = grid[x][y] + Math.min(minPathSum(grid, x-1, y), 
+                                           minPathSum(grid, x, y-1));
+        
+        cache.put(key, minSum);
+        return minSum;
     }
 }
