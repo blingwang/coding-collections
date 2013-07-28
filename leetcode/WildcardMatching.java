@@ -41,6 +41,40 @@ public class WildcardMatching {
         
         return isMatched[m%2][n];
     }
+    
+    public boolean isMatchDP2(String s, String p) {
+        int m = p.length();
+        int n = s.length();
+        
+        // count non-star chars in p and check against s
+        int count = 0;
+        for (int i = 0; i < m; i++) {
+            if (p.charAt(i) != '*') count++;
+        }
+        if (count > n) return false;//n>=count=>enough chars in s
+        
+        boolean[] matched = new boolean[n+1];
+        matched[0] = true;
+        for (int i = 0; i < m; i++) {
+            char c = p.charAt(i);
+            if (c == '*') {
+                for (int j = 0; j <= n; j++) {
+                    if (matched[j]) {
+                        while (j <= n) matched[j++] = true;
+                        break;
+                    }
+                }
+            } else {
+                for (int j = n-1; j >= 0; j--) {
+                    if (matched[j] && (c == s.charAt(j) || c == '?')) matched[j+1] = true;
+                    else matched[j+1] = false;
+                }
+                matched[0] = false;
+            }
+        }
+        
+        return matched[n];
+    }
 
     private boolean isMatchGreedy(String s, String p) {
         // Greedy approach: try to match each substring in p delimited by stars
