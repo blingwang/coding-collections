@@ -37,7 +37,7 @@ class TwoSum {
                 return result;
             }
             
-            // always search in previous elements to eliminate same element
+            // always search in previous to avoid element with same index
             hmap.put(numbers[i], i);
         }
 
