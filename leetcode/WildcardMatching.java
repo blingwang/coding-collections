@@ -70,11 +70,9 @@ public class WildcardMatching {
         return j == p.length();
     }
 
-    // TODO: Wrong solution
-    private boolean isMatchGreedy2(String s, String p) {
-        // Greedy approach: match substring in p delimited by stars from 2 ends
-        int m = p.length(), n = s.length();
-        if (m == 0) return n == 0;
+    public boolean isMatchGreedy2(String s, String p) {
+        int m = p.length();
+        int n = s.length();
         
         // count non-star chars in p and check against s
         int count = 0;
@@ -83,29 +81,49 @@ public class WildcardMatching {
         }
         if (count > n) return false;
         
-        int lo = 0, hi = m - 1;
-        
-        while (lo < m && p.charAt(lo) != '*') lo++;
-        while (hi >= 0 && p.charAt(hi) != '*') hi--;
-        if (lo > hi) { // no star
-            return isMatchNoStar(s, p);
+        int start = 0, end = m - 1;
+        while (start < m && p.charAt(start) != '*') {
+            char cp = p.charAt(start);
+            char cs = s.charAt(start);
+            if (cs != cp && cp != '?') return false;
+            start++;
+        }
+        while (end >= 0 && p.charAt(end) != '*') {
+            char cp = p.charAt(end);
+            char cs = s.charAt(n-(m-end));
+            if (cs != cp && cp != '?') return false;
+            end--;
         }
         
-        if (!isMatchNoStar(p.substring(0, lo), s.substring(0, lo))) return false;
-        if (!isMatchNoStar(p.substring(hi+1), s.substring(hi+n-m+1))) return false;
+        if (start == end) return true; // one star left
+        if (start > end) return isMatchNoStar(s, p); // no star found
         
-        if (hi - lo < 2) return true;
+        s = s.substring(start, n-(m-1-end));
+        p = p.substring(start+1, end);
         
-        String rest = p.substring(lo+1, hi);
+        String[] substrs = p.split("\\*+");
+        for (String str : substrs) {
+            if (str.length() == 0) continue;
+            int match = strStr(s, str);
+            if( match < 0) return false;
+            s = s.substring(match + str.length());
+        }
         
-        for (int i = lo; i < n; i++) {
-            for (int j = hi+n-m; j >= 0 && i <= j; j--) {
-                if (isMatchGreedy(s.substring(i, j+1), rest)) return true;
+        return true;
+    }
+    
+    private int strStr(String haystack, String needle) {
+        for (int i = 0; i <= haystack.length()-needle.length(); i++) {
+            int j;
+            for (j = 0; j < needle.length(); j++) {
+                if (haystack.charAt(i+j) != needle.charAt(j) && 
+                    needle.charAt(j) != '?') {
+                        break;
+                }
             }
-            
+            if (j == needle.length()) return i;
         }
-        
-        return false;
+        return -1;
     }
 
     private boolean isMatchNoStar(String s, String p) {
