@@ -26,7 +26,7 @@ class TwoSum {
 
     /* return two non-zero-based indexes */
     public int[] twoSum2(int[] numbers, int target) {
-        int[] result = new int[2];
+        int[] result = {-1, -1};
         Map<Integer, Integer> hmap = new HashMap<Integer, Integer>();
 
         for(int i = 0; i < numbers.length; i++) {
