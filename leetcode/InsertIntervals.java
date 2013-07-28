@@ -25,30 +25,23 @@ public class InsertIntervals {
    }
    
    public ArrayList<Interval> insertInplace(ArrayList<Interval> intervals, Interval newInterval) {
-        int insertPos = findInsertPosition(intervals, newInterval);
+        int insertIndex = findInsertPosition(intervals, newInterval);
         
-        int i = insertPos;
-        while(i < intervals.size() && intervals.get(i).start <= newInterval.end) {
-            newInterval.start = Math.min(intervals.get(i).start, newInterval.start);
-            newInterval.end = Math.max(intervals.get(i).end, newInterval.end);
+        // merge intervals
+        int i = insertIndex;
+        while (i < intervals.size() && intervals.get(i).start <= newInterval.end) {
+            newInterval.start = Math.min(newInterval.start, intervals.get(i).start);
+            newInterval.end = Math.max(newInterval.end, intervals.get(i).end);
             i++;
         }
         
-        if (i == insertPos) { // no overlap
-            intervals.add(insertPos, newInterval);
-        } else { // shift
-           intervals.set(insertPos, newInterval); 
-           int shift = i - insertPos - 1;
-           if (shift > 0) {
-               while (i < intervals.size()) {
-                   intervals.set(i-shift, intervals.get(i));
-                   i++;
-               }
-               while(shift > 0) {
-                   intervals.remove(intervals.size()-1);
-                   shift--;
-               }
-           }
+        if (i == insertIndex) { // no overlap: insert into list
+            intervals.add(insertIndex, newInterval); // arraylist add: insert or append
+        } else {
+            intervals.set(insertIndex, newInterval);
+            int j = insertIndex + 1;
+            while (i < intervals.size()) intervals.set(j++, intervals.get(i++));//shift
+            while (i > j) intervals.remove(--i); // remove
         }
         
         return intervals;
