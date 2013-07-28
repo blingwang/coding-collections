@@ -25,22 +25,22 @@ class TwoSum {
     }
 
     /* return two non-zero-based indexes */
-    public int[] twoSum2(int[] numbers, int target) {
+    public int[] twoSum(int[] numbers, int target) {
         int[] result = {-1, -1};
-        Map<Integer, Integer> hmap = new HashMap<Integer, Integer>();
-
-        for(int i = 0; i < numbers.length; i++) {
+        Map<Integer, Integer> indexMap = new HashMap<Integer, Integer>();
+        
+        for (int i = 0; i < numbers.length; i++) {
             int expected = target - numbers[i];
-            if (hmap.containsKey(expected)) {
-                result[0] = hmap.get(expected) + 1;
+            if (indexMap.containsKey(expected)) {
+                result[0] = indexMap.get(expected) + 1;
                 result[1] = i + 1;
-                return result;
+                break;
             }
             
             // always search in previous to avoid element with same index
-            hmap.put(numbers[i], i);
+            indexMap.put(numbers[i], i);
         }
-
+        
         return result;
     }
 }
