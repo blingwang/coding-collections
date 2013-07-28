@@ -15,8 +15,8 @@ class TwoSum {
             } else if (sum > target) {
                 end--;
             } else {
-                result[0] = start + 1;
-                result[1] = end + 1;
+                result[0] = numbers[start];
+                result[1] = numbers[end];
                 return result;
             }
         }
