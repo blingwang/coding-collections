@@ -48,9 +48,9 @@ public class MergeIntervals {
             Interval cur = intervals.get(i);
             Interval last = intervals.get(lastIndex);
             
-            if (cur.start <= last.end) {
+            if (cur.start <= last.end) { // overlap => merge to last
                 last.end = Math.max(last.end, cur.end);
-            } else {
+            } else { // not overlap => append to last
                 lastIndex++;
                 intervals.set(lastIndex, cur);
             }
