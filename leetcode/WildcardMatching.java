@@ -79,33 +79,34 @@ public class WildcardMatching {
         for (int i = 0; i < m; i++) {
             if (p.charAt(i) != '*') count++;
         }
-        if (count > n) return false;
+        if (count > n) return false;//n>=count=>enough chars in s
         
         // find exact match from two ends until star is found
-        int start = 0, end = m - 1;
+        int start = 0;
         while (start < m && p.charAt(start) != '*') {
             char cp = p.charAt(start);
             char cs = s.charAt(start);
             if (cs != cp && cp != '?') return false;
             start++;
         }
-        while (end >= 0 && p.charAt(end) != '*') {
-            char cp = p.charAt(end);
-            char cs = s.charAt(n-(m-end));
+        if (start == m) return start == n; // no star found
+        
+        int pEnd = m-1, sEnd = n-1;
+        while (pEnd >= 0 && p.charAt(pEnd) != '*') {
+            char cp = p.charAt(pEnd);
+            char cs = s.charAt(sEnd);
             if (cs != cp && cp != '?') return false;
-            end--;
+            pEnd--;
+            sEnd--;
         }
         
-        if (start == end) return true; // one star left
-        if (start > end) return isMatchNoStar(s, p); // no star found
-        
         // for the rest, match substrings of p
-        s = s.substring(start, n-(m-1-end));
-        p = p.substring(start+1, end);
+        s = s.substring(start, sEnd+1);
+        p = p.substring(start, pEnd+1);
         
         String[] substrs = p.split("\\*+");
         for (String str : substrs) {
-            if (str.length() == 0) continue;
+            if (str.length() == 0) continue; // ignore empty substring
             int match = strStr(s, str);
             if( match < 0) return false;
             s = s.substring(match + str.length());
