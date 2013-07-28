@@ -36,6 +36,8 @@ class TwoSum {
                 result[1] = i + 1;
                 return result;
             }
+            
+            // always search in previous elements to eliminate same element
             hmap.put(numbers[i], i);
         }
 
