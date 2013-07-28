@@ -81,6 +81,7 @@ public class WildcardMatching {
         }
         if (count > n) return false;
         
+        // find exact match from two ends until star is found
         int start = 0, end = m - 1;
         while (start < m && p.charAt(start) != '*') {
             char cp = p.charAt(start);
@@ -98,6 +99,7 @@ public class WildcardMatching {
         if (start == end) return true; // one star left
         if (start > end) return isMatchNoStar(s, p); // no star found
         
+        // for the rest, match substrings of p
         s = s.substring(start, n-(m-1-end));
         p = p.substring(start+1, end);
         
