@@ -44,6 +44,7 @@ public class WildcardMatching {
 
     private boolean isMatchGreedy(String s, String p) {
         // Greedy approach: try to match each substring in p delimited by stars
+        // We always choose the first substring match in s
         int starPos = -1;
         int matchStart = 0;
         int i = 0; // char index in s
