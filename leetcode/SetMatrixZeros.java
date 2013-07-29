@@ -1,8 +1,38 @@
 public class SetMatrixZeros {
     public void setZeroes(int[][] matrix) {
         int m = matrix.length;
+        if (m == 0) return;
         int n = matrix[0].length;
-        if (m == 0 || n == 0) return;
+        if (n == 0) return;
+        
+        // use boolean array to avoid init value = 0
+        boolean[] row = new boolean[m];
+        boolean[] col = new boolean[n];
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    row[i] = true;
+                    col[j] = true;
+                }
+            }
+        }
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (row[i] || col[j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+    
+    // Solution 2 using O(1) space
+    public void setZeroesInplace(int[][] matrix) {
+        int m = matrix.length;
+        if (m == 0) return;
+        int n = matrix[0].length;
+        if (n == 0) return;
         
         boolean row0 = false;
         
