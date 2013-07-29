@@ -34,8 +34,9 @@ public class SetMatrixZeros {
         int n = matrix[0].length;
         if (n == 0) return;
         
-        boolean row0 = false;
+        boolean row0 = false; // use boolean to avoid init value = 0
         
+        // find zero cells
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (matrix[i][j] == 0) {
@@ -46,6 +47,7 @@ public class SetMatrixZeros {
             }
         }
         
+        // set zeros: order matters
         for (int i = 1; i < m; i++) {
             for (int j = 1; j < n; j++) {
                 if (matrix[i][0] == 0 || matrix[0][j] == 0) {
