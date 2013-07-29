@@ -1,7 +1,11 @@
 public class MaxTreeDepth {
-    int maxDepth;
-
     public int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+    }
+    
+    int maxDepth;
+    public int maxDepth2(TreeNode root) {
         maxDepth = 0;
         dfs(root, 0);
         return maxDepth;
