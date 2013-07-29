@@ -1,7 +1,7 @@
 public class ValidatePalindrome {
     public boolean isPalindrome(String s) {
         if (s.length() == 0) return true;
-        s = s.toLowerCase();
+        s = s.toLowerCase(); // reassign: Strings are immutable
         
         int start = 0;
         int end = s.length() - 1;
