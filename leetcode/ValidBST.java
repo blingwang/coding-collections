@@ -4,7 +4,9 @@ public class ValidBST {
     public boolean isValidBST(TreeNode root) {
         //pre = Integer.MIN_VALUE;
         //return inOrder(root); 
-        return inRange(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        //return inRange(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        TreeNode pre = new TreeNode(Integer.MIN_VALUE);
+        return inorder2(root, pre);
     }
 
     private boolean inRange(TreeNode root, int min, int max) {
@@ -20,6 +22,17 @@ public class ValidBST {
         if (root.val <= pre) return false;
         pre = root.val;       
         if (!inOrder(root.right)) return false;
+        
+        return true;
+    }
+    
+    private boolean inorder2 (TreeNode root, TreeNode pre) {
+        if (root == null) return true;
+        
+        if (!inorder(root.left, pre))  return false;
+        if (root.val <= pre.val)       return false;
+        pre.val = root.val;
+        if (!inorder(root.right, pre)) return false;
         
         return true;
     }
