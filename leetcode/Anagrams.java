@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Anagrams {
+    // corner cases: empty strings; distinct word
     public ArrayList<String> anagrams(String[] strs) {
         // Add words into hash table with sorted chars as key
         Map<String, ArrayList<String>> anagramTable = new 
