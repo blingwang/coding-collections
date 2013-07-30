@@ -1,12 +1,26 @@
 public class SumRootToLeaf {
-    int sum;
-
     public int sumNumbers(TreeNode root) {
+        return sumNumbers(root, 0);
+    }
+    
+    private int sumNumbers(TreeNode root, int curSum) {
+        if (root == null) return 0; // don't return curSum
+        
+        curSum = curSum * 10 + root.val;
+        
+        // only return result if leaf node
+        if (root.left == null && root.right == null) return curSum;
+        
+        return sumNumbers(root.left, curSum) + sumNumbers(root.right, curSum); 
+    }
+
+    private int sum;
+    public int sumNumbers2(TreeNode root) {
         sum = 0;
         dfs(root, 0);
         return sum;
     }
-
+    
     private void dfs(TreeNode root, int curSum) {
         if (root == null) return;
         
