@@ -45,6 +45,21 @@ public class MergeKSortedLists {
        return lists.get(0);
    }
    
+   public ListNode mergeKListsTopDown(ArrayList<ListNode> lists) {
+        //if (lists.isEmpty()) return null;
+        return mergeKLists(lists, 0, lists.size()-1);
+    }
+    
+    private ListNode mergeKLists(ArrayList<ListNode> lists, int lo, int hi) {
+        if (lo > hi) return null;
+        if (lo == hi) return lists.get(lo);
+        
+        int mid = lo + (hi - lo) / 2;
+        ListNode left = mergeKLists(lists, lo, mid);
+        ListNode right = mergeKLists(lists, mid+1, hi);
+        return mergeTwoLists(left, right);
+    }
+   
    private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
        
        ListNode dummyHead = new ListNode(-1);
