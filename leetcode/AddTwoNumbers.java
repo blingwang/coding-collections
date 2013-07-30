@@ -3,31 +3,24 @@ public class AddTwoNumbers {
         ListNode dummyHead = new ListNode(-1);
         ListNode pre = dummyHead;
         int carrier = 0;
-        int sum = 0;
         
         while (l1 != null || l2 != null) {
-            if (l1 == null) {
-                sum = l2.val + carrier;
-                pre.next = new ListNode(sum % 10);
-                carrier = sum / 10;
-                pre = pre.next;
-                l2 = l2.next;
-            } else if (l2 == null) {
-                sum = l1.val + carrier;
-                pre.next = new ListNode(sum % 10);
-                carrier = sum / 10;
-                pre = pre.next;
+            int val1 = 0, val2 = 0;
+            
+            if (l1 != null) {
+                val1 = l1.val;
                 l1 = l1.next;
-            } else {
-                sum = l1.val + l2.val + carrier;
-                pre.next = new ListNode(sum % 10);
-                carrier = sum / 10;
-                pre = pre.next;
-                l1 = l1.next;
-                l2 = l2.next;
             }
             
+            if (l2 != null) {
+                val2 = l2.val;
+                l2= l2.next;
+            }
             
+            int sum = val1 + val2 + carrier;
+            carrier = sum / 10;
+            pre.next = new ListNode(sum % 10);
+            pre = pre.next;
         }
         
         if (carrier != 0) pre.next = new ListNode(carrier);
