@@ -11,8 +11,9 @@ public class InorderTraversal {
                current = current.left;
            } 
            
-           if (stack.isEmpty()) break;
+           if (stack.isEmpty()) break; // done
            
+           // always pop when cur is null(left end or right end)
            current = stack.pop();
            values.add(current.val);
            current = current.right;
