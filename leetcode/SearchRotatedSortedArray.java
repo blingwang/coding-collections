@@ -40,16 +40,16 @@ public class SearchRotatedSortedArray {
      * if it is not, the pivot must be to the left.
      */
     int findSortedArrayRotation(int[] A) {
-    int lo = 0;
-    int hi = A.length - 1;
-
-    while (A[lo] > A[hi]) {
-        int mid = lo + (hi - lo) / 2;
-        if (A[mid] > A[hi])
-            lo = mid + 1;
-        else
-            hi = mid;
+        int lo = 0;
+        int hi = A.length - 1;
+    
+        while (A[lo] > A[hi]) {
+            int mid = lo + (hi - lo) / 2;
+            if (A[mid] > A[hi])
+                lo = mid + 1;
+            else
+                hi = mid;
+        }
+        return lo;
     }
-    return lo;
-}
 }
