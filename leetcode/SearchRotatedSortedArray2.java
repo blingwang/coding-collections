@@ -1,5 +1,25 @@
 public class SearchRotatedSortedArray2 {
     public boolean search(int[] A, int target) {
+        int lo = 0;
+        int hi = A.length - 1;
+        
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (A[mid] == target) return true;
+            if (A[mid] < A[hi]) {// right half sorted
+                if (target > A[mid] && target <= A[hi]) lo = mid + 1;
+                else hi = mid - 1;
+            } else if (A[mid] > A[hi]) { // left half sorted
+                if (target >= A[lo] && target < A[mid]) hi = mid - 1;
+                else lo = mid + 1;
+            } else { // A[mid] == A[hi]
+            }
+        }
+        
+        return false;
+    }
+    
+    public boolean search2(int[] A, int target) {
         return searchRotated(A, target, 0, A.length - 1);
     }
 
