@@ -1,22 +1,22 @@
 public interface Node {
-  Node left();
-  Node right();
+	Node left();
+	Node right();
 }
 
 /**
  * Auxilliary class for use in getDeepestNode
  */
 public class NodeDepth {
-  Node node;
-  int depth;
+  	Node node;
+  	int depth;
   
-  public NodeDepth(Node node, int depth) {
-    this.node = node;
-    this.depth = depth;
-  }
-  
-  public int getDepth() {
-    return depth;
+  	public NodeDepth(Node node, int depth) {
+	    this.node = node;
+	    this.depth = depth;
+	}
+
+	public int getDepth() {
+    		return depth;
 	}
 }
 
@@ -27,7 +27,7 @@ public NodeDepth getDeepestNode(Node root) {
 private NodeDepth getDeepestNode(Node root, int depth) {
 	if (root == null) return null;
   
-  NodeDepth left = getDeepestNode(root.left, depth + 1);
+  	NodeDepth left = getDeepestNode(root.left, depth + 1);
 	NodeDepth right = getDeepestNode(root.right, depth + 1);
   
 	if (left == null && right == null) return new NodeDepth(root, depth);
