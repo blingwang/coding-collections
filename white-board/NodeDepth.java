@@ -37,6 +37,35 @@ private NodeDepth getDeepestNode(Node root, int depth) {
 	return (left.getDepth() > right.getDepth()) ? left : right;
 }
 
+public NodeDepth getDeepestNode2(Node root) {
+	if (root == null) return null;
+	
+	NodeDepth left = getDeepestNode(root.left);
+	NodeDepth right = getDeepestNode(root.right);
+	
+	if (left == null && right == null) return new NodeDepth(root, 1);
+	
+	if (left == null) {
+		right.setDepth(right.getDepth() + 1);
+		return right;
+	}
+	
+	if (right == null) {
+		left.setDepth(left.getDepth() + 1);
+		return left;
+	}
+	
+	if (left.getDepth() < right.getDepth()) {
+		right.setDepth(right.getDepth() + 1);
+		return right;	
+	} else {
+		left.setDepth(left.getDepth() + 1);
+		return left;	
+	}
+	
+	return null;
+}
+
 // test cases
 null ->	null
 root=1 -> (1, 1)
