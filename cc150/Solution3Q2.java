@@ -18,7 +18,7 @@ public class Solution3Q2 {
         }
     }
 
-    public Integer pop() {
+    public int pop() {
         int value = s1.pop();
         
         if (value == min()) {
