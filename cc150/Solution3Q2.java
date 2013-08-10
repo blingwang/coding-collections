@@ -13,7 +13,7 @@ public class Solution3Q2 {
     public void push(int value){
         s1.push(value);
         
-        if (value <= min()) {
+        if (s2.isEmpty() || value <= min()) {
             s2.push(value);
         }
     }
@@ -29,8 +29,8 @@ public class Solution3Q2 {
     }
 
     public int min() {
-        if (s2.isEmpty()) {
-            throw new RuntimeException("Empty Stack!");
+        if (s2.isEmpty()) { // or use EmptyStackException?
+            throw new InvalidOperationException("Stack is empty"); 
         } else {
             return s2.peek();
         }
