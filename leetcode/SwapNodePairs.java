@@ -8,9 +8,11 @@ public class SwapNodePairs {
         ListNode newHead = head.next;
         while (first != null && first.next !=null) {
             ListNode second = first.next;
+            
             pre.next = second;
             first.next = second.next;
             second.next = first;
+            
             pre = first;
             first = first.next;
         }
@@ -22,12 +24,10 @@ public class SwapNodePairs {
         if (head == null || head.next == null) return head;
         
         ListNode second = head.next;
-        head.next = second.next;
+        head.next = swapPairs(second.next);;
         second.next = head;
-        head = second;
-        head.next.next = swapPairs(head.next.next);
         
-        return head;
+        return second;
     }
 
     private class ListNode {
