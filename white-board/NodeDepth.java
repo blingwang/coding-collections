@@ -18,6 +18,10 @@ public class NodeDepth {
 	public int getDepth() {
     		return depth;
 	}
+	
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
 }
 
 public NodeDepth getDeepestNode(Node root) {
@@ -27,8 +31,8 @@ public NodeDepth getDeepestNode(Node root) {
 private NodeDepth getDeepestNode(Node root, int depth) {
 	if (root == null) return null;
   
-  	NodeDepth left = getDeepestNode(root.left, depth + 1);
-	NodeDepth right = getDeepestNode(root.right, depth + 1);
+  	NodeDepth left = getDeepestNode(root.left(), depth + 1);
+	NodeDepth right = getDeepestNode(root.right(), depth + 1);
   
 	if (left == null && right == null) return new NodeDepth(root, depth);
 	if (left == null) return right; 
@@ -40,8 +44,8 @@ private NodeDepth getDeepestNode(Node root, int depth) {
 public NodeDepth getDeepestNode2(Node root) {
 	if (root == null) return null;
 	
-	NodeDepth left = getDeepestNode(root.left);
-	NodeDepth right = getDeepestNode(root.right);
+	NodeDepth left = getDeepestNode(root.left());
+	NodeDepth right = getDeepestNode(root.right());
 	
 	if (left == null && right == null) return new NodeDepth(root, 1);
 	
