@@ -74,4 +74,34 @@ public class Subsets2 {
         }
         allSubsets.add(list);
     }
+    
+    public ArrayList<ArrayList<Integer>> subsetsWithDup2(int[] num) {
+        Arrays.sort(num);
+        
+        ArrayList<ArrayList<Integer>> subsets = new ArrayList<ArrayList<Integer>>();
+        subsets.add(new ArrayList<Integer>());
+        int numDups = 0;
+        
+        for (int i = 0; i < num.length; i++) {
+            int count = subsets.size();
+            
+            // count duplicates so far
+            if (i > 0 && num[i] == num[i-1]) numDups++;
+            else numDups = 0;
+            
+            for (int j = 0; j < count; j++) {
+                // only append to subsets containing all previous duplicates
+                ArrayList<Integer> pre = subsets.get(j);
+                if (numDups > 0 && (pre.size() < numDups || 
+                                    pre.get(pre.size()-numDups) != num[i])) continue;
+                
+                ArrayList<Integer> subset = new ArrayList<Integer>();
+                subset.addAll(subsets.get(j));
+                subset.add(num[i]);
+                subsets.add(subset);
+            }
+        }
+        
+        return subsets;
+    }
 }
