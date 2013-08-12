@@ -105,6 +105,11 @@ public class Subsets2 {
         return subsets;
     }
     
+    /*
+     * 1). Add [] to results 
+     * 2). Add each single distinct element to results and recursively 
+     *     append the rest of elements to each subset.
+     */
     public ArrayList<ArrayList<Integer>> subsetsWithDup3(int[] num) {// recursion
         Arrays.sort(num);
         ArrayList<Integer> subset = new ArrayList<Integer>();
