@@ -104,4 +104,26 @@ public class Subsets2 {
         
         return subsets;
     }
+    
+    public ArrayList<ArrayList<Integer>> subsetsWithDup3(int[] num) {// recursion
+        Arrays.sort(num);
+        ArrayList<Integer> subset = new ArrayList<Integer>();
+        ArrayList<ArrayList<Integer>> subsets = new ArrayList<ArrayList<Integer>>();
+        return subsetsWithDupHelper(num, 0, subset, subsets);
+    }
+    
+    public ArrayList<ArrayList<Integer>> subsetsWithDupHelper(int[] num, int cur, 
+                ArrayList<Integer> subset, ArrayList<ArrayList<Integer>> subsets) {
+        subsets.add(subset);
+        
+        for(int i = cur; i < num.length; i++) {
+            if (i > cur && num[i] == num[i-1]) continue;// skip dups
+            
+            ArrayList<Integer> newSet = new ArrayList<Integer>(subset);
+            newSet.add(num[i]);
+            subsets = subsetsWithDupHelper(num, i+1, newSet, subsets);
+        }
+        
+        return subsets;
+    }
 }
