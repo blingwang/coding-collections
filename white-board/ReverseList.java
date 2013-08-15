@@ -17,7 +17,7 @@ class ReverseList {
     }
 
     public static Node reverseListIter(Node head) {
-        if (head == null || head.next == null) {
+        if (head == null || head.next == null) {// this check can be removed
             return head;
         }
           
