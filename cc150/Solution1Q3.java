@@ -29,7 +29,7 @@ public class Solution1Q3{
 		}
 		
 		for (int i = 0; i < t.length(); i++) {
-			charCount[t.charAt(i)]--;
+			charCount[t.charAt(i)]--;// consume chars in s
 			if (charCount[t.charAt(i)] < 0) {
 				return false;
 			}
