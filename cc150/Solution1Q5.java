@@ -1,4 +1,32 @@
 public class Solution1Q5{
+    /*solution 1*/
+    public String compressStr(String str) {
+        if (str.length() <= 2) {
+            return str;
+        }
+        
+        StringBuffer compressed = new StringBuffer();
+        char pre = str.charAt(0);
+        int count = 1;
+        
+        for (int i = 1; i < str.length(); i++) {
+            if (str.charAt(i) == pre) {
+                count++;
+            } else {
+                compressed.append(pre);
+                compressed.append(count);
+                pre = str.charAt(i);
+                count = 1;             
+            }
+        }
+        
+        compressed.append(pre);
+        compressed.append(count);
+        
+        return (str.length() <= compressed.length()) ? str : compressed.toString();
+    }
+    
+    /*solution 2*/
     public String compress(String str){
         // check if compression would create a longer string
         int size = countCompression(str);
@@ -45,6 +73,7 @@ public class Solution1Q5{
         return size;
     }
     
+    /*solution 3*/
     public String compressAlternate(String str){
         int size = countCompression(str);
         if(size >= str.length()){
