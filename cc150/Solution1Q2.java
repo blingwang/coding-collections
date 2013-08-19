@@ -1,5 +1,5 @@
 public class Solution1Q2 {
-    public static String reverse(String str) {
+    public String reverse(String str) {
         char[] chars = str.toCharArray();
         int start = 0;
         int end = chars.length - 1;
