@@ -1,25 +1,25 @@
 public class Solution1Q4{
     // length is true length of the string array
     public void replaceSpaces(char[] str, int length){
-        int spaceCount = 0, newLength, i = 0;
-        for(i = 0; i < length; i++){
-            if(str[i] == ' ' ){
+        int spaceCount = 0;
+        for (int i = 0; i < length; i++) {
+            if (str[i] == ' ') {
                 spaceCount++;
             }
         }
-
-        newLength = length + spaceCount * 2;
-
-        int curWrtPos = newLength;
-        str[curWrtPos--] = '\0';
-
-        for(i = length - 1; i >= 0; i--){
-            if(str[i] == ' '){
-                str[curWrtPos--] = '0';
-                str[curWrtPos--] = '2';
-                str[curWrtPos--] = '%';
-            }else{
-                str[curWrtPos--] = str[i];
+        
+        int newLength = length + spaceCount * 2;
+        assert str.length >= newLength;
+        
+        int writeIndex = newLength;
+        str[writeIndex--] = '\0';  
+        for (int i = length - 1; i >= 0; i--) {
+            if (str[i] == ' ') {
+                str[writeIndex--] = '%';
+                str[writeIndex--] = '0';
+                str[writeIndex--] = '2';
+            } else {
+                str[writeIndex--] = str[i];
             }
         }
     }
