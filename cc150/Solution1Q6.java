@@ -1,10 +1,10 @@
 public class Solution1Q6{
     public void rotate(int[][] matrix, int n){
-        for(int layer = 0; layer < n/2; ++layer){
+        for(int layer = 0; layer < n/2; layer++){
             int first = layer;
             int last = n - 1 - layer;
 
-            for(int i = first; i < last; ++i){
+            for(int i = first; i < last; i++){
                 int offset = i - first;
                 //save top
                 int top = matrix[first][i];
