@@ -1,5 +1,5 @@
 # include <string.h>
-void reverse(char *s) {
+void reverse(char *s) {// or char s[]
     int length = strlen(s);
     int c, i, j;
     
