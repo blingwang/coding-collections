@@ -1,11 +1,16 @@
 public class Solution1Q7{
     public void setZeros(int[][] matrix){
-        boolean[] row = new boolean[matrix.length];
-        boolean[] column = new boolean[matrix.length];
+        int m = matrix.length;
+        if (m == 0) return;
+        int n = matrix[0].length;
+        if (n == 0) return;
+        
+        boolean[] row = new boolean[m];
+        boolean[] column = new boolean[n];
 
         // store the row and column index with value 0
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix[0].length; j++){
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
                 if(matrix[i][j] == 0){
                     row[i] = true;
                     column[j] = true;
@@ -14,8 +19,8 @@ public class Solution1Q7{
         }
 
         // set arr[i][j] to 0 if either row i or column j has a 0
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix[0].length; j++){
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
                 if(row[i] || column[j]){
                     matrix[i][j] = 0;
                 }
