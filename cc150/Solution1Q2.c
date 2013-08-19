@@ -1,19 +1,10 @@
-void reverse(char *str){
-    if (!str) return;
+void reverse(char *str) {
+    int length = strlen(str);
+    int c, i, j;
     
-    char* end = str;
-    char tmp;
-    
-    while(*end){// find end of the string
-        ++end;
-    }
-    --end; // set one char back, since last char is null
-
-    // swap characters from start of string with the end 
-    // of the string, untill the pointers meet in the middle
-    while(str < end){
-        tmp = *str;
-        *str++ = *end;
-        *end++ = tmp;
+    for (i = 0, j = length - 1; i < j; i++, j--) {
+        c = s[i];
+        s[i] = s[j];
+        s[j] = c;
     }
 }
