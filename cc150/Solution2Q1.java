@@ -1,40 +1,30 @@
 import java.util.*;
 
-public class Solution2Q1{
-    class LinkedListNode{
-        LinkedListNode next = null;
-        int data;
-
-        public LinkedListNode(int d){
-            data = d;
-        }
-    }
-
-    public static void deleteDups(LinkedListNode n){
-        Set<Integer> elemsFound = new HashSet<Integer>();
-        LinkedListNode previous = null;
-
-        while(n != null){
-            if(elemsFound.contains(n.data)){
-                previous.next = n.next;
-            }else{
-                elemsFound.add(n.data);
-                previous = n;
+public class Solution {
+    public static void dedupList(ListNode head) {
+        Set<Integer> found = new HashSet<Integer>();
+        ListNode cur = head;
+        ListNode pre = null;
+        
+        while (cur != null) {
+            if (found.contains(cur.val)) {
+                pre.next = cur.next;
+            } else {
+                found.add(cur.val);
+                pre = cur;
             }
-
-            n = n.next;
+            cur = cur.next;
         }
     }
-
-    public static void deleteDupsNoBuffer(LinkedListNode head) {
-        if (head == null) return;
-        LinkedListNode current = head;
+    
+    public static void deleteDupsNoBuffer(ListNode head) {
+        ListNode current = head;
         while (current != null) {
-            // remove all future nodes that have the same value
-            LinkedListNode runner = current;
+            ListNode runner = current;
 
+            // remove all future nodes that have the same value
             while (runner.next != null ) {
-                if (runner.next.data == current.data) {
+                if (runner.next.val == current.val) {
                     runner.next = runner.next.next;
                 } else {
                     runner = runner.next;
@@ -43,5 +33,26 @@ public class Solution2Q1{
             current = current.next;
         }
     }
+	
+    public static void main(String[] args) {
+    	ListNode head = new ListNode(1);
+    	head.next = new ListNode(2);
+    	head.next.next = new ListNode(2);
+    	deleteDupsNoBuffer(head);
+    	
+    	ListNode cur = head;
+    	while (cur != null) {
+    	    System.out.println(cur.val);
+    	    cur = cur.next;
+    	}
+    }
+    
+    private static class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
+    }
 }
-
