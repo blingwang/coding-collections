@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Solution {
+public class Solution2Q2 {
     public static ListNode kthToLast(ListNode head, int k) {
         ListNode n1 = head;
         ListNode n2 = head;
