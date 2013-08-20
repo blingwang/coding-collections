@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Solution {
+public class Solution2Q1 {
     public static void dedupList(ListNode head) {
         Set<Integer> found = new HashSet<Integer>();
         ListNode cur = head;
