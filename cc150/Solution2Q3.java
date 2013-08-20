@@ -1,21 +1,21 @@
-public class Solution2Q3{
-    class LinkedListNode{
-        LinkedListNode next = null;
-        int data;
-
-        public LinkedListNode(int d){
-            data = d;
-        }
-    }
-
-    public static boolean deleteNode(LinkedListNode n) {
+public class Solution2Q3 {
+    public static boolean deleteNode(ListNode n) {
         if (n == null || n.next == null) {
-            return false; // failure
+            return false;//failure: unable to delete last
         }
 
-        LinkedListNode next = n.next;
-        n.data = next.data;
+        ListNode next = n.next;
+        n.val = next.val;
         n.next = next.next;
         return true;
+    }
+    
+    private static class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
     }
 }
