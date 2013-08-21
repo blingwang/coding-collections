@@ -1,19 +1,12 @@
 public class Solution2Q6{
-    class LinkedListNode{
-        LinkedListNode next = null;
-        int data;
+    public static ListNode FindLoopBeginning(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
 
-        public LinkedListNode(int d){
-            data = d;
-        }
-    }
-
-    LinkedListNode FindLoopBeginning(LinkedListNode head) {
-        LinkedListNode slow = head;
-        LinkedListNode fast = head;
-
-        // find meeting point
-        // this will be LOOP_SIZE - k steps into the loop
+        // let loop start be k steps from head
+        // fast is k steps ahead of loop start when slow at loop start
+        // i.e., fast is LOOP_SIZE - k steps from slow
+        // slow and fast meet at LOOP_SIZE - k steps into the loop
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
@@ -38,5 +31,14 @@ public class Solution2Q6{
 
         // both now point to the start of the loop
         return fast;
+    }
+    
+    private static class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
     }
 }
