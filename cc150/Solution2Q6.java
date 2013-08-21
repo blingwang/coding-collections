@@ -5,7 +5,7 @@ public class Solution2Q6{
 
         // let loop start be k steps from head
         // fast is k steps ahead of loop start when slow at loop start
-        // i.e., fast is LOOP_SIZE - k steps from slow
+        // i.e., fast is LOOP_SIZE - k steps behind slow
         // slow and fast meet at LOOP_SIZE - k steps into the loop
         while (fast != null && fast.next != null) {
             slow = slow.next;
@@ -21,7 +21,7 @@ public class Solution2Q6{
         }
 
         // move slow to head. keep fast at meeting point
-        // each are k steps from the loop start
+        // each are k steps behind the loop start
         // if they move at the same pace, they must meet at loop start
         slow = head;
         while (slow != fast) {
