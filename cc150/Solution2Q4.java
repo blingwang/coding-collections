@@ -1,46 +1,86 @@
 public class Solution2Q4{
-    class LinkedListNode{
-        LinkedListNode next = null;
-        int data;
-
-        public LinkedListNode(int d){
-            data = d;
+    public static ListNode partition(ListNode node, int x) {
+        ListNode dummyBefore = new ListNode(0);
+        ListNode dummyAfter = new ListNode(0);
+        ListNode before = dummyBefore;
+        ListNode after = dummyAfter;
+        ListNode cur = node;
+        
+        // partition list
+        while (cur != null) {
+            if (cur.val < x) {
+                before.next = cur;
+                before = before.next;
+            } else {
+                after.next = cur;
+                after = after.next;
+            }
+            
+            cur = cur.next;
         }
+        
+        // merge two lists and set end
+        before.next = dummyAfter.next;
+        after.next = null;
+        
+        return dummyBefore.next;
     }
-
-    public LinkedListNode partition(LinkedListNode node, int x) {
-        LinkedListNode beforeStart = null;
-        LinkedListNode afterStart = null;
+    
+    public static ListNode partition2(ListNode node, int x) {
+        ListNode before = null;
+        ListNode after = null;
 
         // partition list
         while (node != null) {
-            LinkedListNode next = node.next;
-            if (node.data < x) {
+            ListNode next = node.next;
+            if (node.val < x) {
                 //insert node into start of before list
-                node.next = beforeStart;
-                beforeStart = node;
+                node.next = before;
+                before = node;
             } else {
                 // insert node into start of after list
-                node.next = afterStart;
-                afterStart = node;
+                node.next = after;
+                after = node;
             }
 
             node = next;
         }
 
-        // merge before list and after list
-        if (beforeStart == null) {
-            return afterStart;
+        if (before == null) {
+            return after;
         }
 
         // find end of before list and merge the lists
-        LinkedListNode head = beforeStart;
-        while (beforeStart.next != null) {
-            beforeStart = beforeStart.next;
+        ListNode head = before;
+        while (before.next != null) {
+            before = before.next;
         }
-        beforeStart.next = afterStart;
+        before.next = after;
 
         return head;
+    }
+	
+    public static void main(String[] args) {
+    	ListNode head = new ListNode(3);
+    	head.next = new ListNode(2);
+    	head.next.next = new ListNode(1);
+    	
+    	head = partition(head, 2);
+    	
+    	ListNode cur = head;
+        while (cur != null) {
+            System.out.println(cur.val);
+            cur = cur.next;
+        }
+    }
+    
+    private static class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
     }
 }
 
