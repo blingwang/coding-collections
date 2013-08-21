@@ -100,6 +100,10 @@ public class Solution2Q5{
     	head.next = new ListNode(2);
     	head.next.next = new ListNode(1);
     	
+    	for (ListNode cur = head; cur != null; cur = cur.next) {
+    		System.out.println(cur.val);
+    	}
+    	
     	ListNode head2 = new ListNode(8);
         head2.next = new ListNode(7); 
     	
