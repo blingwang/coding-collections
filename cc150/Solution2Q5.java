@@ -1,54 +1,36 @@
 public class Solution2Q5{
-    class LinkedListNode{
-        LinkedListNode next = null;
-        int data;
-
-        public LinkedListNode(int d){
-            data = d;
-        }
-    }
-
-    LinkedListNode addLists(LinkedListNode l1, LinkedListNode l2) {
+    public static ListNode addLists(ListNode l1, ListNode l2) {
         return addLists(l1, l2, 0);
     }
 
-    LinkedListNode addLists(LinkedListNode l1, LinkedListNode l2, int carry) {
+    private static ListNode addLists(ListNode l1, ListNode l2, int carry) {
         // we are done if both lists are null and the carry value is 0
         if (l1 == null && l2 == null && carry == 0) {
             return null;
         }
 
-        LinkedListNode result = new LinkedListNode(carry);
-
-        // add value, and data from l1 and l2
-        int value = carry;
+        // add carry, and values from l1 and l2
+        int sum = carry;
         if(l1 != null) {
-            value += l1.data;
+            sum += l1.val;
         }
         if(l2 != null) {
-            value += l2.data;
+            sum += l2.val;
         }
 
-        result.data = value % 10; 
+        carry = sum / 10;
+        int value = sum % 10;
+        ListNode result = new ListNode(value);
 
         // recurse
-        if (l1 != null || l2 != null || value >=10) {
-            LinkedListNode more = addLists(l1 == null ? null : l1.next,
-                                           l2 == null ? null : l2.next,
-                                           value >= 10 ? 1 : 0);
-            result.next = more;
-        }
+        ListNode next1 = (l1 == null) ? null : l1.next;
+        ListNode next2 = (l2 == null) ? null : l2.next;
+        result.next = addLists(next1, next2, carry);
 
         return result;
     }
-    
-    // for lists with reverse order
-    private class PartialSum {
-        public LinkedListNode sum = null;
-        public int carry = 0;
-    }
 
-    LinkedListNode addReverseLists(LinkedListNode l1, LinkedListNode l2) {
+    public static ListNode addReverseLists(ListNode l1, ListNode l2) {
         int len1 = length(l1);
         int len2 = length(l2);
 
@@ -59,66 +41,91 @@ public class Solution2Q5{
             l2 = padList(l2, len1-len2);
         }
 
-        // add lists
         PartialSum sum = addListsHelper(l1, l2);
 
-        // if there was a carry value left over, insert this at the front of the list
-        // otherwise, just return the linked list
         if(sum.carry == 0) {
-            return sum.sum;
+            return sum.node;
         } else {
-            LinkedListNode result = insertBefore(sum.sum, sum.carry);
+            ListNode result = insertBefore(sum.node, sum.carry);
             return result;
         }
     }
 
-    PartialSum addListsHelper(LinkedListNode l1, LinkedListNode l2) {
+    private static PartialSum addListsHelper(ListNode l1, ListNode l2) {
         if(l1 == null && l2 == null) {
-            PartialSum sum = new PartialSum();
-            return sum;
+            return new PartialSum(null, 0);
         }
-
-        // add smaller digits recursively
-        PartialSum sum = addListsHelper(l1.next, l2.next);
-
-        // add carry to current data
-        int val = sum.carry + l1.data + l2.data;
-
-        // insert sum of current digits
-        LinkedListNode full_result = insertBefore(sum.sum, val % 10);
-
-        // return sum so far, and the carry value
-        sum.sum = full_result;
-        sum.carry = val / 10;
-        return sum;
+        
+        PartialSum nextSum = addListsHelper(l1.next, l2.next);
+        
+        int sum = nextSum.carry + l1.val + l2.val;
+        ListNode curNode = insertBefore(nextSum.node, sum % 10);
+        PartialSum curSum = new PartialSum(curNode, sum / 10);
+        
+        return curSum;
     }
 
     // pad the list with zeros
-    LinkedListNode padList(LinkedListNode l, int padding) {
-        LinkedListNode head = l;
+    private static ListNode padList(ListNode l, int padding) {
+        ListNode head = l;
 
         for (int i = 0; i < padding; i++) {
-            LinkedListNode n = new LinkedListNode(0);
-            n.next = head;
-            head = n;
+            head  = insertBefore(head, 0);
         }
+        
         return head;
     }
 
     // helper function to insert node in the front of a linked list
-    LinkedListNode insertBefore(LinkedListNode list, int data){
-        LinkedListNode node = new LinkedListNode(data);
+    private static ListNode insertBefore(ListNode list, int val){
+        ListNode node = new ListNode(val);
         node.next = list;
         return node;
     }
     
-    int length(LinkedListNode list) {
+    private static  int length(ListNode list) {
         int length = 0;
-        while(list != null) {
+        ListNode cur = list;
+        
+        while(cur != null) {
             length++;
-            list = list.next;
+            cur = cur.next;
         }
 
         return length;
+    }
+	
+    public static void main(String[] args) {
+    	ListNode head = new ListNode(3);
+    	head.next = new ListNode(2);
+    	head.next.next = new ListNode(1);
+    	
+    	ListNode head2 = new ListNode(8);
+        head2.next = new ListNode(7); 
+    	
+    	ListNode cur = addReverseLists(head, head2);
+        while (cur != null) {
+            System.out.println(cur.val);
+            cur = cur.next;
+        }
+    }
+    
+    // for lists with reverse order
+    private static class PartialSum {
+        ListNode node;
+        int carry;
+        PartialSum(ListNode node, int carry) {
+            this.node = node;
+            this.carry = carry;
+        }
+    }
+    
+    private static class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
     }
 }
