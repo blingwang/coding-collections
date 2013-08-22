@@ -24,7 +24,7 @@ public class LongestNonRepeatedSubstring {
     public int lengthOfLongestSubstring2(String s) {
         s.toLowerCase();
         int max = 0;
-        int startIndex = 0;
+        int start = 0;
         
         int[] charIndice = new int[26];
         for (int i = 0; i < charIndice.length; i++) {
@@ -32,25 +32,19 @@ public class LongestNonRepeatedSubstring {
         }
         
         for (int i = 0; i < s.length(); i++) {
-            if (charIndice[s.charAt(i)-'a'] == -1) {
-               charIndice[s.charAt(i)-'a'] = i; 
-            } else {
-                int length = i - startIndex;
+            char cur = s.charAt(i);
+            int last = charIndice[cur-'a'];
+            if (last >= 0 && last >= start) {
+                int length = i - start;
                 if (length > max) max = length; 
-                startIndex = charIndice[s.charAt(i)-'a'] + 1;
-                
-                for (int j = 0; j < charIndice.length; j++) {
-                    if (charIndice[j] < charIndice[s.charAt(i)-'a']) {
-                        charIndice[j] = -1;
-                    }
-                } 
-                
-                charIndice[s.charAt(i)-'a'] = i;           
+                start = last + 1;
             }
+            
+            charIndice[cur-'a'] = i;
         }
         
         // process last substring
-        if (s.length() - startIndex > max) max = s.length() - startIndex;
+        if (s.length() - start > max) max = s.length() - start;
         
         return max;
     }
