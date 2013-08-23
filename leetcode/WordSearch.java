@@ -1,10 +1,10 @@
 import java.util.*;
 
 public class WordSearch {
-    char[][] board;
-    int m, n;
-    String word;
-    HashSet<Integer> marked;
+    private char[][] board;
+    private int m, n;
+    private String word;
+    private HashSet<Integer> marked;
 
     public boolean exist(char[][] board, String word) {
         if (board.length == 0) return false;
