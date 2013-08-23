@@ -1,12 +1,14 @@
-public class Solution3Q1{// three stacks using one array
+import java.util.*;
+
+public class Solution {
     private static final int stackSize = 100;
     private int[] buffer = new int[stackSize * 3];
     private int[] stackCount = {0, 0, 0};// element count
 
-    public void push(int stackNum, int value) throws Exception {
+    public void push(int stackNum, int value) {
         // check if we have space
         if (stackCount[stackNum] >= stackSize) {
-            throw new Exception("Out of space.");
+            throw new RuntimeException("Out of space!");
         }
 
         int index = stackNum * stackSize + stackCount[stackNum];
@@ -14,9 +16,9 @@ public class Solution3Q1{// three stacks using one array
         stackCount[stackNum]++;
     }
 
-    public int pop(int stackNum) throws Exception {
+    public int pop(int stackNum) {
         if (stackCount[stackNum] == 0){
-            throw new Exception("Trying to pop an empty stack");
+            throw new EmptyStackException();
         }
 
         int index = stackNum * stackSize + stackCount[stackNum] - 1;
