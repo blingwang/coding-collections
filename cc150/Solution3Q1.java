@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Solution {
+public class Solution3Q1 {
     private static final int stackSize = 100;
     private int[] buffer = new int[stackSize * 3];
     private int[] stackCount = {0, 0, 0};// element count
