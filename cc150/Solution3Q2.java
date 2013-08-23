@@ -30,7 +30,7 @@ public class Solution3Q2 {
 
     public int min() {
         if (s2.isEmpty()) { // or use EmptyStackException?
-            throw new InvalidOperationException("Stack is empty"); 
+            throw new RuntimeException("Stack is empty"); 
         } else {
             return s2.peek();
         }
