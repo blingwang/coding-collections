@@ -1,9 +1,9 @@
-import java.util.ArrayList;
-public class Solution3Q3 {
+import java.util.*;
+public class Solution3Q1 {
     private ArrayList<Stack> stacks = new ArrayList<Stack>();
     private final int capacity;
     
-    public Solution3Q3(int capacity) {
+    public Solution3Q1(int capacity) {
         this.capacity = capacity;
     }
 
@@ -27,9 +27,9 @@ public class Solution3Q3 {
         }
     }
 
-    public int pop() throws Exception {
+    public int pop() {
         if(isEmpty()) {
-            throw new Exception("Trying to pop an empty stack.");
+            throw new EmptyStackException();
         }
 
         Stack last = getLastStack();
@@ -46,11 +46,11 @@ public class Solution3Q3 {
         return last == null || last.isEmpty();
     }
 
-    public int popAt(int index) throws Exception {
+    public int popAt(int index) {
         return leftShift(index, true);
     }
 
-    public int leftShift(int index, boolean removeTop) throws Exception {
+    public int leftShift(int index, boolean removeTop) {
         Stack stack = stacks.get(index);
         int removedItem;
         if (removeTop) {
@@ -105,9 +105,9 @@ class Stack {
         return true;
     }
 
-    public int pop() throws Exception {
+    public int pop() {
         if (isEmpty()) {
-            throw new Exception("Trying to pop an empty stack.");
+            throw new EmptyStackException();
         }
 
         Node t = top;
