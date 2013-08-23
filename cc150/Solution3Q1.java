@@ -8,7 +8,7 @@ public class Solution {
     public void push(int stackNum, int value) {
         // check if we have space
         if (stackCount[stackNum] >= stackSize) {
-            throw new InvalidOperationException("Out of space!");
+            throw new RuntimeException("Out of space!");
         }
 
         int index = stackNum * stackSize + stackCount[stackNum];
