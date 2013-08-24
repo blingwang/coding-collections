@@ -35,7 +35,7 @@ public class Solution4Q3 {
             val = x;
         }
         
-        public void print() {
+        void print() {
             System.out.print(val);
             if (left != null) left.print();
             if (right != null) right.print();
