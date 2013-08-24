@@ -60,7 +60,7 @@ public class Solution4Q4 {
         return levelLists;
     }
     
-    public ArrayList<LinkedList<TreeNode>> bfsCreateLevelLinkedList(TreeNode root) {
+    public ArrayList<LinkedList<TreeNode>> bfs2(TreeNode root) {
         ArrayList<LinkedList<TreeNode>> result = new ArrayList<LinkedList<TreeNode>>();
 
         LinkedList<TreeNode> current = new LinkedList<TreeNode>();
