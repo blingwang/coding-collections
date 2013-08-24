@@ -1,5 +1,5 @@
 public class Solution4Q8 { 
-    public boolean containsTree(TreeNode t1, TreeNode t2) {
+    public static boolean containsTree(TreeNode t1, TreeNode t2) {
         if (t2 == null) {
             return true;
         }
@@ -7,7 +7,7 @@ public class Solution4Q8 {
         return subTree(t1,t2);
     }
 
-    private boolean subTree(TreeNode r1, TreeNode r2) {
+    private static boolean subTree(TreeNode r1, TreeNode r2) {
         if (r1 == null) {
             return false;
         }
@@ -19,7 +19,7 @@ public class Solution4Q8 {
         return (subTree(r1.left, r2) || subTree(r1.right, r2));
     }
 
-    private boolean matchTree(TreeNode r1, TreeNode r2) {
+    private static boolean matchTree(TreeNode r1, TreeNode r2) {
         if (r1 == null && r2 == null) {
             return true;
         }
@@ -60,7 +60,7 @@ public class Solution4Q8 {
         TreeNode bst = sortedArrayToBST(a);
         bst.print();   
         System.out.println();
-        System.out.println();
+        System.out.println(containsTree(bst, root));
     }
     
     private static class TreeNode {
