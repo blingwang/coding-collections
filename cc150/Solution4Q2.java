@@ -1,66 +1,63 @@
 import java.util.*;
-public class Solution4Q2 {
-    private class Node {
-        private int data;
-        State state;
-        private ArrayList<Node> neighbors;
-
-        public Node(int data) {
-            this.data = data;
+public class Solution4Q2 {   
+    public static boolean bfs(Node start, Node end) {
+        assert start != end;
+        ArrayDeque<Node> queue = new ArrayDeque<Node>();
+        Set<Node> marked = new HashSet<Node>();
+        
+        queue.offer(start);
+        
+        while (!queue.isEmpty()) {
+            Node cur = queue.poll();
+            
+            for (Node n : cur.getAdjacent()) {
+                if (n == end) return true;
+                
+                if (!marked.contains(n)) {
+                    queue.offer(n);
+                    marked.add(n);
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    public static void main(String[] args) {
+        Node start = new Node(1);
+        Node end = new Node(2);
+        start.neighbors.add(end);
+        
+        System.out.println(bfs(start, end));
+    }
+    
+    private static class Node {
+        private int val;
+        private List<Node> neighbors;
+        
+        public Node(int x) {
+            val = x;
             neighbors = new ArrayList<Node>();
         }
-
-        public ArrayList<Node> getAdjacent() {
+        
+        public List<Node> getAdjacent() {
             return neighbors;
         }
     }
-
-    private class Graph {
-        private ArrayList<Node> nodes;
+    
+    private static class Graph {
+        private List<Node> nodes;
+        
         public Graph() {
             nodes = new ArrayList<Node>();
         }
-
+        
         public void addNode(Node n) {
             nodes.add(n);
         }
-
-        public ArrayList<Node> getNodes() {
+        
+        public List<Node> getNodes() {
             return nodes;
         }
-    }
-
-    enum State {
-        Unvisited, Visited, Visiting;
-    }
-
-    public static boolean bfsPathSearch(Graph g, Node start, Node end) {
-        LinkedList<Node> q = new LinkedList<Node>();
-
-        for (Node u : g.getNodes()) {
-            u.state = State.Unvisited;
-        }
-
-        start.state = State.Visiting;
-        q.add(start);
-
-        Node u;
-        while (!q.isEmpty()) {
-            u = q.removeFirst();
-            if(u != null) {
-                for (Node v : u.getAdjacent()) {
-                    if (v.state == State.Unvisited) {
-                        if (v == end) {
-                            return true;
-                        } else {
-                            v.state = State.Visiting;
-                            q.add(v);
-                        }
-                    }
-                }
-                u.state = State.Visited;
-            }
-        }
-        return false;
     }
 }
