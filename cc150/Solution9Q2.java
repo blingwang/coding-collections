@@ -3,7 +3,16 @@ class Solution9Q2 {
     private Random rnd = new Random();
     
     // find a path in a obstacle grid
-    public boolean getPath(int x, int y, ArrayList<Point> path, 
+    public ArrayList<Point> getPath(int x, int y) {
+        ArrayList<Point> path = new ArrayList<Point>();
+        HashMap<Point, Boolean> cache = new HashMap<Point, Boolean>();
+
+       getPath(x, y, path, cache);
+
+       return path;
+    }
+    
+    private boolean getPath(int x, int y, ArrayList<Point> path, 
             HashMap<Point, Boolean> cache) {
         Point p = new Point(x, y);
         if (cache.containsKey(p)) { // already visited this cell
@@ -30,15 +39,6 @@ class Solution9Q2 {
 
         cache.put(p, success); // cache result
         return success;
-    }
-
-    public ArrayList<Point> getPath(int x, int y) {
-        ArrayList<Point> path = new ArrayList<Point>();
-        HashMap<Point, Boolean> cache = new HashMap<Point, Boolean>();
-
-       getPath(x, y, path, cache);
-
-       return path;
     }
 
     private boolean isFree(int x, int y) {
