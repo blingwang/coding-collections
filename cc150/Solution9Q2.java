@@ -1,6 +1,6 @@
 import java.util.*;
 class Solution9Q2 {
-    private Random rnd = new Random();
+    private Random rand = new Random();
     
     // find a path in a obstacle grid
     public ArrayList<Point> getPath(int x, int y) {
@@ -42,7 +42,7 @@ class Solution9Q2 {
     }
 
     private boolean isFree(int x, int y) {
-        return rnd.nextBoolean();
+        return rand.nextBoolean();
     }
 
     private class Point {
