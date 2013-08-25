@@ -1,22 +1,28 @@
 public class SudokuSolver {
     public void solveSudoku(char[][] board) {
-        solveSudokuRec(board, 0);
+        solveSudoku(board, 0);
     }
 
-    private boolean solveSudokuRec(char[][] board, int count) {
-        if (count == 81) return true;
+    private boolean solveSudoku(char[][] board, int count) {
+        if (count == 81) return true; // base case
+        
         int i = count / 9;
         int j = count % 9;
-        if (board[i][j] != '.') return solveSudokuRec(board, count+1);
+        
+        // skip filled cell
+        if (board[i][j] != '.') return solveSudoku(board, count+1);
+        
         for ( char k = '1'; k <= '9'; k++) {                    
-            if (isValidSudoku(board, k, i, j)) {
+            if (isValidSudoku(board, k, i, j)) {// backtrack if invalid
                 board[i][j] = k;
-                if (solveSudokuRec(board, count+1)) {
-                    return true;
+                if (solveSudoku(board, count+1)) { // recurse
+                    return true; // found solution: no more dfs
                 }
             }
         }
-        board[i][j] = '.';    
+        
+        board[i][j] = '.'; // clean up
+        
         return false;
     }
 
