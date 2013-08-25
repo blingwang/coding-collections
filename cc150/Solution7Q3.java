@@ -1,16 +1,16 @@
 class Solution7Q3 {}
 class Line {
-    static double epsilon = 0.000001;
-    public double slope;
-    public double yintercept;
+    public static final double epsilon = 0.000001;
+    private double slope;
+    private double yIntercept;
 
     public Line(double s, double y) {
         slope = s;
-        yintercept = y;
+        yIntercept = y;
     }
 
-    public boolean intersect(Line line2) {
+    public boolean intersect(Line, line2) {
         return Math.abs(slope - line2.slope) > epsilon ||
-            Math.abs(yintercept - line2.yintercept) < epsilon;
+               Math.abs(yIntercept - line2.yIntercept) < epsilon;
     }
 }
