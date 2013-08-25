@@ -35,9 +35,9 @@ public class Solution9Q9 {
     }
 
     private boolean isValid(int[] a, int k) {
-        for (int i = 0; i < k; i++) { // row distance == col distance
+        for (int i = 0; i < k; i++) { 
             if (a[k] - a[i] == k - i || a[i] - a[k] == k - i) {
-                return false;
+                return false; // row distance == col distance
             }
         }
         
