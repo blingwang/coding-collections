@@ -1,7 +1,8 @@
 import java.util.*;
 class Solution9Q2 {
     private Random rnd = new Random();
-
+    
+    // find a path in a obstacle grid
     public boolean getPath(int x, int y, ArrayList<Point> path, 
             HashMap<Point, Boolean> cache) {
         Point p = new Point(x, y);
