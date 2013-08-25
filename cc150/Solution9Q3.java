@@ -1,49 +1,60 @@
 class Solution9Q3 {
-    public static int magicFast(int[] array, int start, int end) {
-        if (end < start || start < 0 || end >= array.length) {
-            return - 1;
-        }
-
-        int mid = start + (end - start) / 2;
-        if (array[mid] == mid) {
+    public int findMagicIndex(int[] a) {
+        return findMagicIndex(a, 0, a.length - 1);
+    }
+    
+    private int findMagicIndex(int[] a, int lo, int hi) {
+        if (lo > hi) return -1;
+        
+        int mid = lo + (hi - lo) / 2;
+        if (a[mid] == mid) return mid;
+        else if (a[mid] < mid) return findMagicIndex(a, mid+1, hi);
+        else return findMagicIndex(a, lo, mid-1);
+    }
+    
+    public int findMagicIndexDup(int[] a) {
+        return findMagicIndexDup2(a, 0, a.length - 1);
+    }
+    
+    private int findMagicIndexDup(int[] a, int lo, int hi) {
+        if (lo > hi) return -1;
+        
+        int mid = lo + (hi - lo) / 2;
+        if (a[mid] == mid) {
             return mid;
-        } else if (array[mid] > mid) {
-            return magicFast(array, start, mid - 1);
+        } else if (a[mid] < mid) {
+            int result = findMagicIndexDup(a, lo, a[mid]);
+            if (result >= 0) return result;
+            return findMagicIndexDup(a, mid + 1, hi);
         } else {
-            return magicFast(array, mid + 1, end);
+            int result = findMagicIndexDup(a, a[mid], hi);
+            if (result >= 0) return result;
+            return findMagicIndexDup(a, lo, mid - 1);
         }
     }
-
-    public static int magicFast(int[] array) {
-        return magicFast(array, 0, array.length - 1);
-    }
-
-    public static int magicFastDup(int[] array, int start, int end) {
-        if (end < start || start < 0 || end >= array.length) {
-            return -1;
-        }
-
-        int midIndex = start + (end - start) / 2;
-        int midValue = array[midIndex];
-        if(midValue == midIndex) {
-            return midIndex;
-        }
-
+    
+    private int findMagicIndexDup2(int[] a, int lo, int hi) {
+        if (lo > hi) return -1;
+        
+        int mid = lo + (hi - lo) / 2;
+        if (a[mid] == mid) {
+            return mid;
+        } 
+        
         // search left
-        int leftIndex = Math.min(midIndex - 1, midValue);
-        int left = magicFast(array, start, leftIndex);
-        if (left > 0) {
-            return left;
-        }
-
-        // searach right
-        int rightIndex = Math.max(midIndex + 1, midValue);
-        int right = magicFast(array, rightIndex, end);
-
-        return right;
+        int result = findMagicIndexDup(a, lo, Math.min(mid-1, a[mid]));
+        if (result >= 0) return result;
+        
+        // search right
+        result = findMagicIndexDup(a, Math.max(mid+1, a[mid]), hi);
+        
+        return result;
     }
-
-    public static int magicFastDup(int[] array) {
-        return magicFast(array, 0, array.length - 1);
+    
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] a = {-2, -1, 2, 2, 5, 6};
+        
+        System.out.println(sol.findMagicIndexDup(a));
     }
 }
