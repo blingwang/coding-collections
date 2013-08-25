@@ -50,7 +50,7 @@ class HashTable<K, V> {
         }
         
         table[hash(key)] = new Entry<K, V>(key, val, first);
-        N++;
+        N++; // resize when list is too long
     }
     
     // a helper linked list data type
