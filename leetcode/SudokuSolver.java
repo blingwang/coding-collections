@@ -12,6 +12,7 @@ public class SudokuSolver {
         // skip filled cell
         if (board[i][j] != '.') return solveSudoku(board, count+1);
         
+        // try all possibilities
         for ( char k = '1'; k <= '9'; k++) {                    
             if (isValidSudoku(board, k, i, j)) {// backtrack if invalid
                 board[i][j] = k;
@@ -21,7 +22,8 @@ public class SudokuSolver {
             }
         }
         
-        board[i][j] = '.'; // clean up
+        // clean up
+        board[i][j] = '.'; 
         
         return false;
     }
