@@ -9,7 +9,7 @@ class Line {
         yIntercept = y;
     }
 
-    public boolean intersect(Line, line2) {
+    public boolean intersect(Line line2) {
         return Math.abs(slope - line2.slope) > epsilon ||
                Math.abs(yIntercept - line2.yIntercept) < epsilon;
     }
