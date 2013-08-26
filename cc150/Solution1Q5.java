@@ -65,7 +65,7 @@ public class Solution1Q5{
             }else{
                 last = str.charAt(i);
                 size = 1 + String.valueOf(count).length();
-                count = 0;
+                count = 1;
             }
         }
 
