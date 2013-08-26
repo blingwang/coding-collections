@@ -6,7 +6,7 @@ public class Solution2Q2 {
         ListNode n2 = head;
 
         // move n2 forward k nodes into the list
-        for(int i = 0; i < k -1; i++) {
+        for(int i = 0; i < k -1; i++) {// i < k?
             if (n2 == null) return null; // error check
             n2 = n2.next;
         }
