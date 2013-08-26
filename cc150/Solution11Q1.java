@@ -3,6 +3,7 @@ class Solution11Q1 {
         assert(a.length >= sizeA + sizeB);
         int indexA = sizeA - 1;
         int indexB = sizeB - 1;
+        
         for (int i = sizeA + sizeB - 1; i >= 0; i--) {
             if (indexA < 0) a[i] = b[indexB--];
             else if (indexB < 0) break;
