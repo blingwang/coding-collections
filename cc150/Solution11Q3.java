@@ -1,5 +1,27 @@
 class Solution11Q3 {
-    public static int search(int[] a, int left, int right, int x) {
+    public boolean search(int[] A, int target) {
+        int lo = 0;
+        int hi = A.length - 1;
+        
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (A[mid] == target) return true;         
+            
+            else if (A[mid] < A[hi]) {// right half sorted
+                if (target > A[mid] && target <= A[hi]) lo = mid + 1;
+                else hi = mid - 1;
+            } else if (A[mid] > A[hi]) { // left half sorted
+                if (target >= A[lo] && target < A[mid]) hi = mid - 1;
+                else lo = mid + 1;
+            } else {
+                hi--; // A[mid] == A[hi]: move hi
+            }
+        }
+        
+        return false;
+    }
+    
+    public static int search2(int[] a, int left, int right, int x) {
         if (right < left) {
             return -1;
         }
