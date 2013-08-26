@@ -50,4 +50,63 @@ class Solution9Q4 {
         }
         return subset;
     } 
+    
+    public static ArrayList<ArrayList<Integer>> subsets(ArrayList<Integer> set) {
+        ArrayList<ArrayList<Integer>> subsets = new ArrayList<ArrayList<Integer>>();
+        subsets.add(new ArrayList<Integer>());
+        
+        for (int i = 0; i < set.size(); i++) {// adding each element
+            int count = subsets.size();
+            for (int j = 0; j < count; j++) {
+                ArrayList<Integer> subset = new ArrayList<Integer>();
+                subset.addAll(subsets.get(j));
+                subset.add(set.get(i));
+                subsets.add(subset);
+            }
+        }
+        
+        return subsets;
+    }
+    
+    public static ArrayList<ArrayList<Integer>> subsets2(ArrayList<Integer> set) {
+        ArrayList<ArrayList<Integer>> subsets = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> prefix = new ArrayList<Integer>();
+        
+        enumerate(set, subsets, prefix, 0);
+        
+        return subsets;
+    }
+    
+    private static void enumerate(ArrayList<Integer> set, ArrayList<ArrayList<Integer>> subsets,
+                                  ArrayList<Integer> prefix, int k) {
+        if (k == set.size()) {
+            ArrayList<Integer> subset = new ArrayList<Integer>();
+            subset.addAll(prefix);
+            subsets.add(subset);
+            return;
+        }
+        
+        enumerate(set, subsets, prefix, k+1);
+        prefix.add(set.get(k));
+        enumerate(set, subsets, prefix, k + 1);
+        prefix.remove(prefix.size() - 1);
+    }
+    
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] a = {1,2,3};
+        ArrayList<Integer> set = new ArrayList<Integer>();
+        for (int i : a) {
+            set.add(i);
+        }
+        ArrayList<ArrayList<Integer>> subsets = subsets2(set);
+        for (ArrayList<Integer> subset : subsets) {
+            for (int i : subset) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
+        }
+        
+        System.out.println();
+    }
 }
