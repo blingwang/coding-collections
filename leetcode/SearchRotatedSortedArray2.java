@@ -7,7 +7,7 @@ public class SearchRotatedSortedArray2 {
             int mid = lo + (hi - lo) / 2;
             if (A[mid] == target) return true;         
             
-            else if (A[mid] < A[hi]) {// right half sorted
+            if (A[mid] < A[hi]) {// right half sorted
                 if (target > A[mid] && target <= A[hi]) lo = mid + 1;
                 else hi = mid - 1;
             } else if (A[mid] > A[hi]) { // left half sorted
