@@ -1,5 +1,37 @@
 import java.util.*;
 class Solution9Q6 {
+    public ArrayList<String> generateParentheses(int n) {
+        ArrayList<String> result = new ArrayList<String>();
+        char[] prefix = new char[n*2];
+        generateParentheses(n, 0, 0, prefix, result);
+        return result;
+    }
+    
+    private void generateParentheses(int n, int leftCount, int rightCount,
+                    char[] prefix, ArrayList<String> result) {
+        if (leftCount < rightCount || leftCount > n) return;
+        
+        if (leftCount == n && rightCount == n) {
+            result.add(new String(prefix));
+            return;
+        }
+        
+        int curIndex = leftCount + rightCount;
+        prefix[curIndex] = '(';
+        generateParentheses(n, leftCount + 1, rightCount, prefix, result);
+        prefix[curIndex] = ')';
+        generateParentheses(n, leftCount, rightCount + 1, prefix, result);
+        
+    }
+    
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        for (String s : sol.generateParentheses(3)) {
+            System.out.println(s);
+        }
+    }
+    
     private void addParen(ArrayList<String> list, int leftRem,
                           int rightRem, char[] str, int count) {
         // make sure left paren comes before right
