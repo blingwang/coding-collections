@@ -1,23 +1,21 @@
 class Solution11Q6 {
-    public static boolean findElementStepWise(int[][] matrix, int elem) {
-        int numRows = matrix.length;
-        int numCols = matrix[0].length;
-        if (elem < matrix[0][0] || elem > matrix[numRows-1][numCols-1]) {
-            return false;
-        }
-
+    public static boolean findElementStepWise(int[][] matrix, int target) {
+        int m = matrix.length;
+        if (m == 0) return false;
+        int n = matrix[0].length;
+        if (n == 0) return false;
+        
+        if (target < matrix[0][0] || target > matrix[m-1][n-1]) return false;
+        
         int row = 0;
-        int col = numCols - 1;
-        while (row < numRows && col >= 0) {
-            if (matrix[row][col] == elem) {
-                return true;
-            } else if (matrix[row][col] > elem) {
-                col--;
-            } else {
-                row++;
-            }
+        int col = n - 1;
+        
+        while (row < m && col >= 0) {
+            if (matrix[row][col] == target) return true;
+            if (matrix[row][col] > target)  col--;
+            else                            row++;
         }
-
+        
         return false;
     }
 
