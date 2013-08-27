@@ -11,6 +11,8 @@ public class MultiplyStrings {
             int d1 = num1.charAt(i) - '0';
             for (int j = n-1; j >= 0; j--) {
                 int d2 = num2.charAt(j) - '0';
+                // result array: [len1+len2]
+                // sliding len2 from end to mid
                 int curIndex = i + j + 1; // consider end case: m+n-1
                 
                 // sum product and previous values
