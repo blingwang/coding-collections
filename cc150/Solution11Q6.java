@@ -18,32 +18,50 @@ class Solution11Q6 {
         
         return false;
     }
-
-    private static boolean findElementBinPart(int[][] matrix, int target, int u, int l, int d, int r) {
+    
+    public static boolean searchMatrix(int[][] matrix, int target) {
+        int m = matrix.length;
+        if (m == 0) return false;
+        int n = matrix[0].length;
+        if (n == 0) return false;
+        
+        return findElementBinPart(matrix, target, 0, 0, m-1, n-1);
+    }
+    
+    private static boolean findElementBinPart(int[][] matrix, int target, 
+                                             int u, int l, int d, int r) {
         if (u > d || l > r) return false;
         if (target < matrix[u][l] || target > matrix[d][r]) return false;
-
-        // find first element greater than target in middle row
-        int mid = u + (d - u) / 2;
-        int col = findFirstNoLessThan(matrix[mid], target, l, r);
-
-        if (col < 0) { // no element equal or greater than target is found
-            return findElementBinPart(matrix, target, mid+1, l, d, r);
+        
+        int midRow = u + (d - u) / 2; // mid row;
+        int col = findFirstNoLessThan(matrix[midRow], l, r, target);
+        
+        if (col < 0) {
+            return findElementBinPart(matrix, target, midRow + 1, l, d, r);
         }
-
-        if (target == matrix[mid][col]) return true;
-
-        return findElementBinPart(matrix, target, mid+1, l, d, col-1) || 
-               findElementBinPart(matrix, target, u, col, mid-1, r);
+        
+        if (matrix[midRow][col] == target) return true;
+        
+        return findElementBinPart(matrix, target, u, col, midRow - 1, r) || 
+               findElementBinPart(matrix, target, midRow + 1, l, d, col - 1);
+    }
+    
+    private static int findFirstNoLessThan(int[] a, int lo, int hi, int target) {
+        int bestSoFar = -1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (a[mid] == target) return mid;
+            if (a[mid] > target) {
+                bestSoFar = mid;
+                hi = mid - 1;
+            } else {
+                lo = mid + 1;
+            }
+        }
+        return bestSoFar;
     }
 
-    public static boolean findElementBinPart(int[][] matrix, int target) {
-        int numRows = matrix.length;
-        int numCols = matrix[0].length;
-        return findElementBinPart(matrix, target, 0, 0, numRows-1, numCols-1);
-    }
-
-    private static int findFirstNoLessThan(int[] a, int value, int start, int end) {
+    private static int findFirstNoLessThan2(int[] a, int value, int start, int end) {
         if (start > end) return -1;
 
         int left = start;
