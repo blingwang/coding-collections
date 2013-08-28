@@ -1,6 +1,6 @@
 class Solution17Q3 {
     public int countFactZeros(int num) {
-        if (num < 0) {
+        if (num < 0) { // negative
             return -1;
         }
 
@@ -13,8 +13,9 @@ class Solution17Q3 {
     }
     
     private int factorsOf5(int i) {
+        assert (i > 0);
         int count = 0;
-        while (i % 5 == 0) {
+        while (i % 5 == 0) {// 0?
             count++;
             i /= 5;
         }
