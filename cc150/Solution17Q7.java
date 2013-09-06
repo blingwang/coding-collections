@@ -45,6 +45,7 @@ class Solution17Q7 {
             return str + teens[number - 11] + " ";
         } else if (number == 10 || number >= 20) {
             str += tens[number / 10 - 1] + " ";
+            number %= 10;
         }
 
         // Convert ones place
