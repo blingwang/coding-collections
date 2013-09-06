@@ -36,7 +36,7 @@ class Solution17Q7 {
 
         // Convert hundreds place
         if (number >= 100) {
-            str += digits[number / 100 - 1] + " Hundred";
+            str += digits[number / 100 - 1] + " Hundred ";
             number %= 100;
         }
 
