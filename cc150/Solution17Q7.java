@@ -55,5 +55,75 @@ class Solution17Q7 {
 
         return str;
     }
+    
+    public static String numToString2(int number) {
+        if (number == 0) return "Zero";
+        if (number < 0) return "Negative " + numToString(-number);
+        
+        return convertThousands(number);
+    }
+    
+    private static String convertThousands(int number) {
+        int count = 0;
+        String str = "";
+
+        while (number > 0) {
+            if (number % 1000 != 0) {
+                str = convertHundreds(number % 1000) + thousands[count] + " " + str;
+            }      
+            number /= 1000;
+            count++;
+        }
+        
+        return str;
+    }
+    
+    private static String convertHundreds(int number) {
+        assert(number < 1000);
+        StringBuilder sb = new StringBuilder();
+        
+        if (number >= 100) {
+            sb.append(digits[number/100-1]);
+            sb.append(" Hundred ");
+        }
+        
+        sb.append(convertTens(number % 100));
+        
+        return sb.toString();
+    }
+    
+    private static String convertTens(int number) {
+        assert(number < 100);
+        
+        StringBuilder sb = new StringBuilder();
+        if (number >= 11 && number <= 19) {
+            sb.append(teens[number-11]);
+            sb.append(" ");
+        } else if (number == 10 || number >= 20){
+            sb.append(tens[number/10 - 1]);
+            sb.append(" ");
+        }
+        
+        sb.append(convertOnes(number % 10));
+        
+        return sb.toString();
+    }
+    
+    private static String convertOnes(int number) {
+        assert(number >= 0 && number < 10);
+        StringBuilder sb = new StringBuilder();
+       
+        if (number > 0) {
+            sb.append(digits[number-1]);
+            sb.append(" ");
+        }
+        
+        return sb.toString();
+    }
+    
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.println(numToString(56789));
+    }
 }
 
