@@ -27,7 +27,7 @@ class Solution17Q2 {
         return sum;
     }
 
-    public Piece hasWon1(Piece[][] board) {
+    public Piece hasWon2(Piece[][] board) {
         for (int i = 0; i < board.length; i++) {
             // check rows
             if (board[i][0] != Piece.Empty &&
