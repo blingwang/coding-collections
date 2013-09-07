@@ -116,14 +116,13 @@ class Solution17Q2 {
 }
 
 public class TripleT {
- 
     enum State{Blank, X, O};
  
     int n = 3;
     State[][] board = new State[n][n];
     int moveCount;
  
-    void Move(int x, int y, State s){
+    public void Move(int x, int y, State s){
     	if(board[x][y] == State.Blank){
     		board[x][y] = s;
     	}
