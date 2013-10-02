@@ -47,10 +47,10 @@ public class BinarySearch {
         int lo = 0, hi = a.length - 1;
         
         while (hi - lo > 1) {
-                int mid = lo + (hi - lo) / 2;
-                if (a[mid] == target) return mid;
-                if (a[mid] < target) lo = mid + 1;
-                else hi = mid - 1;
+            int mid = lo + (hi - lo) / 2;
+            if (a[mid] == target) return mid;
+            if (a[mid] < target) lo = mid + 1;
+            else hi = mid - 1;
         }
         
         return (a[hi] - target < target - a[lo]) ? hi : lo;
