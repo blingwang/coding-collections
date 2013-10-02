@@ -1,32 +1,18 @@
 class ReverseWords {
     public static void reverseWords(char[] words) {
-        if (words.length <= 1) {
-            return;
-        }
-
-        // reverse string
+        if (words.length <= 1) return;
+        
         reverseStr(words, 0, words.length - 1);
 
-        // reverse each word back
         int i = 0;
-        int wordStart = 0;
-        int wordEnd = 0;
-        while (i < words.length) {
-            // find next word character
-            while (i < words.length && words[i] == ' ') {
-                i++;
-            }
-
-            wordStart = i; // found start of word
+        while (true) {
+            while (i < words.length && words[i] == ' ') i++;
+            if (i == words.length) break; // no words left
+            int wordStart = i; 
             
-            // find next space char
-            while (i < words.length && words[i] != ' ') {
-                i++;
-            }
+            while (i < words.length && words[i] != ' ') i++;
+            int wordEnd = i - 1; 
 
-            wordEnd = i - 1; // found end of word
-
-            // reverse word 
             reverseStr(words, wordStart, wordEnd);
         }
     }
