@@ -5,9 +5,7 @@ class ReverseList {
     }
 
     public static Node reverseListRecur(Node head) {
-        if (head == null || head.next == null) {
-            return head;
-        }
+        if (head == null || head.next == null) return head;
 
         Node newHead = reverseListRecur(head.next);
         head.next.next = head;
@@ -17,10 +15,6 @@ class ReverseList {
     }
 
     public static Node reverseListIter(Node head) {
-        if (head == null || head.next == null) {// this check can be removed
-            return head;
-        }
-          
         Node pre = null;
         Node cur = head;
 
@@ -31,8 +25,7 @@ class ReverseList {
             cur = next;
         }
 
-        Node newHead = pre;
-        return newHead;
+        return pre;
     }
 }
 
