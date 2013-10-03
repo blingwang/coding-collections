@@ -44,6 +44,7 @@ public class BinarySearch {
     }
 
     public int searchClosest(int[] a, int target) {
+        // assert isSorted(a) && a.length > 0;
         int lo = 0, hi = a.length - 1;
         
         while (hi - lo > 1) {
