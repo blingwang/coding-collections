@@ -5,11 +5,9 @@ class QuickSort {
     }
 
     private static void quickSort(Comparable[] a, int lo, int hi) {
-        if (lo >= hi) {
-            return;
-        }
+        if (lo >= hi) return;
 
-        int p = partition(a, lo, hi);
+        int p = partition(a, lo, hi); // partition and get pivot index
         quickSort(a, lo, p - 1);
         quickSort(a, p + 1, hi);
     }
@@ -21,28 +19,24 @@ class QuickSort {
 
         while (true) {
             // i is the index of the first element >= pivot or hi 
-            while (a[i].compareTo(pivot) < 0) {
-                if (i == hi) break;
-                i++;
-            }
+            while (i < hi && a[i].compareTo(pivot) < 0) i++;
 
             // j is index of the last element <= pivot
-            while (a[j].compareTo(pivot) > 0) {
-                if (i == lo) break;
-                j--;
-            }
+            while (j > lo && a[j].compareTo(pivot) > 0) j--;
 
             if (i >= j) break;
-
-            Comparable temp = a[i];
-            a[i] = a[j];
-            a[j] = temp;
+            swap(a, i, j);
         }
 
-        a[lo] = a[j];
-        a[j] = pivot;
+        swap(a, lo, j);
         
         return j;
+    }
+    
+    private static void swap(Comparable[] a, int i, int j) {
+        Comparable temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
     }
 
     public static void main(String[] args) {
