@@ -24,11 +24,12 @@ public class BinaryTree implements Iterable<TreeNode>{
         }
         
         private class InorderIterator implements Iterator<TreeNode> {
-                TreeNode current;
-                ArrayDeque<TreeNode> stack = new ArrayDeque<TreeNode>();
+                private TreeNode current;
+                private ArrayDeque<TreeNode> stack;
                 
                 public InorderIterator(TreeNode root) {
                         current = root;
+                        stack = new ArrayDeque<TreeNode>();
                 }
                 
                 @Override 
