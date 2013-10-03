@@ -1,5 +1,5 @@
 import java.util.*;
-class IteratorWrapper<T> {
+class IteratorWrapper<T> { // peekable iterator
     private Iterator<T> it;
     private T nextValue;
     private boolean hasNext;
@@ -7,6 +7,7 @@ class IteratorWrapper<T> {
     public IteratorWrapper(Iterator<T> it) {
         this.it = it;
         hasNext = it.hasNext();
+        
         if (hasNext) {
             nextValue = it.next();
         }
@@ -14,8 +15,9 @@ class IteratorWrapper<T> {
 
     public T peek() {
         if (!hasNext) {
-            throw new RuntimeException();
+            throw new NoSuchElementException();
         }
+        
         return nextValue;
     }
 
@@ -25,11 +27,12 @@ class IteratorWrapper<T> {
 
     public T next() {
         if (!hasNext) {
-            throw new RuntimeException();
+            throw new NoSuchElementException();
         }
     
         T result = nextValue;
         hasNext = it.hasNext();
+        
         if (hasNext) {
             nextValue = it.next();
         }
