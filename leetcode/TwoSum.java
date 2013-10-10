@@ -3,7 +3,7 @@ import java.util.*;
 class TwoSum {
     /* return two int values */
     public int[] twoSum(int[] numbers, int target) {
-        int[] result = new int[2];
+        int[] pair = new int[2];
         Arrays.sort(numbers);
         int start = 0;
         int end = numbers.length - 1;
@@ -15,13 +15,13 @@ class TwoSum {
             } else if (sum > target) {
                 end--;
             } else {
-                result[0] = numbers[start];
-                result[1] = numbers[end];
-                return result;
+                pair[0] = numbers[start];
+                pair[1] = numbers[end];
+                return pair;
             }
         }
 
-        return result;
+        return pair;
     }
 
     /* return two non-zero-based indexes */
