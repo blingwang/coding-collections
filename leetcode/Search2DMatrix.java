@@ -1,4 +1,5 @@
 class Search2DMatrix {
+    /**** if current row is always less than next row, matrix is sorted array ***/
     public boolean searchMatrix(int[][] matrix, int target) {
         int m = matrix.length;
         int n = matrix[0].length;
