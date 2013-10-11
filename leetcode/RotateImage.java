@@ -5,6 +5,7 @@ public class RotateImage {
     public void rotateByTranspose(int[][] matrix) {
         int n = matrix.length;
         assert(n == matrix[0].length);
+        
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n-i-1; j++) {// swap half elements
                 int temp = matrix[i][j];
@@ -25,6 +26,7 @@ public class RotateImage {
     public void rotateByLayer(int[][] matrix) {
         int n = matrix.length;
         assert(n == matrix[0].length);
+        
         for (int layer = 0; layer < n/2; layer++) {
             for (int i = layer; i < n - layer - 1; i++) {
                 int temp = matrix[layer][i];
