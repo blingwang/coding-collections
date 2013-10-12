@@ -5,8 +5,9 @@ public class SpiralMatrix {
         result = new ArrayList<Integer>();
         int m = matrix.length;
         if (m == 0) return result;
-        
         int n = matrix[0].length;
+        if (n == 0) return result;
+        
         sprialOrderAddMatrix(matrix, m, n, 0);
         
         return result;
