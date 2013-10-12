@@ -15,14 +15,14 @@ public class MergeIntervals {
         
         Collections.sort(intervals, comparator);
         
-        Interval last = intervals.get(0);
-        mergedList.add(last);
+        Interval pre = intervals.get(0);
+        mergedList.add(pre);
         for (Interval cur : intervals) {
-            if (cur.start <= last.end) {
-                last.end = Math.max(last.end, cur.end);
+            if (cur.start <= pre.end) {
+                pre.end = Math.max(pre.end, cur.end);
             } else {
                 mergedList.add(cur);
-                last = cur;
+                pre = cur;
             }
         }
         
