@@ -30,33 +30,32 @@ public class MergeIntervals {
     }
     
     public ArrayList<Interval> mergeInplace(ArrayList<Interval> intervals) {
-        if (intervals == null || intervals.size() == 0) return intervals;
+        if (intervals.isEmpty()) return intervals;
         
         Comparator<Interval> comparator = new Comparator<Interval>() {
             @Override
             public int compare(Interval i1, Interval i2) {
-                if (i1.start < i2.start) return -1;
                 if (i1.start > i2.start) return 1;
+                if (i1.start < i2.start) return -1;
                 return 0;
             }
         };
         
         Collections.sort(intervals, comparator);
         
-        int lastIndex = 0;
+        int lastMerged = 0;
         for (int i = 1; i < intervals.size(); i++) {
+            Interval pre = intervals.get(lastMerged);
             Interval cur = intervals.get(i);
-            Interval last = intervals.get(lastIndex);
             
-            if (cur.start <= last.end) { // overlap => merge to last
-                last.end = Math.max(last.end, cur.end);
-            } else { // not overlap => append to last
-                lastIndex++;
-                intervals.set(lastIndex, cur);
+            if (cur.start <= pre.end) {
+                pre.end = Math.max(pre.end, cur.end);
+            } else {
+                intervals.set(++lastMerged, cur);
             }
         }
         
-        for (int i = intervals.size() - 1; i > lastIndex; i--) {
+        for (int i = intervals.size() - 1; i > lastMerged; i--) {
             intervals.remove(i);
         }
         
