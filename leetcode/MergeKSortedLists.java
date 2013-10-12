@@ -30,20 +30,18 @@ public class MergeKSortedLists {
        return dummyHead.next;
    }
    
-   public ListNode mergeKListsDivideAndConquer(ArrayList<ListNode> lists) {
-       if (lists.isEmpty()) return null;
-       
-       int last = lists.size() - 1;
-       
-       while (last > 0) {
-           int cur = 0;
-           while (cur < last) {
-               lists.set(cur, mergeTwoLists(lists.get(cur++), lists.get(last--)));
-           }
-       }
-       
-       return lists.get(0);
-   }
+   public ListNode mergeKListsInplace(ArrayList<ListNode> lists) {
+        if (lists.isEmpty()) return null;
+        
+        int last = lists.size() - 1;
+        while (last > 0) {
+            for (int cur = 0; cur < last; cur++, last--) {
+                lists.set(cur, mergeTwoLists(lists.get(cur), lists.get(last)));
+            }
+        }
+        
+        return lists.get(0);
+    }
    
    public ListNode mergeKListsTopDown(ArrayList<ListNode> lists) {
         //if (lists.isEmpty()) return null;
