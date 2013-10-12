@@ -3,6 +3,8 @@ public class SearchInsertionPosition {
         int left = 0; 
         int right = A.length - 1;
         int bestSoFar = -1;
+        
+        // insert position should be equal or first greater
         while (left <= right) {
             int mid = left + (right - left) / 2;
             if (A[mid] == target) return mid;
@@ -14,7 +16,8 @@ public class SearchInsertionPosition {
             }
         }
         
-        if (bestSoFar < 0) return A.length;
+        if (bestSoFar < 0) return A.length; // all less than target
+        
         return bestSoFar;     
     }
 }
