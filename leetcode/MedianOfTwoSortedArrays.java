@@ -1,4 +1,24 @@
 public class MedianOfTwoSortedArrays {
+     public double findMedianSortedArrays(int A[], int B[]) {
+        int m = A.length, n = B.length;
+        int total = m + n;
+        
+        if ((total & 0x1) == 1) return findKth(A, B, total/2 + 1);
+        
+        return (findKth(A, B, total/2) + findKth(A, B, total/2 + 1)) / 2;
+    }
+    
+    private double findKth(int[] A, int[] B, int rank) {
+        assert(rank > 0 && rank <= A.length + B.length);
+        int kth = 0;
+        for (int i = 0, j = 0, k = 0; k < rank; k++) {
+            if (i == A.length)      kth = B[j++];
+            else if (j == B.length) kth = A[i++];
+            else if (A[i] > B[j])   kth = B[j++];
+            else                    kth = A[i++];
+        }
+        return kth;
+    }
 
     private double findMedianWithMerge(int[] A, int[] B) {
         int m = A.length, n = B.length;
