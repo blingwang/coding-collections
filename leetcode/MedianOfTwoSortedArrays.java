@@ -43,20 +43,27 @@ public class MedianOfTwoSortedArrays {
     public double findMedianSortedArraysSublinear(int[] A, int[] B) {
         int m = A.length, n = B.length;
         int total = m + n;
-        if ((total & 0x1) == 1) return findKth(A, 0, m, B, 0, n, total/2 + 1);
-        else return (findKth(A, 0, m, B, 0, n, total/2) + 
-                     findKth(A, 0, m, B, 0, n, (total/2)+1)) / 2;
+        
+        if ((total & 0x1) == 1) {
+             return findKth(A, 0, A.length, B, 0, B.length, total/2 + 1);
+        }
+        
+        return (findKth(A, 0, A.length, B, 0, B.length, total/2) + 
+                findKth(A, 0, A.length, B, 0, B.length, total/2 + 1)) / 2;
     }
     
-    private double findKth(int a[], int sa, int m, int b[], int sb, int n, int k) {
-        if (m > n) return findKth(b, sb, n, a, sa, m, k);
+    private double findKth(int[] A, int offA, int lenA, int[] B, int offB, int lenB, int k) {
+        if (lenA > lenB) return findKth(B, offB, lenB, A, offA, lenA, k);
     
-        if (m == 0) return b[sb+k-1];
-        if (k == 1) return Math.min(a[sa], b[sb]);
+        if (lenA == 0) return B[offB+k-1];
+        if (k == 1) return Math.min(A[offA], B[offB]); // base case
         
         // drop elements smaller than kth in a and b: compare k/2 th 
-        int pa = Math.min(k/2, m), pb = k - pa;
-        if (a[sa+pa-1] < b[sb+pb-1]) return findKth(a, sa+pa, m-pa, b, sb, n, k - pa);
-        return findKth(a, sa, m, b, sb+pb, n-pb, k-pb);
+        int midA = Math.min(k/2, lenA), midB = k - midA;
+        if (A[offA+midA-1] < B[offB+midB-1]) {
+            return findKth(A, offA+midA, lenA-midA, B, offB, lenB, k-midA);
+        }
+        
+        return findKth(A, offA, lenA, B, offB+midB, lenB-midB, k-midB);
     }
 }
