@@ -54,12 +54,12 @@ public class SpiralMatrix {
         int m = matrix.length;
         if (m == 0) return result;
         int n = matrix[0].length;
-        int totalLayers = (Math.min(m, n) + 1) / 2;
+        int totalLayers = (Math.min(m, n) + 1) / 2; // ceiling
         int count = 0;
         
         for (int layer = 0; layer < totalLayers; layer++) {
             // single row
-            if (layer * 2 == m-1) {
+            if (m - layer * 2 == 1) {
                 for(int i = layer; i <= n -layer - 1; i++) {
                     result.add(matrix[layer][i]);
                 }
@@ -67,7 +67,7 @@ public class SpiralMatrix {
             }
             
             // single column
-            if (layer * 2 == n-1) {
+            if (n - layer * 2 == 1) {
                 for(int i = layer; i <= m - layer - 1; i++) {
                     result.add(matrix[i][n-layer-1]);
                 }
