@@ -59,11 +59,11 @@ public class MedianOfTwoSortedArrays {
         if (k == 1) return Math.min(A[offA], B[offB]); // base case
         
         // drop elements smaller than kth in a and b: compare k/2 th 
-        int midA = Math.min(k/2, lenA), midB = k - midA;
-        if (A[offA+midA-1] < B[offB+midB-1]) {
-            return findKth(A, offA+midA, lenA-midA, B, offB, lenB, k-midA);
+        int smallerAs = Math.min(k/2, lenA), smallerBs = k - smallerAs;
+        if (A[offA+smallerAs-1] < B[offB+smallerBs-1]) {
+            return findKth(A, offA+smallerAs, lenA-smallerAs, B, offB, lenB, k-smallerAs);
         }
         
-        return findKth(A, offA, lenA, B, offB+midB, lenB-midB, k-midB);
+        return findKth(A, offA, lenA, B, offB+smallerBs, lenB-smallerBs, k-smallerBs);
     }
 }
