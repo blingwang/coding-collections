@@ -45,10 +45,10 @@ public class SearchRotatedSortedArray {
     
         while (A[lo] > A[hi]) {
             int mid = lo + (hi - lo) / 2;
-            if (A[mid] > A[hi])
+            if (A[mid] > A[hi]) // right rotated
                 lo = mid + 1;
             else
-                hi = mid;
+                hi = mid; // not mid-1 since lo=mid possible
         }
         return lo;
     }
