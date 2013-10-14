@@ -48,7 +48,7 @@ public class SearchRotatedSortedArray {
             if (A[mid] > A[hi]) // right rotated
                 lo = mid + 1;
             else
-                hi = mid; // not mid-1 since lo=mid possible
+                hi = mid; // mid can be pivot
         }
         return lo;
     }
