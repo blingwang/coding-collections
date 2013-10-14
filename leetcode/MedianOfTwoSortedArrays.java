@@ -41,8 +41,7 @@ public class MedianOfTwoSortedArrays {
     }
     
     public double findMedianSortedArraysSublinear(int[] A, int[] B) {
-        int m = A.length, n = B.length;
-        int total = m + n;
+        int total = A.length + B.length;
         
         if ((total & 0x1) == 1) {
              return findKth(A, 0, A.length, B, 0, B.length, total/2 + 1);
@@ -59,7 +58,8 @@ public class MedianOfTwoSortedArrays {
         if (k == 1) return Math.min(A[offA], B[offB]); // base case
         
         // drop elements smaller than kth in a and b: compare k/2 th 
-        int smallerAs = Math.min(k/2, lenA), smallerBs = k - smallerAs;
+        int smallerAs = Math.min(k/2, lenA)
+        int smallerBs = k - smallerAs;
         if (A[offA+smallerAs-1] < B[offB+smallerBs-1]) {
             return findKth(A, offA+smallerAs, lenA-smallerAs, B, offB, lenB, k-smallerAs);
         }
