@@ -1,4 +1,34 @@
 public class ReverseLinkedList2 {
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        assert(m >= 1 && m <= n);
+        if (head == null || m == n) return head;
+        
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy;
+        ListNode cur = head;
+        
+        for (int i = 1; i < m; i++) {
+            pre = cur;
+            cur = cur.next;
+        }
+        
+        ListNode preM = pre;
+        ListNode nodeM = cur;
+
+        for (int i = m; i <= n; i++) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        
+        preM.next = pre;
+        nodeM.next = cur;
+        
+        return dummy.next;
+    }
+    
     public ListNode reverseBetweenShorter(ListNode head, int m, int n) {
         if (m >= n || head == null) return head;
         
