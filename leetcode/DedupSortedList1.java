@@ -1,15 +1,15 @@
 public class DedupSortedList1 {
     public ListNode deleteDuplicates(ListNode head) {
-        ListNode cur = head;
         ListNode pre = head;
-        while (cur != null) {
+        for (ListNode cur = head; cur != null; cur = cur.next) {
             if (cur.val != pre.val) {
                 pre.next = cur;
                 pre = cur;
             }
-            cur = cur.next;
         }
-        if (pre != null) pre.next = null;
+        
+       if (pre != null) pre.next = null;
+        
         return head;
     }
     
