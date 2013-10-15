@@ -1,23 +1,23 @@
 public class SwapNodePairs {
     public ListNode swapPairs(ListNode head) {
-        if (head == null || head.next == null) return head;
-        
-        ListNode dummy = new ListNode(-1);
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
         ListNode pre = dummy;
         ListNode first = head;
-        ListNode newHead = head.next;
-        while (first != null && first.next !=null) {
+        
+        while (first!= null && first.next != null) {
             ListNode second = first.next;
+            ListNode next = second.next;
             
             pre.next = second;
-            first.next = second.next;
             second.next = first;
+            first.next = next;
             
             pre = first;
-            first = first.next;
+            first = next;
         }
         
-        return newHead;
+        return dummy.next;
     }
     
     public ListNode swapPairs2(ListNode head) {
