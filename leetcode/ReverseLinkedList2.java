@@ -23,7 +23,7 @@ public class ReverseLinkedList2 {
         return dummyHead.next;
     }   
 
-    public ListNode reverseBetween(ListNode head, int m, int n) {
+    public ListNode reverseBetween2(ListNode head, int m, int n) {
         if (m >= n || head == null) return head;
         
         ListNode dummyHead = new ListNode(-1);
