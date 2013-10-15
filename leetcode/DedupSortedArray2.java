@@ -1,18 +1,12 @@
 public class DedupSortedArray2 {
     public int removeDuplicates(int[] A) {
-        if (A.length == 0) return 0;
-        int updateIndex = 1;
-        int preValue = A[0];
-        int preCount = 1;
+        if (A.length <= 2) return A.length;
         
-        for (int i = 1; i < A.length; i++) {
-            if(A[i] != preValue) {
-                A[updateIndex++] = A[i];
-                preValue = A[i];
-                preCount = 1;
-            } else if (preCount == 1) {
-                A[updateIndex++] = A[i];
-                preCount++;
+        int updateIndex = 2;
+        for (int i = 2; i < A.length; i++) {
+            if (A[i] != A[updateIndex-2]) {
+                A[updateIndex] = A[i];
+                updateIndex++;
             }
         }
         
