@@ -1,6 +1,8 @@
 public class RotatedList {
     public ListNode rotateRight(ListNode head, int n) {
+        assert(n >= 0);
         if (head == null || n == 0) return head;
+        
         ListNode fast = head;
         ListNode slow = head;
         
