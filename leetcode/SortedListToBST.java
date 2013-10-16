@@ -20,40 +20,40 @@ public class SortedListToBST {
         return root;
     }
     
-    private TreeNode sortedListToBST2(ListNode head, int start, int end) {
+    public TreeNode sortedListToBST2(ListNode head) {
+        int n = computeListLength(head);
+        if (head == null) return null;
+        ListNode curNode = new ListNode(head.val);
+        curNode.next = head.next;
+        return sortedListToBST(curNode, 0 , n - 1);
+    }
+    
+    private TreeNode sortedListToBST(ListNode curNode, int start, int end) {
         if (start > end) return null;
         
         int mid = start + (end - start) / 2;
-        TreeNode left = sortedListToBST(head, start, mid - 1);
-        TreeNode parent = new TreeNode(head.val);
+        TreeNode left = sortedListToBST(curNode, start, mid - 1);
+        TreeNode parent = new TreeNode(curNode.val);
         
         // Java pass in Object by reference, so we can't change head but we can change its content :)
-        if (head.next != null) { // "move to next"
-            head.val = head.next.val;
-            head.next = head.next.next;
+        if (curNode.next != null) { // "move to next"
+            curNode.val = curNode.next.val;
+            curNode.next = curNode.next.next;
         }
         
-        TreeNode right = sortedListToBST(head, mid + 1, end);
+        TreeNode right = sortedListToBST(curNode, mid + 1, end);
         parent.left = left;
         parent.right = right;
         
         return parent;
     }
-
+    
     private int computeListLength(ListNode head) {
         int length = 0;
-        while (head != null) {
+        for (ListNode cur = head; cur != null; cur = cur.next) {
             length++;
-            head = head.next;
         }
-        
         return length;
-    }
-
-    private class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; next = null; }
     }
 
     private class TreeNode {
