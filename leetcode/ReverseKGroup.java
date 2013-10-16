@@ -1,5 +1,41 @@
 public class ReverseKGroup {
     public ListNode reverseKGroup(ListNode head, int k) {
+        if (head == null || k < 2) return head;
+        
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        int count = 0;
+        ListNode preGroup = dummy;
+        ListNode cur = head;
+        
+       while (cur != null) {
+            count++;
+            ListNode next = cur.next;
+            
+            if (count % k == 0) {
+                ListNode start = preGroup.next;
+                preGroup.next = reverseKNodes(start, next, k);
+                preGroup = start;
+            }
+            
+            cur = next;
+        }
+        
+        return dummy.next;
+    }
+    
+    private ListNode reverseKNodes(ListNode start, ListNode pre, int k) {
+        ListNode cur = start;
+        for (int i = 0; i < k; i++) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+    
+    public ListNode reverseKGroupTwoPointers(ListNode head, int k) {
         if (k <= 1) return head;
         
         ListNode dummyHead = new ListNode(-1);
