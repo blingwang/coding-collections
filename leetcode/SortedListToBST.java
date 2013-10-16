@@ -19,6 +19,26 @@ public class SortedListToBST {
 
         return root;
     }
+    
+    private TreeNode sortedListToBST2(ListNode head, int start, int end) {
+        if (start > end) return null;
+        
+        int mid = start + (end - start) / 2;
+        TreeNode left = sortedListToBST(head, start, mid - 1);
+        TreeNode parent = new TreeNode(head.val);
+        
+        // Java pass in Object by reference, so we can't change head but we can change its content :)
+        if (head.next != null) { // "move to next"
+            head.val = head.next.val;
+            head.next = head.next.next;
+        }
+        
+        TreeNode right = sortedListToBST(head, mid + 1, end);
+        parent.left = left;
+        parent.right = right;
+        
+        return parent;
+    }
 
     private int computeListLength(ListNode head) {
         int length = 0;
