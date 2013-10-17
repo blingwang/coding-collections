@@ -3,18 +3,20 @@ public class GasStation {
         assert(gas.length == cost.length);
         int N = gas.length;
         
-        int curLeft = 0;
-        int totalLeft = 0;
+        int curGas = 0; // gas left after each edge from valid start
+        int totalGas = 0; // total gas left until current edge
         int start = 0;
+        
         for (int i = 0; i < N; i++) {
-            curLeft += gas[i] - cost[i];
-            totalLeft += gas[i] - cost[i];
-            if (curLeft < 0) {// first invalid sum, drop all pre
+            curGas += gas[i] - cost[i];
+            totalGas += gas[i] - cost[i];
+            
+            if (curGas < 0) {// first invalid sum, drop all pre
                 start = i + 1;
-                curLeft = 0;
+                curGas = 0;
             }
         }
         
-        return totalLeft >= 0 ? start : -1;
+        return totalGas >= 0 ? start : -1;
     }
 }
