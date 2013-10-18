@@ -54,7 +54,7 @@ public class MinBinaryTreeDepth {
         return min;
     }
 
-    private void dfs(int depth, TreeNode root) {
+    private void dfs(int depth, TreeNode root) { // top down
         if (root == null) return;
         
         if (root.left == null && root.right == null) {
