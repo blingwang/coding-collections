@@ -12,6 +12,7 @@ public class BalancedBinaryTree {
        
        int leftHeight = checkHeight(root.left);
        if (leftHeight < 0) return -1;
+       
        int rightHeight = checkHeight(root.right);
        if (rightHeight < 0) return -1;
        
