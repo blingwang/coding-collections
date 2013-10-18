@@ -36,7 +36,7 @@ public class BinaryTreeLevelOrder {
         return result;
     }
     
-    // DFS: T(k) = 2T(k-1) + c, k=lgn
+    // preorder DFS: T(k) = 2T(k-1) + c, k=lgn
     // DFS use less memory since height is limited
     // time complexity is still O(n): 1+3+7+...+2^k-1, k=lgn
     public ArrayList<ArrayList<Integer>> levelOrderDFS(TreeNode root) {
