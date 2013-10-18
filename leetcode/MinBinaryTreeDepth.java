@@ -50,17 +50,19 @@ public class MinBinaryTreeDepth {
     public int minDepthDFS2(TreeNode root) {
         if (root == null) return 0;
         min = Integer.MAX_VALUE;
-        inorderTraversal(0, root);
+        dfs(0, root);
         return min;
     }
 
-    private void inorderTraversal(int depth, TreeNode root) {
+    private void dfs(int depth, TreeNode root) {
         if (root == null) return;
+        
         if (root.left == null && root.right == null) {
             min = Math.min(min, depth + 1);
         }
-        inorderTraversal(depth + 1, root.left);
-        inorderTraversal(depth + 1, root.right);
+        
+        dfs(depth + 1, root.left);
+        dfs(depth + 1, root.right);
     }
 
     private class TreeNode {
