@@ -4,6 +4,7 @@ public class BinaryTreeZigzagLevelOrder {
         ArrayList<ArrayList<Integer>> levelList = new ArrayList<ArrayList<Integer>>();
         if (root == null) return levelList;
         
+        // adjacent levels nodes are visited in reverse order: use stack
         ArrayDeque<TreeNode> currentLevel = new ArrayDeque<TreeNode>();
         ArrayDeque<TreeNode> nextLevel = new ArrayDeque<TreeNode>();
         boolean leftToRight = false; // 2nd level: push left to right, pop right to left
