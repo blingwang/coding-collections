@@ -1,25 +1,24 @@
 import java.util.*;
 
 public class BottomUpLevelOrder {
-    ArrayList<ArrayList<Integer>> result;
-
     public ArrayList<ArrayList<Integer>> levelOrderBottom(TreeNode root) {
-        result = new ArrayList<ArrayList<Integer>>();
-        inOrder(root, 0); 
-        return result;
+        ArrayList<ArrayList<Integer>> levelList = new ArrayList<ArrayList<Integer>>();
+        preOrder(root, levelList, 0);
+        Collections.reverse(levelList);
+        return levelList;
     }
-
-    private void inOrder(TreeNode root, int level) {
+    
+    private void preOrder(TreeNode root, ArrayList<ArrayList<Integer>> levelList, int level) {
         if (root == null) return;
-        if (level >= result.size()) {
-            ArrayList<Integer> levelNodes = new ArrayList<Integer>();
-            result.add(0, levelNodes);
+        if (level >= levelList.size()) {
+            levelList.add(new ArrayList<Integer>());
         }
         
-        ArrayList<Integer> levelNodes = result.get(result.size() - level - 1);
-        levelNodes.add(root.val);
-        inOrder(root.left, level+1);
-        inOrder(root.right, level+1);
+        ArrayList<Integer> currentLevel = levelList.get(level);
+        currentLevel.add(root.val);
+        
+        preOrder(root.left, levelList, level + 1);
+        preOrder(root.right, levelList, level + 1);
     }
 
     private class TreeNode {
