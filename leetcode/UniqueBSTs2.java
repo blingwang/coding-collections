@@ -1,28 +1,32 @@
 import java.util.*;
 public class UniqueBSTs2 {
-    int count;
     public ArrayList<TreeNode> generateTrees(int n) {
-        return generateTrees(1, n);
+        return genSubTrees(1, n);
     }
     
-    private ArrayList<TreeNode> generateTrees(int start, int end) {
-        ArrayList<TreeNode> rootlist = new ArrayList<TreeNode>();
-        if(start > end) rootlist.add(null);
+    private ArrayList<TreeNode> genSubTrees(int start, int end) {
+        ArrayList<TreeNode> trees = new ArrayList<TreeNode>();
+        if (start > end) trees.add(null);
+        
         for (int i = start; i <= end; i++) {
-            ArrayList<TreeNode> leftRoots = generateTrees(start, i-1);
-            ArrayList<TreeNode> rightRoots = generateTrees(i+1, end);
-            for(TreeNode leftRoot : leftRoots) {
-                for (TreeNode rightRoot : rightRoots) {
+            ArrayList<TreeNode> lefts = genSubTrees(start, i - 1);
+            ArrayList<TreeNode> rights = genSubTrees(i + 1, end);
+            
+            for(TreeNode left : lefts) {
+                for (TreeNode right : rights) {
                     TreeNode root = new TreeNode(i);
-                    root.left = leftRoot;
-                    root.right = rightRoot;
-                    rootlist.add(root);
+                    root.left = left;
+                    root.right = right;
+                    trees.add(root);
                 }
             }
+            
         }
-        return rootlist;
+        
+        return trees;
     }
     
+    int count;
     public ArrayList<TreeNode> generateTreesIteration(int n) {
         ArrayList<TreeNode>[] bstLists = (ArrayList<TreeNode>[]) new ArrayList[n+1];       
         bstLists[0] = new ArrayList<TreeNode>();
