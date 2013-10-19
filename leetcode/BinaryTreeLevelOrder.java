@@ -2,38 +2,41 @@ import java.util.*;
 
 public class BinaryTreeLevelOrder {
     public ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-        if (root == null) return result;
-
+        ArrayList<ArrayList<Integer>> levelList = new ArrayList<ArrayList<Integer>>();
+        if (root == null) return levelList;
+        
         ArrayDeque<TreeNode> queue = new ArrayDeque<TreeNode>();
+        int currentCount = 0;
+        int nextCount = 0;
+        
         queue.offer(root);
-        int currentLevelNodes = 0;
-        int nextLevelNodes = 1;
-
+        nextCount++;
+        
         while (!queue.isEmpty()) {
-            if (currentLevelNodes == 0) {
-                result.add(new ArrayList<Integer>());
-                currentLevelNodes = nextLevelNodes;
-                nextLevelNodes = 0;
+            if (currentCount == 0) {
+                currentCount = nextCount;
+                nextCount = 0;
+                levelList.add(new ArrayList<Integer>());
             }
             
             TreeNode node = queue.poll();
-            currentLevelNodes--;
-
-            ArrayList<Integer> list = result.get(result.size()-1);
-            list.add(node.val);
-
+            currentCount--;
+            
+            ArrayList<Integer> currentLevel = levelList.get(levelList.size() - 1);
+            currentLevel.add(node.val);
+            
             if (node.left != null) {
                 queue.offer(node.left);
-                nextLevelNodes++;
+                nextCount++;
             }
+            
             if (node.right != null) {
                 queue.offer(node.right);
-                nextLevelNodes++;
+                nextCount++;
             }
         }
-
-        return result;
+        
+        return levelList;
     }
     
     // preorder DFS: T(k) = 2T(k-1) + c, k=lgn
