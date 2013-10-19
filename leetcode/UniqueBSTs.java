@@ -1,13 +1,15 @@
 public class UniqueBSTs {
     public int numTrees(int n) {
-        assert(n >= 0);
         int[] numBSTs = new int[n+1];
-        numBSTs[0] = 1;
+        numBSTs[0] = 1; // base case
+        
+        // select root, arrange n-1 nodes on left and right
         for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= i; j++) {
-                numBSTs[i] += numBSTs[j-1] * numBSTs[i-j];
+            for (int j = 0; j < i; j++) {// i-1 nodes left
+                numBSTs[i] += numBSTs[j] * numBSTs[i-1-j];
             }
         }
+        
         return numBSTs[n];
     }
 }
