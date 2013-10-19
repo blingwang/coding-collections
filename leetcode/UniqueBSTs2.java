@@ -26,6 +26,62 @@ public class UniqueBSTs2 {
         return trees;
     }
     
+    public ArrayList<TreeNode> generateTreesDP(int n) {
+        if (n < 1) {
+            ArrayList<TreeNode> trees = new ArrayList<TreeNode>();
+            trees.add(null);
+            return trees;
+        }
+        
+        ArrayList<ArrayList<ArrayList<TreeNode>>> allTreesTable = new ArrayList<ArrayList<ArrayList<TreeNode>>>();
+        
+        for (int i = 1; i <= n; i++) {
+            ArrayList<TreeNode> singleNodeTrees = new ArrayList<TreeNode>();
+            singleNodeTrees.add(new TreeNode(i));
+            ArrayList<ArrayList<TreeNode>> equalRootTreesList = new ArrayList<ArrayList<TreeNode>>();
+            equalRootTreesList.add(singleNodeTrees);
+            allTreesTable.add(equalRootTreesList);
+        }
+        
+        for (int size = 2; size <= n; size++) { // size of tree
+            for (int i = 1; i <= n - size + 1 ; i++) { // start num of range
+                ArrayList<TreeNode> currentSizeTrees = new ArrayList<TreeNode>();
+                for (int j = i; j <= i + size - 1; j++) { // root num
+                    if (j == i) {
+                        ArrayList<TreeNode> rights = allTreesTable.get(j).get(i+size-j-2); // j+1~i+size-1
+                        for (TreeNode right : rights) {
+                            TreeNode root = new TreeNode(j);
+                            root.right = right;
+                            currentSizeTrees.add(root);
+                        }
+                    } else if (j == i + size -1) {
+                        ArrayList<TreeNode> lefts = allTreesTable.get(i-1).get(j-i-1); // i~j-1
+                        for (TreeNode left : lefts) {
+                            TreeNode root = new TreeNode(j);
+                            root.left = left;
+                            currentSizeTrees.add(root);
+                        }
+                    } else {
+                        ArrayList<TreeNode> lefts = allTreesTable.get(i-1).get(j-i-1); // i~j-1
+                        ArrayList<TreeNode> rights = allTreesTable.get(j).get(i+size-j-2); // j+1~i+size-1
+                        for (TreeNode left : lefts) {
+                            for (TreeNode right : rights) {
+                                TreeNode root = new TreeNode(j);
+                                root.left = left;
+                                root.right = right;
+                                currentSizeTrees.add(root);
+                            }
+                        }
+                    }
+                }
+                
+                allTreesTable.get(i-1).add(currentSizeTrees);
+            }
+        }
+        
+        return allTreesTable.get(0).get(n-1);
+    }
+    
     int count;
     public ArrayList<TreeNode> generateTreesIteration(int n) {
         ArrayList<TreeNode>[] bstLists = (ArrayList<TreeNode>[]) new ArrayList[n+1];       
