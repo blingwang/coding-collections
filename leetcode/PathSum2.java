@@ -1,31 +1,27 @@
 import java.util.*;
 
 public class PathSum2 {
-    ArrayList<ArrayList<Integer>> paths;
-
     public ArrayList<ArrayList<Integer>> pathSum(TreeNode root, int sum) {
-        paths = new ArrayList<ArrayList<Integer>>();
-        ArrayList<Integer> curPath = new ArrayList<Integer>();
-        dfs(root, curPath, sum);
-        return paths;
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> path = new ArrayList<Integer>();
+        findPathSum(root, sum, path, result);
+        return result;
     }
-
-    private void dfs(TreeNode root, ArrayList<Integer> curPath, int sum) {
+    
+    private void findPathSum(TreeNode root, int sum, ArrayList<Integer> path, 
+                             ArrayList<ArrayList<Integer>> result) {
         if (root == null) return;
         
-        curPath.add(root.val);
+        path.add(root.val);
+        
         if (root.left == null && root.right == null && root.val == sum) {
-            ArrayList<Integer> found = new ArrayList<Integer>();
-            found.addAll(curPath);
-            paths.add(found);
-            curPath.remove(curPath.size() - 1);
-            return;
+            result.add(new ArrayList<Integer>(path));
         }
         
-        dfs(root.left, curPath, sum - root.val);
-        dfs(root.right, curPath, sum - root.val);
+        findPathSum(root.left, sum - root.val, path, result);
+        findPathSum(root.right, sum - root.val, path, result);
         
-        curPath.remove(curPath.size() - 1);
+        path.remove(path.size() - 1);
     }
 
     private class TreeNode {
