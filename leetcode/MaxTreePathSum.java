@@ -1,31 +1,29 @@
 public class MaxTreePathSum {
-    private int maxSum;
-
     public int maxPathSum(TreeNode root) {
-        maxSum = Integer.MIN_VALUE;
-        maxRootPathSum(root);
-        return maxSum;
+        Data data = dfs(root);
+        return data.maxSum;
     }
-
-    private int maxRootPathSum(TreeNode root) {
-        if (root == null) return Integer.MIN_VALUE;
-        int rootPathLeftSum = root.val;
-        int rootPathRightSum = root.val;
+    
+    private Data dfs(TreeNode root) {// post order
+        Data data = new Data();
+        if (root == null) return data;
         
-        int leftMax = maxRootPathSum(root.left);
-        int rightMax = maxRootPathSum(root.right);
-        if (leftMax > 0) rootPathLeftSum += leftMax;
-        if (rightMax > 0) rootPathRightSum += rightMax;
-        int rootPathSum = rootPathLeftSum + rootPathRightSum - root.val;
-        if (rootPathSum > maxSum) maxSum = rootPathSum;
+        Data left = dfs(root.left);
+        Data right = dfs(root.right);
         
-        return Math.max(rootPathLeftSum, rootPathRightSum);
+        // partial path can be empty
+        data.partialPath = Math.max(0, Math.max(left.partialPath, right.partialPath) + root.val);
+        data.maxSum = max(left.maxSum, right.maxSum, left.partialPath + root.val + right.partialPath);
+        
+        return data;
     }
-
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
+    
+    private int max(int a, int b, int c) {
+        return Math.max(Math.max(a, b), c);
+    }
+    
+    private class Data {
+        int partialPath = 0; // partialPath >= 0
+        int maxSum = Integer.MIN_VALUE;
     }
 }
