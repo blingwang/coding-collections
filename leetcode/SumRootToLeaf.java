@@ -3,6 +3,7 @@ public class SumRootToLeaf {
         return sumNumbers(root, 0);
     }
     
+    // DFS
     private int sumNumbers(TreeNode root, int curSum) {
         if (root == null) return 0; // don't return curSum
         
@@ -41,23 +42,6 @@ public class SumRootToLeaf {
         }
         
         return sum;
-    }
-    
-    // DFS
-    private int sum;
-    public int sumNumbers2(TreeNode root) {
-        sum = 0;
-        dfs(root, 0);
-        return sum;
-    }
-    
-    private void dfs(TreeNode root, int curSum) {
-        if (root == null) return;
-        
-        curSum = curSum * 10 + root.val;
-        if (root.left == null && root.right == null) sum += curSum;
-        dfs(root.left, curSum);
-        dfs(root.right, curSum);
     }
 
     private class TreeNode {
