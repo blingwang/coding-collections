@@ -1,33 +1,28 @@
 public class ConstructTreePostInorder {
+    Map<Integer, Integer> inorderMap;
+    
     public TreeNode buildTree(int[] inorder, int[] postorder) {
-        return buildTree(inorder, 0, inorder.length-1, postorder, 0, postorder.length-1);
-    }
-
-    private TreeNode buildTree(int[] inorder, int inStart, int inEnd, 
-                               int[] postorder, int postStart, int postEnd) {
-        if (postStart > postEnd || postStart < 0) return null;
-        
-        int rootVal = postorder[postEnd];
-        TreeNode root = new TreeNode(rootVal);
-        
-        int inorderIndex = searchArray(inorder, inStart, inEnd, rootVal);
-        int leftSubTreeSize = inorderIndex - inStart;
-        
-        root.left = buildTree(inorder, inStart, inorderIndex-1,
-                              postorder, postStart, postStart+leftSubTreeSize-1);
-                  
-        root.right = buildTree(inorder, inorderIndex+1, inEnd,
-                               postorder, postStart+leftSubTreeSize, postEnd-1);
-        
-        return root;
-    }
-
-    private int searchArray(int[] a, int start, int end, int target) {
-        for (int i = start; i <= end; i++) {
-            if (a[i] == target) return i;
+        inorderMap = new HashMap<Integer, Integer>();
+        for (int i = 0; i < inorder.length; i++) {
+            inorderMap.put(inorder[i], i);
         }
         
-        return -1;
+        return buildSubTree(inorder, 0, inorder.length-1, postorder, postorder.length-1);
+    }
+    
+    private TreeNode buildSubTree(int[] inorder, int inStart, int inEnd, 
+                               int[] postorder, int postEnd) {
+        if (inStart > inEnd) return null;
+        
+        int rootVal = postorder[postEnd];
+        int rootIndex = inorderMap.get(rootVal);
+        int rightSubTreeSize = inEnd - rootIndex;
+        
+        TreeNode root = new TreeNode(rootVal);
+        root.left = buildSubTree(inorder, inStart, rootIndex-1, postorder, postEnd-rightSubTreeSize-1);
+        root.right = buildSubTree(inorder, rootIndex+1, inEnd, postorder, postEnd-1);
+        
+        return root;
     }
 
     private class TreeNode {
