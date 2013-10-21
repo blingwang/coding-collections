@@ -23,6 +23,25 @@ public class FlattenBinaryTree {
         
         return end;
     }
+    
+    public void flatten2(TreeNode root) { // iterative solution
+        TreeNode current = root;
+        
+        while (current != null) {
+            if (current.left != null) {
+                if (current.right != null) {// if we need to prune a right subtree
+                    TreeNode next = current.left;
+                    while (next.right != null) next = next.right;
+                    next.right = current.right;
+                }
+                
+                current.right = current.left;
+                current.left = null;
+            }
+            
+            current = current.right;
+        }
+    }
 
     private class TreeNode {
         int val;
