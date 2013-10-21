@@ -1,30 +1,27 @@
 public class FlattenBinaryTree {
     public void flatten(TreeNode root) {
-        dfs(root);      
+        flattenTree(root);
     }
-
-    private TreeNode dfs(TreeNode root) {
+    
+    private TreeNode flattenTree(TreeNode root) {// return last visited node
         if (root == null) return null;
         
         TreeNode left = root.left;
         TreeNode right = root.right;
+        TreeNode end = root; // end of flattened tree so far
         
-        TreeNode leftEnd = dfs(root.left);
-        TreeNode rightEnd = dfs(root.right);
-        
-        root.left = null;
-        if (leftEnd != null) {
+        if (left != null) { // insert left
+            root.left = null;
             root.right = left;
-            leftEnd.right = right; 
+            end = flattenTree(left);
+            end.right = right;
+        }
+    
+        if (right != null) {
+            end = flattenTree(right);
         }
         
-        if (rightEnd != null) {
-            return rightEnd;
-        } else if (leftEnd != null) {
-            return leftEnd;
-        }
-        
-        return root;
+        return end;
     }
 
     private class TreeNode {
