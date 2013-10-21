@@ -27,8 +27,8 @@ public class BalancedBinaryTree {
        int leftHeight = getHeight(root.left);
        int rightHeight = getHeight(root.right);
        
-       return isBalanced(root.left) && isBalanced(root.right) && 
-              Math.abs(leftHeight - rightHeight) <= 1;
+       return Math.abs(leftHeight - rightHeight) <= 1 && 
+              isBalanced(root.left) && isBalanced(root.right);
    }
    
    private int getHeight(TreeNode root) {
