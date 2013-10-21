@@ -35,8 +35,8 @@ public class RecoverBST {
         q.val = temp;
     }
     
-    TreeNode first, second, pre;
-    public void recoverTree(TreeNode root) {
+    private TreeNode first, second, pre;
+    public void recoverTree2(TreeNode root) {
         first = null;
         second = null;
         pre = null;
