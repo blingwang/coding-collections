@@ -21,6 +21,30 @@ public class PopulateNextRightPointers2 {
         
         connect(nextRoot);
     }
+    
+    public void connect2(TreeLinkNode root) {
+        TreeLinkNode firstRoot = root;
+        while (firstRoot != null) {
+            TreeLinkNode nextRoot = null;
+            TreeLinkNode preNode = null;
+            
+            for (TreeLinkNode current = firstRoot; current != null; current = current.next) {
+                if (current.left != null) {
+                    if (nextRoot == null) nextRoot = current.left;
+                    if (preNode != null) preNode.next = current.left;
+                    preNode = current.left;
+                }
+                
+                if (current.right != null) {
+                    if (nextRoot == null) nextRoot = current.right;
+                    if (preNode != null) preNode.next = current.right;
+                    preNode = current.right;
+                }
+            }
+            
+            firstRoot = nextRoot;
+        }
+    }
 
     private class TreeLinkNode {
         int val;
