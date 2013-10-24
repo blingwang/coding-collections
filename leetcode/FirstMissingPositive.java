@@ -3,7 +3,7 @@ public class FirstMissingPositive {
         int n = A.length;
         
         for (int i = 0; i < n; i++) {
-            while (A[i] > 0 && A[i] <= n && A[i] != A[A[i]-1]) {
+            while (A[i] > 0 && A[i] <= n && A[A[i]-1] != A[i]) {
                 int temp = A[i];
                 A[i] = A[A[i]-1];
                 A[temp-1] = temp;
