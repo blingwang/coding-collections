@@ -5,25 +5,27 @@ public class CountAndSay {
         result.append(1);
         
         for (int i = 1; i < n; i++) {
-            StringBuilder temp = new StringBuilder();
-            char preValue = result.charAt(0);
-            int preCount = 1;
+            StringBuilder ith = new StringBuilder();
+            int count = 1;
+            char preDigit = result.charAt(0);
             
             for (int j = 1; j < result.length(); j++) {
-                char c = result.charAt(j);
-                if (c == preValue) {
-                    preCount++;
+                char curDigit = result.charAt(j);
+                if (curDigit == preDigit) {
+                    count++;
                 } else {
-                    temp.append(preCount);
-                    temp.append(preValue);
-                    preValue = c;
-                    preCount = 1;
+                    ith.append(count);
+                    ith.append(preDigit);
+                    preDigit = curDigit;
+                    count = 1;
                 }
             }
-            temp.append(preCount);
-            temp.append(preValue);       
-            result = temp;
+            
+            ith.append(count);
+            ith.append(preDigit);
+            result = ith;
         }
-        return result.toString();     
+        
+        return result.toString();
     }
 }
