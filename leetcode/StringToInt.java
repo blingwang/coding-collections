@@ -1,7 +1,5 @@
 public class StringToInt {
     public int atoi(String str) {
-        if (str.length() == 0) return 0;
-        
         long result = 0;
         int i = 0;
         
@@ -11,10 +9,10 @@ public class StringToInt {
         
         // check sign
         int sign = 1;
-        if (str.charAt(i) == '-') {
-            sign = -1;
+        if (str.charAt(i) == '+') {
             i++;
-        } else if (str.charAt(i) == '+') {
+        } else if (str.charAt(i) == '-') {
+            sign = -1;
             i++;
         }
         
@@ -22,13 +20,15 @@ public class StringToInt {
         while (i < str.length()) {
             char c = str.charAt(i);
             if (c < '0' || c > '9') break;
-            result = result * 10 + (c - '0');;
-            if (result > Integer.MAX_VALUE) {
-                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
-            }
+            
+            result = result * 10 + (c - '0');
+            
+            if (sign > 0 && result > Integer.MAX_VALUE) return Integer.MAX_VALUE;
+            else if (sign < 0 && -result < Integer.MIN_VALUE) return Integer.MIN_VALUE;
+            
             i++;
         }
         
-        return (int)result * sign;
+        return (int)(result * sign);
     }
 }
