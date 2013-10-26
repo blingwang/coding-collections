@@ -53,15 +53,15 @@ public class ValidateNumber {
         s = s.trim();
         
         int i = s.indexOf('e');
-        if (i == -1) {
+        if (i < 0) {
             return isDouble(s);
         } else {
-            return isDouble(s.substring(0,i)) && isInteger(s.substring(i+1));
+            return isDouble(s.substring(0, i)) && isInteger(s.substring(i+1));
         }
     }
     
     private boolean isDouble(String s) {
-        if (s.startsWith("+") || s.startsWith("-")) {
+        if (startWithSign(s)) {
             return isUnsignedDouble(s.substring(1));
         } else {
             return isUnsignedDouble(s);
@@ -69,23 +69,23 @@ public class ValidateNumber {
     }
     
     private boolean isUnsignedDouble(String s) {
-        int i = s.indexOf('.');
-        if (i == -1) {
+        int i = s.indexOf('.') ;
+        if (i < 0) {
             return isUnsignedInteger(s);
-        } else {
-            if (s.length() == 1) {// "." => false
-                return false;
-            }
-            
-            String left = s.substring(0, i);
-            String right = s.substring(i+1);
-            return (left.equals("") || isUnsignedInteger(left)) &&
-                   (right.equals("") || isUnsignedInteger(right));
         }
+        
+        String left = s.substring(0, i);
+        String right = s.substring(i+1);
+        
+        if (left.isEmpty() && right.isEmpty()) return false;// "." => false
+        if (!left.isEmpty() && !isUnsignedInteger(left)) return false;
+        if (!right.isEmpty() && !isUnsignedInteger(right)) return false;
+        
+        return true;
     }
     
     private boolean isInteger(String s) {
-        if (s.startsWith("+") || s.startsWith("-")) {
+        if (startWithSign(s)) {
             return isUnsignedInteger(s.substring(1));
         } else {
             return isUnsignedInteger(s);
@@ -93,9 +93,7 @@ public class ValidateNumber {
     }
     
     private boolean isUnsignedInteger(String s) {
-        if (s.length() == 0) {
-            return false;
-        }
+        if (s.length() == 0) return false;
         
         for (int i = 0; i < s.length(); i++) {
             if (!Character.isDigit(s.charAt(i))) {
@@ -104,5 +102,10 @@ public class ValidateNumber {
         }
         
         return true;
+    }
+    
+    private boolean startWithSign(String s) {
+        if (s.isEmpty()) return false;
+        return s.charAt(0) == '+' || s.charAt(0) == '-';
     }
 }
