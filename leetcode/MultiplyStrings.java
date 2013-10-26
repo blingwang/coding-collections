@@ -6,13 +6,13 @@ public class MultiplyStrings {
         int l1 = num1.length(), l2 = num2.length();
         int[] result = new int[l1+l2];
         
-        for (int i = l1 - 1; i >= 0; i++) {
+        for (int i = l1 - 1; i >= 0; i--) {
             int val1 = num1.charAt(i) - '0';
-            for (int j = l2 - 1; j >= 0; j++) {
+            for (int j = l2 - 1; j >= 0; j--) {
                 int val2 = num2.charAt(j) - '0';
-                int product = val1 * val2;
-                result[i+j+1] += product % 10;
-                result[i+j] += product / 10;
+                int sum = result[i+j+1]+ val1 * val2;
+                result[i+j+1] = sum % 10;
+                result[i+j] += sum / 10;
             }
         }
         
