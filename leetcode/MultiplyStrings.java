@@ -1,6 +1,31 @@
 public class MultiplyStrings {
     public String multiply(String num1, String num2) {
-        assert (num1 != null && num2 != null);
+        assert(!num1.isEmpty() && !num2.isEmpty());
+        if (num1.equals("0") || num2.equals("0")) return "0";
+        
+        int l1 = num1.length(), l2 = num2.length();
+        int[] result = new int[l1+l2];
+        
+        for (int i = l1 - 1; i >= 0; i++) {
+            int val1 = num1.charAt(i) - '0';
+            for (int j = l2 - 1; j >= 0; j++) {
+                int val2 = num2.charAt(j) - '0';
+                int product = val1 * val2;
+                result[i+j+1] += product % 10;
+                result[i+j] += product / 10;
+            }
+        }
+        
+        StringBuilder answer = new StringBuilder();
+        if (result[0] != 0) answer.append(result[0]);
+        for (int i = 1; i < result.length; i++) {
+            answer.append(result[i]);
+        }
+        
+        return answer.toString();
+    }
+    
+    public String multiply2(String num1, String num2) {
         int m = num1.length();
         int n = num2.length();
         assert (m != 0 && n != 0);
