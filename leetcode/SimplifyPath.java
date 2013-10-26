@@ -1,7 +1,7 @@
 import java.util.*;
 public class SimplifyPath {
     public String simplifyPath(String path) {
-        if (path == null || path.length() == 0) return "/";
+        if (path == null || !path.startWith('/')) return null;
         
         String[] fileNames = path.trim().split("/");
         ArrayDeque<String> deque = new ArrayDeque<String>();
