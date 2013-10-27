@@ -25,9 +25,8 @@ public class NQueens {
         }
 
         for (int i = k; i < N; i++) {
-            if(shouldBackTrack(k)) return;
             exch(k, i);
-            enumerate(k+1);
+            if(!shouldBackTrack(k)) enumerate(k+1);
             exch(k, i);
         }
     }
