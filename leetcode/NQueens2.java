@@ -24,9 +24,8 @@ class NQueens2 {
         // TODO enumerate N/2 choices for k=0
 
         for (int i = k; i < N; i++) {
-            if(backtrack(k)) return;
             exch(a, k, i);
-            enumerate(k+1);
+            if(!backtrack(k)) enumerate(k+1);
             exch(a, k, i);
         }
     }
