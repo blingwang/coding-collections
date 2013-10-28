@@ -31,4 +31,24 @@ public class SquareRoot {
         while (Math.abs(t*t - x) > x*epsilon) t = (x/t + t) / 2.0;
         return t;
     }
+    
+    // binary search
+    public double sqrt(double x)
+    {
+        if (x < 0.0) {
+            throw new ArithmeticException();
+        }
+        
+        double lo = 0.0;
+        double hi = Math.max(1.0, x);
+        
+        while(hi - lo > 10e-9)
+        {
+            double mid = (lo + hi) / 2.0;
+            if (mid*mid > x) hi = mid;
+            else lo = mid;
+        }
+        
+        return lo;
+    }
 }
