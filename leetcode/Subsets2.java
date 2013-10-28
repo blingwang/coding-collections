@@ -109,6 +109,7 @@ public class Subsets2 {
      * 1). Add [] to results 
      * 2). Add each single distinct element to results and recursively 
      *     append the rest of elements to each subset.
+     * grow each set by each distinct num after last num in the set
      */
     public ArrayList<ArrayList<Integer>> subsetsWithDup3(int[] num) {// recursion
         Arrays.sort(num);
