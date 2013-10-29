@@ -1,40 +1,44 @@
 import java.util.*;
 public class CombinationSum {
-    ArrayList<ArrayList<Integer>> list;
-    int[] candidates;
+    private int[] candidates;
+    private int[] count;
+    private ArrayList<ArrayList<Integer>> combList;
+    
     public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
-        list = new ArrayList<ArrayList<Integer>>();
-        Arrays.sort(candidates);
         this.candidates = candidates;
-        int[] prefix = new int[candidates.length];
-        enumerate(0, target, prefix);
-        return list;
+        count = new int[candidates.length];
+        combList = new ArrayList<ArrayList<Integer>>();
+        
+        Arrays.sort(candidates);
+        enumerate(0, target);
+        
+        return combList;
     }
-
-    private void enumerate(int candidateIndex, int target, int[] prefix) {
+    
+    private void enumerate(int candidateIndex, int target) {
         if (target == 0) {
-            list.add(getCombinationList(prefix));
+            process();
             return;
         }
         
-        if (candidateIndex == candidates.length) return;
+        if (candidateIndex >= candidates.length) return;
         
         int candidate = candidates[candidateIndex];
         for (int i = 0; i * candidate <= target; i++) {
-            prefix[candidateIndex] = i;
-            enumerate(candidateIndex+1, target - i * candidate, prefix); 
+            count[candidateIndex] = i;
+            enumerate(candidateIndex + 1, target - i * candidate);
         }
-        prefix[candidateIndex] = 0;
+        
+        count[candidateIndex] = 0;
     }
-
-    private ArrayList<Integer> getCombinationList(int[] counts) {
-        ArrayList<Integer> combList = new ArrayList<Integer>();
-        for (int i = 0; i < counts.length; i++) {
-            int count = counts[i];
-            for (int j = 0; j < count; j++) {
-                combList.add(candidates[i]);
+    
+    private void process() {
+        ArrayList<Integer> combination = new ArrayList<Integer>();
+        for (int i = 0; i < count.length; i++) {
+            for (int j = 0; j < count[i]; j++) {
+                combination.add(candidates[i]);
             }
         }
-        return combList;
+        combList.add(combination);
     }
 }
