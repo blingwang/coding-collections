@@ -77,11 +77,10 @@ public class Subsets2 {
     
     public ArrayList<ArrayList<Integer>> subsetsWithDup2(int[] num) {
         Arrays.sort(num);
-        
         ArrayList<ArrayList<Integer>> subsets = new ArrayList<ArrayList<Integer>>();
         subsets.add(new ArrayList<Integer>());
-        int numDups = 0; // pre dups count
         
+        int numDups = 0; // pre dups count
         for (int i = 0; i < num.length; i++) {
             int count = subsets.size();
             
