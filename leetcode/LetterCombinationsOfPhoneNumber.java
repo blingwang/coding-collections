@@ -1,7 +1,6 @@
 import java.util.*;
 public class LetterCombinationsOfPhoneNumber {
-    private static final String[] letterMap = {" ", "", "abc", "def", "ghi", 
-                                             "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    private final String[] letterMap = {" ","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
     private String digits;
     private ArrayList<String> combinations;
     
