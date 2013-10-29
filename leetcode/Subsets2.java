@@ -80,7 +80,7 @@ public class Subsets2 {
         
         ArrayList<ArrayList<Integer>> subsets = new ArrayList<ArrayList<Integer>>();
         subsets.add(new ArrayList<Integer>());
-        int numDups = 0;
+        int numDups = 0; // pre dups count
         
         for (int i = 0; i < num.length; i++) {
             int count = subsets.size();
