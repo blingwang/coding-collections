@@ -1,9 +1,7 @@
 import java.util.*;
 public class LetterCombinationsOfPhoneNumber {
-    private static final char[][] charMap = {{' '}, {}, {'a','b','c'}, {'d','e','f'}, 
-                                             {'g','h','i'}, {'j','k','l'}, 
-                                             {'m','n','o'},{'p','q','r','s'}, 
-                                             {'t','u','v'}, {'w','x','y','z'}};
+    private static final String[] letterMap = {" ", "", "abc", "def", "ghi", 
+                                             "jkl", "mno", "pqrs", "tuv", "wxyz"};
     private String digits;
     private ArrayList<String> combinations;
     
@@ -22,8 +20,9 @@ public class LetterCombinationsOfPhoneNumber {
         }
         
         int num = digits.charAt(curIndex) - '0';
-        for (char c : charMap[num]) {
-            prefix[curIndex] = c;
+        String letters = letterMap[num];
+        for (int i = 0; i < letters.length(); i++) {
+            prefix[curIndex] = letters.charAt(i);
             enumerate(curIndex + 1, prefix);
         }
     }
