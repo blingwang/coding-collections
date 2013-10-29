@@ -8,11 +8,11 @@ public class LetterCombinationsOfPhoneNumber {
         this.digits = digits;
         combinations = new ArrayList<String>();
         char[] prefix = new char[digits.length()];
-        enumerate(0, prefix);
+        combine(0, prefix);
         return combinations;
     }
     
-    private void enumerate(int curIndex, char[] prefix) {
+    private void combine(int curIndex, char[] prefix) {
         if (curIndex == digits.length()) {
             combinations.add(new String(prefix));
             return;
@@ -22,7 +22,7 @@ public class LetterCombinationsOfPhoneNumber {
         String letters = letterMap[num];
         for (int i = 0; i < letters.length(); i++) {
             prefix[curIndex] = letters.charAt(i);
-            enumerate(curIndex + 1, prefix);
+            combine(curIndex + 1, prefix);
         }
     }
 }
