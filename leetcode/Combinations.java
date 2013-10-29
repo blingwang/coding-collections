@@ -1,7 +1,7 @@
 import java.util.*;
 public class Combinations {
-    ArrayList<ArrayList<Integer>> combList;
-    int[] combination;
+    private ArrayList<ArrayList<Integer>> combList;
+    private int[] combination;
     public ArrayList<ArrayList<Integer>> combine(int n, int k) {
         assert(n >=k);
         combList = new ArrayList<ArrayList<Integer>>();
