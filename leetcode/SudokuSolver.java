@@ -15,11 +15,10 @@ public class SudokuSolver {
         if (board[i][j] != '.') return solve(count+1);// skip filled cell
         
         // try all possibilities
-        for ( char k = '1'; k <= '9'; k++) {                    
-            if (isValidSudoku(i, j, k)) {// backtrack if invalid
-                board[i][j] = k;
-                if (solve(count+1)) return true; // recurse until solution found
-            }
+        for ( char k = '1'; k <= '9'; k++) {  
+            board[i][j] = k;
+            // if not backtrack, recurse until solution found
+            if (isValidSudoku(i, j) && solve(count+1)) return true;
         }
         
         board[i][j] = '.'; // clean up
@@ -27,28 +26,28 @@ public class SudokuSolver {
         return false;
     }
 
-    private boolean isValidSudoku(int i, int j, char num) {     
-        return isRowValid(i, j, num) && isColValid(i, j, num) && 
-               isBoxValid(i, j, num);
+    private boolean isValidSudoku(int i, int j) {     
+        return isRowValid(i, j) && isColValid(i, j) && 
+               isBoxValid(i, j);
     }
 
-    private boolean isRowValid(int row, int col, char num) {
+    private boolean isRowValid(int row, int col) {
         for (int i = 0; i < 9; i++) {
-            if (i !=col && board[row][i] == num) return false;
+            if (i !=col && board[row][i] == board[row][col]) return false;
         }
         
         return true;
     }
 
-    private boolean isColValid(int row, int col, char num) {
+    private boolean isColValid(int row, int col) {
         for (int i = 0; i < 9; i++) {
-            if (i != row && board[i][col] == num) return false;
+            if (i != row && board[i][col] == board[row][col]) return false;
         }
         
         return true;
     }
 
-    private boolean isBoxValid(int row, int col, char num) {
+    private boolean isBoxValid(int row, int col) {
         int startRow = (row / 3) * 3;
         int startCol = (col / 3) * 3;
         
@@ -57,7 +56,7 @@ public class SudokuSolver {
                 int r = startRow + i;
                 int c = startCol + j;
                 if (r == row && c == col) continue; 
-                if (board[r][c] == num) return false;
+                if (board[r][c] == board[row][col]) return false;
             }
         }
         
