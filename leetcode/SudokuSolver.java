@@ -1,57 +1,54 @@
 public class SudokuSolver {
+    private char[][] board;
+    
     public void solveSudoku(char[][] board) {
-        solveSudoku(board, 0);
+        this.board = board;
+        solve(0);
     }
 
-    private boolean solveSudoku(char[][] board, int count) {
+    private boolean solve(int count) {
         if (count == 81) return true; // base case
         
         int i = count / 9;
         int j = count % 9;
         
-        // skip filled cell
-        if (board[i][j] != '.') return solveSudoku(board, count+1);
+        if (board[i][j] != '.') return solve(count+1);// skip filled cell
         
         // try all possibilities
         for ( char k = '1'; k <= '9'; k++) {                    
-            if (isValidSudoku(board, k, i, j)) {// backtrack if invalid
+            if (isValidSudoku(i, j, k)) {// backtrack if invalid
                 board[i][j] = k;
-                if (solveSudoku(board, count+1)) { // recurse
-                    return true; // found solution: no more dfs
-                }
+                if (solve(count+1)) return true; // recurse until solution found
             }
         }
         
-        // clean up
-        board[i][j] = '.'; 
+        board[i][j] = '.'; // clean up
         
         return false;
     }
 
-    private boolean isValidSudoku(char[][] board, char c, int i, int j) {     
-        return isRowValid(board, c, i, j) && isColValid(board, c, i, j) && 
-               isBoxValid(board, c, i, j);
+    private boolean isValidSudoku(int i, int j, char num) {     
+        return isRowValid(i, j, num) && isColValid(i, j, num) && 
+               isBoxValid(i, j, num);
     }
 
-    private boolean isRowValid(char[][] board, char num, int row, int col) {
+    private boolean isRowValid(int row, int col, char num) {
         for (int i = 0; i < 9; i++) {
-            if (i !=col && board[row][i] == num) {
-                return false;
-            }
+            if (i !=col && board[row][i] == num) return false;
         }
+        
         return true;
     }
 
-    private boolean isColValid(char[][] board, char num, int row, int col) {
+    private boolean isColValid(int row, int col, char num) {
         for (int i = 0; i < 9; i++) {
-            if (i != row && board[i][col] == num) {
-                return false;
-            }
+            if (i != row && board[i][col] == num) return false;
         }
+        
         return true;
     }
 
-    private boolean isBoxValid(char[][] board, char num, int row, int col) {
+    private boolean isBoxValid(int row, int col, char num) {
         int startRow = (row / 3) * 3;
         int startCol = (col / 3) * 3;
         
@@ -63,6 +60,7 @@ public class SudokuSolver {
                 if (board[r][c] == num) return false;
             }
         }
+        
         return true;
     }
 }
