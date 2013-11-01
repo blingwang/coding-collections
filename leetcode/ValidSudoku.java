@@ -1,54 +1,57 @@
 public class ValidSudoku {
     public boolean isValidSudoku(char[][] board) {
         assert(board.length == 9 && board[0].length == 9);
-        return isValidRow(board) && isValidCol(board) && isValidBox(board);
+        return isRowValid(board) && isColValid(board) && isBoxValid(board);
     }
-
-    private boolean isValidRow(char[][] board) {
-        boolean[] curRow = new boolean[9];
-        for (int row = 0; row < 9; row++) {
-            Arrays.set(curRow, false);
-            for (int col = 0; col < 9; col++) {
-                char c = board[row][col];
-               if (c == '.') continue;
-               if (curRow[c-'1'] == true) return false;
-               curRow[c-'1'] = true;
+    
+    private boolean isRowValid(char[][] board) {
+        boolean[] found = new boolean[9];
+        for (int i = 0; i < 9; i++) {
+            Arrays.fill(found, false);
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] == '.') continue;
+                int curNum = board[i][j] - '0';
+                if (found[curNum-1]) return false;
+                found[curNum-1] = true;
             }
         }
+        
         return true;
     }
-
-    private boolean isValidCol(char[][] board) {
-        boolean[] curCol = new boolean[9];
-        for (int col = 0; col < 9; col++) {
-            Arrays.set(curCol, false);
-            for (int row = 0; row < 9; row++) {
-                char c = board[row][col];
-                if (c == '.') continue;
-                if (curCol[c-'1'] == true) return false;
-                curCol[c-'1'] = true;
+    
+    private boolean isColValid(char[][] board) {
+        boolean[] found = new boolean[9];
+        for (int j = 0; j < 9; j++) {
+            Arrays.fill(found, false);
+            for (int i = 0; i < 9; i++) {
+                if (board[i][j] == '.') continue;
+                int curNum = board[i][j] - '0';
+                if (found[curNum-1]) return false;
+                found[curNum-1] = true;
             }
         }
+        
         return true;
     }
-
-    private boolean isValidBox(char[][] board) {
-        boolean[] curBox = new boolean[9];
+    
+    private boolean isBoxValid(char[][] board) {
+        boolean[] found = new boolean[9];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                Arrays.set(curBox, false);
+                Arrays.fill(found, false);
                 int startRow = i * 3;
                 int startCol = j * 3;
-                for (int m = 0; m < 3; m++) {
-                    for (int n = 0; n < 3; n++) {
-                        char c = board[startRow+m][startCol+n];
-                        if (c == '.') continue;
-                        if (curBox[c-'1'] == true) return false;
-                        curBox[c-'1'] = true;
+                for (int ii = 0; ii < 3; ii++) {
+                    for (int jj = 0; jj < 3; jj++) {
+                        if (board[startRow+ii][startCol+jj] == '.') continue;
+                        int curNum = board[startRow+ii][startCol+jj] - '0';
+                        if (found[curNum-1]) return false;
+                        found[curNum-1] = true;
                     }
                 }
             }
         }
+        
         return true;
     }
 }
