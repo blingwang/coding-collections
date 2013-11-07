@@ -27,6 +27,18 @@ class Prime {
         return primes;
     }
     
+    // prime checker
+    public static boolean isPrime(int n) {
+    	if (n < 2) return false;
+    	if (n == 2) return true;
+
+    	for (int i = 2; i * i <= n; i++) {
+    	    if (n % i == 0) return false;
+    	}
+    
+    	return true;
+    }
+
     // naive method, for more advanced algorithms, see:
     // http://en.wikipedia.org/wiki/Integer_factorization
     public static ArrayList<Integer> findFactors(int n) {
