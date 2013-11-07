@@ -3,7 +3,7 @@ class SieveOfErastosthenes {
         assert(max >= 2);
         boolean[] isComposite = new boolean[max + 1];
         
-        for (int i = 2; i * i <= max; i++) {//sieve primes:2~sqrt(n)
+        for (int i = 2; i * i <= max; i++) {//sieve primes:2~sqrt(max)
             if (!isComposite [i]) {
                 for (int j = i; i * j <= max; j++) {//candidates=i*j:i^2~max
                     isComposite [i*j] = true;
