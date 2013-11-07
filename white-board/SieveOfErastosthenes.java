@@ -1,5 +1,6 @@
 class SieveOfErastosthenes {
     private static int [] generatePrimes(int max) {
+        assert(max >=2);
         boolean[] isComposite = new boolean[max + 1];
         
         for (int i = 2; i * i <= max; i++) {//sieve primes:2~sqrt(n)
