@@ -16,30 +16,30 @@ class PermutationSequence {
     }
     
     public String getPermutation(int n, int k) {
-        assert(n >0 && n <=9);
-        final String digits= "123456789";
+        assert(n >= 1 && n <= 9);
+        final String digits = "123456789";
         String s = digits.substring(0, n);
-
-        int NFact = 1;
-        for (int i = 1; i <= n; i++) {
-            NFact *= i;
-        }
-        assert(k > 0 && k <= NFact);
-
-        // kth permutation will be at k-1 index in permutations array
-        k--;
-
-        int permsPerDigitChoice = NFact; 
-        String prefix = "";
-        // set digit at each position of permutation sequence
+        k--; // convert to 0-based
+        
+        String permutation = "";
+        int permsPerDigitChoice = factorial(n);
         for (int i = n; i > 0; i--) {
             permsPerDigitChoice /= i;
             int digitChoiceIndex = k / permsPerDigitChoice;
-            prefix += s.charAt(digitChoiceIndex);
-            s = s.substring(0,digitChoiceIndex) + s.substring(digitChoiceIndex+1);
+            permutation += s.charAt(digitChoiceIndex);
+            
+            s = s.substring(0, digitChoiceIndex) + s.substring(digitChoiceIndex+1);
             k %= permsPerDigitChoice;
         }
-
-        return prefix;
-    }   
+        
+        return permutation;
+    }
+    
+    private int factorial(int n) {
+        int fact = 1;
+        for (int i = 1; i <= n; i++) {
+            fact *= i;
+        }
+        return fact;
+    }
 }
