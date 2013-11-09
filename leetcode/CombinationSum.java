@@ -22,8 +22,9 @@ public class CombinationSum {
         }
         
         if (candidateIndex >= candidates.length) return;
-        
         int candidate = candidates[candidateIndex];
+        if (candidate > target) return; //candidates in sorted order
+        
         for (int i = 0; i * candidate <= target; i++) {
             count[candidateIndex] = i;
             enumerate(candidateIndex + 1, target - i * candidate);
