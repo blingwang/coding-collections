@@ -8,40 +8,37 @@ public class NextPermutation {
      *     and reverse the ascending part behind it
      */
     public void nextPermutation(int[] num) {
-         if (num.length < 2) return;
-         
-         // search for first number not in ascending order from end
-         int index = num.length - 2;
-         while ( index >= 0 && num[index] >= num[index+1] ) {
-             index--;
-         }     
-         
-         reverseArray(num, index+1, num.length-1); // reverse ascending part
-         if (index < 0) return; // all numbers in ascending order
-         int pivotIndex = index; // first number not in ascending order
-         
-         // find first number greater than pivot behind pivot
-         index = pivotIndex + 1;
-         while (index < num.length && num[index] <= num[pivotIndex]) {
-             index++;
-         }      
-
-         // swap pivot with next greater number behind the pivot
-         exch(num, pivotIndex, index);
-     }
-
-    private void exch(int[] a, int i, int j) {
+        int nonAscendingStart = findNonAscendingTail(num);
+        reverse(num, nonAscendingStart, num.length - 1);
+        
+        if (nonAscendingStart > 0) {
+            int firstDescendingFromEnd = nonAscendingStart - 1;
+            int nextGreater = findNextGreaterBehind(num, firstDescendingFromEnd);
+            swap(num, firstDescendingFromEnd, nextGreater);
+        }
+    }
+    
+    private int findNonAscendingTail(int[] num) {
+        int cur = num.length - 1;
+        while (cur > 0 && num[cur-1] >= num[cur]) cur--;
+        return cur;
+    }
+    
+    private void reverse(int[] a, int start, int end) {
+        while (start < end) {
+            swap(a, start++, end--);
+        }
+    }
+    
+    private int findNextGreaterBehind(int[] num, int cur) {
+        int next = cur + 1;
+        while (next < num.length && num[next] <= num[cur]) next++;
+        return next;
+    }
+    
+    private void swap(int[] a, int i, int j) {
         int temp = a[i];
         a[i] = a[j];
         a[j] = temp;
-    }
-
-    private void reverseArray(int[] a, int start, int end) {
-        if (start > end || start < 0 || end >= a.length) return;
-        while (start < end) {
-            exch(a, start, end);
-            start++;
-            end--;
-        }
     }
 }
