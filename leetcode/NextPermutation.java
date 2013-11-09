@@ -30,7 +30,7 @@ public class NextPermutation {
         }
     }
     
-    private int findNextGreaterBehind(int[] num, int cur) {
+    private int findNextGreaterBehind(int[] num, int cur) {// for non-descending tail
         int next = cur + 1;
         while (next < num.length && num[next] <= num[cur]) next++;
         return next;
