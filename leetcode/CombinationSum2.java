@@ -1,45 +1,48 @@
 import java.util.*;
 public class CombinationSum2 {
-    ArrayList<ArrayList<Integer>> list;
     int[] candidates;
+    ArrayList<ArrayList<Integer>> combList;
+    
     public ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
-        list = new ArrayList<ArrayList<Integer>>();
-        Arrays.sort(num);
-        this.candidates = num;
-        int[] prefix = new int[candidates.length];
-        enumerate(0, target, prefix);
-        return list;
+        candidates = num;
+        combList = new ArrayList<ArrayList<Integer>>();
+        
+        Arrays.sort(candidates);
+        boolean[] inCombination = new boolean[candidates.length];
+        combine(0, target, inCombination);
+        
+        return combList;
     }
-
-    private void enumerate(int candidateIndex, int target, int[] prefix) {
+    
+    private void combine(int k, int target, boolean[] inCombination) {
         if (target == 0) {
-            list.add(getCombinationList(prefix));
+            addCombination(inCombination);
             return;
         }
         
-        if (target < 0 || candidateIndex == candidates.length) return;
+        if (target < 0 || k == candidates.length) return;
         
-        int candidate = candidates[candidateIndex];
-        enumerate(candidateIndex+1, target, prefix);
+        combine(k+1, target, inCombination);
         
-        if (candidateIndex >= 1 && candidate == candidates[candidateIndex-1] &&
-            prefix[candidateIndex-1] == 0) {
-            return;
-        }
+        if (preDupSkipped(k, inCombination)) return;
         
-        prefix[candidateIndex] = 1;
-        enumerate(candidateIndex+1, target - candidate, prefix);
-        prefix[candidateIndex] = 0;
+        inCombination[k] = true;
+        combine(k+1, target-candidates[k], inCombination);
+        
+        inCombination[k] = false;
     }
-
-    private ArrayList<Integer> getCombinationList(int[] counts) {
-        ArrayList<Integer> combList = new ArrayList<Integer>();
-        for (int i = 0; i < counts.length; i++) {
-            int count = counts[i];
-            for (int j = 0; j < count; j++) {
-                combList.add(candidates[i]);
+    
+    private void addCombination(boolean[] inCombination) {
+        ArrayList<Integer> combination = new ArrayList<Integer>();
+        for (int i = 0; i < inCombination.length; i++) {
+            if (inCombination[i]) {
+                combination.add(candidates[i]);
             }
         }
-        return combList;
+        combList.add(combination);
+    }
+    
+    private boolean preDupSkipped(int k, boolean[] inCombination) {
+        return k > 0 && candidates[k] == candidates[k-1] && !inCombination[k-1];
     }
 }
