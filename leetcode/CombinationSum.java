@@ -5,7 +5,7 @@ public class CombinationSum {
     private ArrayList<ArrayList<Integer>> combList;
     
     public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
-        this.candidates = candidates;
+        this.candidates = candidates; // no dups, all positive
         count = new int[candidates.length];
         combList = new ArrayList<ArrayList<Integer>>();
         
