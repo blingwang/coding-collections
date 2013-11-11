@@ -2,7 +2,6 @@ public class Strstr {
     public String strStr(String haystack, String needle) {
         int m = needle.length();
         int n = haystack.length();
-        if (m > n) return null;
         
         for (int i = 0; i <= n - m; i++) {
             int j;
@@ -10,6 +9,7 @@ public class Strstr {
                 if (haystack.charAt(i+j) != needle.charAt(j)) break;
             }
             
+            // must check after loop for ("", "")
             if (j == m) return haystack.substring(i);
         }
         
