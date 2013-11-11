@@ -9,7 +9,7 @@ public class CombinationSum {
         count = new int[candidates.length];
         combList = new ArrayList<ArrayList<Integer>>();
         
-        Arrays.sort(candidates);
+        Arrays.sort(candidates); // not necessary
         enumerate(0, target);
         
         return combList;
