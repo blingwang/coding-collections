@@ -1,19 +1,22 @@
 import java.util.*;
 
 public class ValidParentheses {
-    private static final Map<Character, Character> map;
-    static {
-        map = new HashMap<Character, Character>();
-        map.put(')', '(');
-        map.put('}', '{');
-        map.put(']', '[');
+    private static final Map<Character, Character> map = createMap();
+    
+    private static Map<Character, Character> createMap() {
+        Map<Character, Character> parentheses = new HashMap<Character, Character>();
+        parentheses.put(')', '(');
+        parentheses.put('}', '{');
+        parentheses.put(']', '[');
+        return Collections.unmodifiableMap(parentheses);
     }
     
     public boolean isValid(String s) {
         ArrayDeque<Character> stack = new ArrayDeque<Character>();
+        
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if (!map.containsKey(c)) { // left parenthese
+            if (isLeft(c)) {
                 stack.push(c);
             } else {
                 char left = map.get(c);
@@ -22,6 +25,10 @@ public class ValidParentheses {
         }
         
         return stack.isEmpty();
+    }
+    
+    private boolean isLeft(char c) {
+        return !map.containsKey(c);
     }
     
     public boolean isValid2(String s) {
