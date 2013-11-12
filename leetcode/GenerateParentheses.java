@@ -1,30 +1,30 @@
 import java.util.*;
 public class GenerateParentheses {
-    private int N;
+    private int n;
     private ArrayList<String> result;
-
+    
     public ArrayList<String> generateParenthesis(int n) {
-        N = n;
+        this.n = n;
         result = new ArrayList<String>();
-
-        char[] prefix = new char[N*2];        
-        generateParenthesis(prefix, 0, 0);     
-
+        
+        char[] prefix = new char[n*2];
+        generate(0, 0, prefix);
+        
         return result;
     }
-
-    private void generateParenthesis(char[] prefix, int leftCount, int rightCount) {
-        if (leftCount < rightCount || leftCount > N) return;
-
-        if (leftCount == N && rightCount == N) {
+    
+    private void generate(int leftCount, int rightCount, char[] prefix) {
+        if (leftCount < rightCount || leftCount > n) return;
+        
+        int curIndex = leftCount + rightCount;
+        if (curIndex == n * 2) {
             result.add(new String(prefix));
             return;
         }
-
-        int index = leftCount + rightCount;
-        prefix[index] = '(';
-        generateParenthesis(prefix, leftCount+1, rightCount);
-        prefix[index] = ')';
-        generateParenthesis(prefix, leftCount, rightCount+1);
+        
+        prefix[curIndex] = '(';
+        generate(leftCount+1, rightCount, prefix);
+        prefix[curIndex] = ')';
+        generate(leftCount, rightCount+1, prefix);
     }
 }
