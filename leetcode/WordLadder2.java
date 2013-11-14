@@ -94,17 +94,20 @@ public class WordLadder2 {
 class WordLadder2DFS { // DFS search for paths, slower
     ArrayList<ArrayList<String>> ladders;
     private HashSet<String> dict;
-    private HashSet<String> marked;
+    private HashSet<String> marked; // onStack
     
     public ArrayList<ArrayList<String>> findLadders(String start, String end, HashSet<String> dictionary) {
         ladders = new ArrayList<ArrayList<String>>();
         dict = dictionary;
         marked = new HashSet<String>();
+        
         int ladderLength = ladderLength(start, end);
+        
         if (ladderLength > 0){
             String[] editPath = new String[ladderLength];
-                    enumerateEditPaths(start, end, editPath, 0);
+            enumerateEditPaths(start, end, editPath, 0);
         }
+        
         return ladders;
     }
     
@@ -114,15 +117,18 @@ class WordLadder2DFS { // DFS search for paths, slower
         
         if (srcIndex == editPath.length-1) {
             if (source.equals(end)){
-                addLadder(editPath);
-                }
+                    addLadder(editPath);
+            }
+            
             return;
         }
         
         marked.add(source);
+        
         for (String w : getOneEditWords(source)) {
             enumerateEditPaths(w, end, editPath, srcIndex+1);
         }
+        
         marked.remove(source);
     }
     
