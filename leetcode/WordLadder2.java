@@ -89,44 +89,6 @@ public class WordLadder2 {
         
         return words;
     }
-
-    private void enumerateEditPaths(String end, Map<String, ArrayList<String>> edgesTo,
-                                    String[] editPath, int endIndex) {
-        editPath[endIndex] = end; // append current end to path
-        
-        if (!edgesTo.containsKey(end)) { // found start, add ladder
-            addLadder(editPath);
-            return;
-        }
-        
-        for (String w : edgesTo.get(end)) {
-            enumerateEditPaths(w, edgesTo, editPath, endIndex-1);
-        }
-    }
-    
-    private void addLadder(String[] editPath) {
-        ArrayList<String> ladder = new ArrayList<String>();
-        for (String s : editPath) {
-            ladder.add(s);
-        }
-        ladders.add(ladder);
-    }
-
-    private Set<String> getOneEditWords(String word, HashSet<String> dict) {
-        Set<String> words = new HashSet<String>();
-        char[] wordArray = word.toCharArray();
-        for (int i = 0; i < wordArray.length; i++) {
-            char curChar = wordArray[i];
-            for (char c = 'a'; c <= 'z'; c++) {
-                if (c == wordArray[i]) continue;
-                wordArray[i] = c;
-                String w = new String(wordArray);
-                if (dict.contains(w)) words.add(w);
-            }
-            wordArray[i] = curChar; // clean up
-        }
-        return words;
-    }
 }
 
 class WordLadder2DFS { // DFS search for paths, slower
