@@ -5,15 +5,15 @@ public class Fibonacci {
     }
     
     public static int fib(int n) {
-        int f = 0; // f(0)
-        int g = 1; // f(-1)
+        int fn1 = 0; // f(0)
+        int fn2 = 1; // f(-1)
       
         for(int i = 0; i < n; i++){// fib(1) to fib(n)
-          f = f + g;
-          g = f - g;
+          fn1 = fn1 + fn2;
+          fn2 = fn1 - fn2;
         } 
       
-        return f;
+        return fn1;
     }
     
     public static void printFibs(int limit) {         
