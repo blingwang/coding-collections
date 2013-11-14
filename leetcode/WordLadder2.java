@@ -1,46 +1,93 @@
 import java.util.*;
 public class WordLadder2 {
-    private ArrayList<ArrayList<String>> ladders;
+    private ArrayList<ArrayList<String>> editPaths;
+    private Map<String, Integer> distTo;
+    private Map<String, ArrayList<String>> edgesTo;
+    private int minDist;
     
     public ArrayList<ArrayList<String>> findLadders(String start, String end, HashSet<String> dict) {
-        ladders = new ArrayList<ArrayList<String>>();
-        int shortestLadderLength = Integer.MAX_VALUE;
+        editPaths = new ArrayList<ArrayList<String>>();
+        distTo = new HashMap<String, Integer>();
+        edgesTo = new HashMap<String, ArrayList<String>>();
+        minDist = Integer.MAX_VALUE;
         ArrayDeque<String> queue = new ArrayDeque<String>();
-        Map<String, Integer> distTo = new HashMap<String, Integer>();
-        Map<String, ArrayList<String>> edgesTo = new HashMap<String, ArrayList<String>>();
+        
         queue.offer(start);
         distTo.put(start, 1);
         
         while (!queue.isEmpty()) {
             String w = queue.poll();
-            if (distTo.get(w) > shortestLadderLength - 1) break;
-            for (String v : getOneEditWords(w, dict)) {
-                if (distTo.containsKey(v)) { // visited, go no further
-                    if (distTo.get(v) == distTo.get(w)+1) {
-                        edgesTo.get(v).add(w); // one more path with min distance
-                    }
-                    
-                } else {
+            if (distTo.get(w) >= minDist) break;
+            
+            for (String v : oneEditWords(w, dict)) {
+                if (v.equals(end) && !distTo.containsKey(v)) {
+                    minDist = distTo.get(w) + 1;
+                }
+                
+                if (!distTo.containsKey(v)) {
                     queue.offer(v);
-                    distTo.put(v, distTo.get(w)+1);
-                    ArrayList<String> edges = new ArrayList<String>();
-                    edges.add(w);
-                    edgesTo.put(v, edges);
-                    
-                    if (v.equals(end)) { // found end 
-                        shortestLadderLength = distTo.get(w) + 1;
-                        break; // no more edges from w to end
-                    }
-                }         
+                    distTo.put(v, distTo.get(w) + 1);
+                    addEdge(w, v);
+                } else if (distTo.get(v) == distTo.get(w)+1) {
+                    addEdge(w, v);
+                }
             }
         }
         
-        if (shortestLadderLength != Integer.MAX_VALUE) { // at least one path found
-            String[] editPath = new String[shortestLadderLength];
-            enumerateEditPaths(end, edgesTo, editPath, editPath.length-1);
+        if (minDist != Integer.MAX_VALUE) {
+            enumerateEditPaths(minDist-1, end, new String[minDist]);
         }
         
-        return ladders;
+        return editPaths;
+    }
+    
+    private void addEdge(String from, String to) {
+        if (!edgesTo.containsKey(to)) {
+            edgesTo.put(to, new ArrayList<String>());
+        }
+        
+        edgesTo.get(to).add(from);
+    }
+    
+    private void enumerateEditPaths(int curIndex, String curWord, String[] editPath) {
+        editPath[curIndex] = curWord;
+        
+        if (curIndex == 0) {
+            addEditPath(editPath);
+            return;
+        }
+        
+        for (String parent : edgesTo.get(curWord)) {
+            enumerateEditPaths(curIndex-1, parent, editPath);
+        }
+    }
+    
+    private void addEditPath(String[] editPath) {
+        ArrayList<String> path = new ArrayList<String>();
+        for (String word : editPath) {
+            path.add(word);
+        }
+        editPaths.add(path);
+    }
+    
+    private Set<String> oneEditWords(String word, HashSet<String> dict) {
+        Set<String> words = new HashSet<String>();
+        char[] letters = word.toCharArray();
+        
+        for (int i = 0; i < letters.length; i++) {
+            char curLetter = letters[i];
+            
+            for (char c = 'a'; c <= 'z'; c++) {
+                if (c == curLetter) continue;
+                letters[i] = c;
+                String candidate = new String(letters);
+                if (dict.contains(candidate)) words.add(candidate);
+            }
+            
+            letters[i] = curLetter;
+        }
+        
+        return words;
     }
 
     private void enumerateEditPaths(String end, Map<String, ArrayList<String>> edgesTo,
