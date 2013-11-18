@@ -42,21 +42,25 @@ public class BuySellStock1 {
     }
     
     public int maxProfitUsingMaxSubarray(int[] prices) {
-        if (prices == null || prices.length == 0) return 0;
-        // transform input array to daily change array
+        if (prices.length == 0) return 0;
+        int[] dailyChanges = computeDailyChanges(prices);
+        return maxSubArray(dailyChanges);
+    }
+    
+    private int[] computeDailyChanges(int[] prices) {
         int[] dailyChanges = new int[prices.length-1];
         for (int i = 0; i < dailyChanges.length; i++) {
             dailyChanges[i] = prices[i+1] - prices[i];
         }
-        
-        return maxSubArray(dailyChanges);
+        return dailyChanges;
     }
     
-    private int maxSubArray(int[] A) { // Kadane's algorithm
-        int maxEndingHere = 0, maxSoFar = 0;
-        for (int i = 0; i < A.length; i++) {
-            maxEndingHere = Math.max(0, maxEndingHere + A[i]);
-            maxSoFar      = Math.max(maxSoFar, maxEndingHere);
+    private int maxSubArray(int[] a) {
+        int maxEndingHere = 0;
+        int maxSoFar = 0;
+        for (int i = 0; i < a.length; i++) {
+            maxEndingHere = Math.max(0, maxEndingHere + a[i]);
+            maxSoFar = Math.max(maxSoFar, maxEndingHere);
         }
         return maxSoFar;
     }
