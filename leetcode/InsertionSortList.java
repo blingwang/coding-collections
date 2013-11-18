@@ -14,12 +14,14 @@ public class InsertionSortList {
     
     private void insertSortedList(ListNode node, ListNode head) {
         ListNode current = head;
+        
         while (current.next != null) {
             if (current.next.val >= node.val) {
                 node.next = current.next;
                 current.next = node;
                 return;
             }
+            
             current = current.next;
         }
         
