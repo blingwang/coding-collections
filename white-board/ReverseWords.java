@@ -18,7 +18,7 @@ class ReverseWords {
     }
 
     private static void reverseStr(char[] str, int start, int end) {
-        if (start < 0 || end >= str.length || start > end) return;
+        if (start < 0 || end >= str.length) return;
         
         while (start < end) {
             char temp = str[start];
