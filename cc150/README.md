@@ -1,4 +1,4 @@
-Chapter 1 | Arrays and Strings
+## Chapter 1 | Arrays and Strings
 
 1.1 Implement an algorithm to determine if a string has all unique characters. What if you can not use additional data structures?
 
@@ -16,7 +16,7 @@ Chapter 1 | Arrays and Strings
 
 1.8 Assume you have a method isSubstring which checks if one word is a substring of another. Given two strings, s1 and s2, write code to check if s2 is a rotation of s1 using only one call to isSubstring (i.e., “waterbottle” is a rotation of “erbottlewat”).
 
-Chapter 2 | Linked Lists
+## Chapter 2 | Linked Lists
 
 2.1 Write code to remove duplicates from an unsorted linked list. FOLLOW UP How would you solve this problem if a temporary buffer is not allowed?
 
@@ -28,7 +28,7 @@ Chapter 2 | Linked Lists
 
 2.5 Given a circular linked list, implement an algorithm which returns node at the beginning of the loop. DEFINITION Circular linked list: A (corrupt) linked list in which a node’s next pointer points to an earlier node, so as to make a loop in the linked list. EXAMPLE input: A –> B –> C –> D –> E –> C (the same C as earlier) output: C
 
-Chapter 3 | Stacks and Queues
+## Chapter 3 | Stacks and Queues
 
 3.1 Describe how you could use a single array to implement three stacks.
 
@@ -42,7 +42,7 @@ Chapter 3 | Stacks and Queues
 
 3.6 Write a program to sort a stack in ascending order. You should not make any assump- tions about how the stack is implemented. The following are the only functions that should be used to write this program: push | pop | peek | isEmpty.
 
-Chapter 4 | Trees and Graphs
+## Chapter 4 | Trees and Graphs
 
 4.1 Implement a function to check if a tree is balanced. For the purposes of this question, a balanced tree is defined to be a tree such that no two leaf nodes differ in distance from the root by more than one.
 
@@ -60,7 +60,7 @@ Chapter 4 | Trees and Graphs
 
 4.8 You are given a binary tree in which each node contains a value. Design an algorithm to print all paths which sum up to that value. Note that it can be any path in the tree – it does not have to start at the root.
 
-Chapter 5 | Bit Manipulation
+## Chapter 5 | Bit Manipulation
 
 5.1 You are given two 32-bit numbers, N and M, and two bit positions, i and j. Write a method to set all bits between i and j in N equal to M (e.g., M becomes a substring of N located at i and starting at j). EXAMPLE: Input: N = 10000000000, M = 10101, i = 2, j = 6 Output: N = 10001010100
 
@@ -76,15 +76,15 @@ Chapter 5 | Bit Manipulation
 
 5.7 An array A[1…n] contains all the integers from 0 to n except for one number which is missing. In this problem, we cannot access an entire integer in A with a single operation. The elements of A are represented in binary, and the only operation we can use to access them is “fetch the jth bit of A[i]”, which takes constant time. Write code to find the missing integer. Can you do it in O(n) time?
 
-Chapter 6 | Brain Teasers
+## Chapter 6 | Brain Teasers
 
 Cracking the coding interview—Q6.1~Q6.6
 
-Chapter 7 | Object Oriented Design
+## Chapter 7 | Object Oriented Design
 
 XDDDDDD
 
-Chapter 8 | Recursion
+## Chapter 8 | Recursion
 
 8.1 Write a method to generate the nth Fibonacci number.
 
@@ -102,7 +102,7 @@ Chapter 8 | Recursion
 
 8.8 Write an algorithm to print all ways of arranging eight queens on a chess board so that none of them share the same row, column or diagonal.
 
-Chapter 9 | Sorting and Searching
+## Chapter 9 | Sorting and Searching
 
 9.1 You are given two sorted arrays, A and B, and A has a large enough buffer at the end to hold B. Write a method to merge B into A in sorted order.
 
@@ -118,15 +118,15 @@ Chapter 9 | Sorting and Searching
 
 9.7 A circus is designing a tower routine consisting of people standing atop one another’s shoulders. For practical and aesthetic reasons, each person must be both shorter and lighter than the person below him or her. Given the heights and weights of each person in the circus, write a method to compute the largest possible number of people in such a tower. EXAMPLE: Input (ht, wt): (65, 100) (70, 150) (56, 90) (75, 190) (60, 95) (68, 110) Output: The longest tower is length 6 and includes from top to bottom: (56, 90) (60,95) (65,100) (68,110) (70,150) (75,190)
 
-Chapter 10 | Mathematical
+## Chapter 10 | Mathematical
 
 Cracking the coding interview—Q10.1~Q10.7
 
-Chapter 11 | Testing
+## Chapter 11 | Testing
 
 Cracking the coding interview—Q11.1~Q11.6
 
-Chapter 12 | System Design and Memory Limits
+## Chapter 12 | System Design and Memory Limits
 
 12.1 If you were integrating a feed of end of day stock price information (open, high, low,and closing price) for 5,000 companies, how would you do it? You are responsible for the development, rollout and ongoing monitoring and maintenance of the feed. Describe the different methods you considered and why you would recommend your approach. The feed is delivered once per trading day in a comma-separated format via an FTP site. The feed will be used by 1000 daily users in a web application.
 
@@ -142,7 +142,7 @@ Chapter 12 | System Design and Memory Limits
 
 12.7 You have to design a database that can store terabytes of data. It should support efficient range queries. How would you do it?
 
-Chapter 13 | C++
+## Chapter 13 | C++
 
 13.1 Write a method to print the last K lines of an input file using C++.
 
@@ -162,11 +162,11 @@ Chapter 13 | C++
 
 13.9 Write a smart pointer (smart_ptr) class.
 
-Chapter 14 | Java
+## Chapter 14 | Java
 
 Pass
 
-Chapter 15 | Databases
+## Chapter 15 | Databases
 
 15.1 Write a method to find the number of employees in each department.
 
@@ -178,7 +178,7 @@ Chapter 15 | Databases
 
 15.5 Imagine a simple database storing information for students’ grades. Design what this database might look like, and provide a SQL query to return a list of the honor roll students (top 10%), sorted by their grade point average.
 
-Chapter 16 | Low Level
+## Chapter 16 | Low Level
 
 16.1 Explain the following terms: virtual memory, page fault, thrashing.
 
@@ -186,7 +186,7 @@ Chapter 16 | Low Level
 
 16.10 Write a function called my2DAlloc which allocates a two dimensional array. Minimize the number of calls to malloc and make sure that the memory is accessible by the notation arr[i][j].
 
-Chapter 17 | Networking
+## Chapter 17 | Networking
 
 17.1 Explain what happens, step by step, after you type a URL into a browser. Use as much detail as possible. 
 
@@ -198,7 +198,7 @@ Chapter 17 | Networking
 
 17.5 What are the differences between TCP and UDP? Explain how TCP handles reliable delivery (explain ACK mechanism), flow control (explain TCP sender’s / receiver’s window) and congestion control.
 
-Chapter 18 | Threads and Locks
+## Chapter 18 | Threads and Locks
 
 18.1 What’s the difference between a thread and a process?
 
@@ -208,7 +208,7 @@ Chapter 18 | Threads and Locks
 
 18.5 Suppose we have the following code:… i) Can you design a mechanism to make sure that B is executed after A, and C is executed after B? ii) Suppose we have the following code to use class Foo. We do not know how the threads will be scheduled in the OS. Can you design a mechanism to make sure that all the methods will be executed in sequence?
 
-Chapter 19 | Moderate
+## Chapter 19 | Moderate
 
 19.1 Write a function to swap a number in place without temporary variables.
 
@@ -229,7 +229,7 @@ The computer has four slots containing balls that are red ®, yellow (Y), green 
 
 19.11 Design an algorithm to find all pairs of integers within an array which sum to a specified value.
 
-Chapter 20 | Hard
+## Chapter 20 | Hard
 
 20.1 Write a function that adds two numbers. You should not use + or any arithmetic operators.
 
@@ -252,4 +252,3 @@ Chapter 20 | Hard
 20.11 Imagine you have a square matrix, where each cell is filled with either black or white. Design an algorithm to find the maximum subsquare such that all four borders are filled with black pixels.
 
 20.12 Given an NxN matrix of positive and negative integers, write code to find the submatrix with the largest possible sum. 
-
