@@ -157,5 +157,9 @@ public class TernarySearchTree {
 
 	tst.delete(4);
 	tst.printLevelOrder();
+	System.out.println();
+
+	tst.delete(0);
+	tst.printLevelOrder();
     }
 }
