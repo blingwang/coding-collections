@@ -13,7 +13,7 @@ public class LongParser {
      * Limitations: this method does not handle overflow
      * If the string contains a number beyond long value limits, it will overflow.
      *
-     * @param s a string to parsed to long
+     * @param s a string to be parsed to long
      * @return the long represented by the argument in decimal.
      * @throws NumberFormatException if the string is not a valid long.
      */
@@ -63,17 +63,21 @@ public class LongParser {
         assert(stringToLong("0") == 0L);
         assert(stringToLong("-0") == 0L);
         assert(stringToLong("+11") == 11L);
+        assert(stringToLong("+001") == 1L);
+        assert(stringToLong("-010") == 10L);
         assert(stringToLong("-123456789") == -123456789L);
         assert(stringToLong("6666666666") == 6666666666L);
 
         try {
             stringToLong("+");
+            System.out.println("failure: +");
         } catch (NumberFormatException e) {
             System.out.println("success");
         }
 
         try {
             stringToLong("88a6");
+            System.out.println("failure: 88a6");
         } catch (NumberFormatException e) {
             System.out.println("success");
         }
