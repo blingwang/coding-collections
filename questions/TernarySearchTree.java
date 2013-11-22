@@ -25,7 +25,7 @@ public class TernarySearchTree {
             node.left = insert(node.left, value);
         } else if (value > node.value) {
             node.right = insert(node.right, value);
-        } else {
+        } else { // can be optimized: middle subtree is a single branch
             node.middle = insert(node.middle, value);
         }
 
