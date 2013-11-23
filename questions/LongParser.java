@@ -69,6 +69,13 @@ public class LongParser {
         assert(stringToLong("6666666666") == 6666666666L);
 
         try {
+            stringToLong("");
+            System.out.println("failure: +");
+        } catch (NumberFormatException e) {
+            System.out.println("success");
+        }
+        
+        try {
             stringToLong("+");
             System.out.println("failure: +");
         } catch (NumberFormatException e) {
