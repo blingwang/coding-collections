@@ -11,7 +11,7 @@ public class GrayCode {
         return numList;
     }
 
-    public ArrayList<Integer> grayCode(int n) {
+    public ArrayList<Integer> grayCode(int n) { // fold in half
         ArrayList<Integer> numList = new ArrayList<Integer>();
         numList.add(0);
         
