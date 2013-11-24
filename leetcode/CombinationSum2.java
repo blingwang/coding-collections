@@ -24,7 +24,8 @@ public class CombinationSum2 {
         
         combine(k+1, target, inCombination);
         
-        if (preDupSkipped(k, inCombination)) return;
+        boolean preDupSkipped = (k > 0 && candidates[k] == candidates[k-1] && !inCombination[k-1]);
+        if (preDupSkipped) return;
         
         inCombination[k] = true;
         combine(k+1, target-candidates[k], inCombination);
@@ -40,9 +41,5 @@ public class CombinationSum2 {
             }
         }
         combList.add(combination);
-    }
-    
-    private boolean preDupSkipped(int k, boolean[] inCombination) {
-        return k > 0 && candidates[k] == candidates[k-1] && !inCombination[k-1];
     }
 }
