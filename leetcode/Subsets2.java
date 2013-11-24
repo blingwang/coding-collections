@@ -91,8 +91,9 @@ public class Subsets2 {
             for (int j = 0; j < count; j++) {
                 // only append to subsets containing all previous duplicates
                 ArrayList<Integer> pre = subsets.get(j);
-                if (numDups > 0 && (pre.size() < numDups || 
-                                    pre.get(pre.size()-numDups) != num[i])) continue;
+                boolean preDupSkipped = numDups > 0 && (pre.size() < numDups || 
+                                        pre.get(pre.size()-numDups) != num[i]);
+                if (preDupSkipped) continue;
                 
                 ArrayList<Integer> subset = new ArrayList<Integer>();
                 subset.addAll(subsets.get(j));
