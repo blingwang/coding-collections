@@ -1,7 +1,7 @@
 import java.util.*;
 public class Permutations2 {
-    int[] a;
-    ArrayList<ArrayList<Integer>> permutations;
+    private int[] a;
+    private ArrayList<ArrayList<Integer>> permutations;
 
     public ArrayList<ArrayList<Integer>> permuteUnique(int[] num) {
         a = num;
