@@ -1,7 +1,7 @@
 import java.util.*;
 public class CombinationSum2 {
-    int[] candidates;
-    ArrayList<ArrayList<Integer>> combList;
+    private int[] candidates;
+    private ArrayList<ArrayList<Integer>> combList;
     
     public ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
         candidates = num;
