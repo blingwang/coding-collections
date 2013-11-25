@@ -1,29 +1,33 @@
 public class EditDistance {
     public int minDistance(String word1, String word2) {
-        int n = word1.length();
-        int m = word2.length();
+        int m = word1.length();
+        int n = word2.length();
         
-        int[][] distances = new int[n+1][m+1];
-        for (int i = 0; i <= n; i++) {
-            distances[i][0] = i;
-        }
-        for (int j = 0; j <= m; j++) {
-            distances[0][j] = j;
+        int[][] distTable = new int[m+1][n+1];
+        
+        for (int i = 1; i <= m; i++) {
+            distTable[i][0] = i;
         }
         
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
-                int insertion = distances[i][j-1] + 1;
-                int deletion = distances[i-1][j] + 1;
-                int substitution = distances[i-1][j-1];
-                if (word1.charAt(i-1) != word2.charAt(j-1)) substitution += 1;
-                distances[i][j] = min(insertion, deletion, substitution);
+        for (int j = 1; j <= n; j++) {
+            distTable[0][j] = j;
+        }
+        
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                int byInsert = distTable[i][j-1] + 1;
+                int byDelete = distTable[i-1][j] + 1;
+                int bySubstitute = distTable[i-1][j-1];
+                
+                if (word1.charAt(i-1) != word2.charAt(j-1)) bySubstitute++;
+                
+                distTable[i][j] = min(byInsert, byDelete, bySubstitute);
             }
         }
         
-        return distances[n][m];
+        return distTable[m][n];
     }
-
+    
     private int min(int a, int b, int c) {
         return Math.min(a, Math.min(b, c));
     }
