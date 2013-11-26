@@ -15,40 +15,39 @@ public class LRUCache {
     
     public int get(int key) {
         if (!map.containsKey(key)) return -1;
-        
-        Entry node = map.get(key);
-        node.remove();
-        node.addAfter(header);
-        
-        return node.val;
+        Entry entry = map.get(key);
+        entry.remove();
+        entry.addAfter(header);
+        return entry.val;
     }
     
-    public void set(final int key, int value) {
-        Entry node = map.get(key);
+    public void set(int key, int value) {
         if (map.containsKey(key)) {
-            node.val = value;
-            node.remove();
-            node.addAfter(header);
+            Entry entry = map.get(key);
+            entry.val = value;
+            entry.remove();
+            entry.addAfter(header);
         } else {
-            if (size == capacity) {
-                removeLastEntry();
-                size--;
-            }
-            
-            node = new Entry(key, value);
-            node.addAfter(header);
-            size++;
-            map.put(key, node);
+            addEntry(key, value);
         }
+    }
+    
+    private void addEntry(int key, int value) {
+        if (size == capacity) removeLastEntry();
+        Entry entry = new Entry(key, value);
+        entry.addAfter(header);
+        map.put(key, entry);
+        size++;
     }
     
     private void removeLastEntry() {
         Entry last = header.before;
         last.remove();
         map.remove(last.key);
+        size--;
     }
     
-    private static class Entry { // doubly-linked list node
+    private static class Entry { // doubly-linked entry node
         private final int key;
         private int val;
         private Entry before, after;
