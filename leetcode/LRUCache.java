@@ -15,9 +15,11 @@ public class LRUCache {
     
     public int get(int key) {
         if (!map.containsKey(key)) return -1;
+        
         Entry entry = map.get(key);
         entry.remove();
         entry.addAfter(header);
+        
         return entry.val;
     }
     
@@ -34,6 +36,7 @@ public class LRUCache {
     
     private void addEntry(int key, int value) {
         if (size == capacity) removeLastEntry();
+        
         Entry entry = new Entry(key, value);
         entry.addAfter(header);
         map.put(key, entry);
