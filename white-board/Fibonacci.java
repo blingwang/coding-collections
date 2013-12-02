@@ -15,6 +15,26 @@ public class Fibonacci {
       
         return fn1;
     }
+
+    /*
+    * 0 1 1 2 3 5 8 13  Fibonacci seq.
+    * 0 1 2 3 4 5 6 7 <-- index
+    *
+    *Ex: given index 6, return sum of 0, 1, 1, 2, 3, 5
+    */
+    public int fibSum(int maxIndex) {    
+        int sum = 0;
+        int fn1 = 0;
+        int fn2 = 1;
+        
+        for (int i = 1; i <= maxIndex; i++) {
+            fn1 = fn1 + fn2;
+            fn2 = fn1 - fn2;
+            sum += fn1;
+        }
+        
+        return sum;
+    }
     
     public static void printFibs(int limit) {         
         long[] series = new long[limit];
