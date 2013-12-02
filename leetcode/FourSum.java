@@ -1,5 +1,6 @@
 import java.util.*;
 class FourSum {
+    // store all pairs in hashmap will give us O(n^2) 
     public ArrayList<ArrayList<Integer>> fourSum(int[] num, int target) {
         ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
         Arrays.sort(num);
