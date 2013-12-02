@@ -27,7 +27,7 @@ public class Fibonacci {
         int fn1 = 0;
         int fn2 = 1;
         
-        for (int i = 1; i <= maxIndex; i++) {
+        for (int i = 1; i < maxIndex; i++) {
             fn1 = fn1 + fn2;
             fn2 = fn1 - fn2;
             sum += fn1;
