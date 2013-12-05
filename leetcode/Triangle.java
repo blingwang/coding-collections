@@ -3,20 +3,22 @@ public class Triangle {
     public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
         int n = triangle.size();
         if (n == 0) return 0;
-        int[] minTotals = new int[n];
-        minTotals[0] = triangle.get(0).get(0);
+        int[] minPathSums = new int[n];
+        minPathSums[0] = triangle.get(0).get(0);
         
         for (int i = 1; i < n; i++) {
             ArrayList<Integer> row = triangle.get(i);
-            assert(row.size() == i + 1);
-            minTotals[i] = minTotals[i-1] + row.get(i);
-            for (int j = i - 1; j >= 1; j--) {
-                minTotals[j] = Math.min(minTotals[j-1], minTotals[j]) + row.get(j);
+            assert(row.size() == i+1);
+            minPathSums[i] = minPathSums[i-1] + row.get(i);
+            
+            for (int j = i-1; j > 0; j--) {
+                minPathSums[j] = Math.min(minPathSums[j-1], minPathSums[j]) + row.get(j);
             }
-            minTotals[0] += row.get(0);
+            
+            minPathSums[0] += row.get(0);
         }
         
-        return min(minTotals);
+        return min(minPathSums);
     }
     
     public int minimumTotalBottomUp(ArrayList<ArrayList<Integer>> triangle) {
