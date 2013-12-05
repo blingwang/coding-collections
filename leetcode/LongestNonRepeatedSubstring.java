@@ -22,30 +22,25 @@ public class LongestNonRepeatedSubstring {
     }
     
     public int lengthOfLongestSubstring2(String s) {
-        s.toLowerCase();
-        int max = 0;
+        int maxLength = 0;
         int start = 0;
+        int[] lastIndice = new int[26];
         
-        int[] charIndice = new int[26];
-        for (int i = 0; i < charIndice.length; i++) {
-            charIndice[i] = -1;
-        }
+        s = s.toLowerCase();
+        Arrays.fill(lastIndice, -1);
         
         for (int i = 0; i < s.length(); i++) {
-            char cur = s.charAt(i);
-            int last = charIndice[cur-'a'];
-            if (last >= 0 && last >= start) {
-                int length = i - start;
-                if (length > max) max = length; 
-                start = last + 1;
+            char curLetter = s.charAt(i);
+            
+            if (lastIndice[curLetter-'a'] >= start) {
+                start = lastIndice[curLetter-'a'] + 1;
             }
             
-            charIndice[cur-'a'] = i;
+            int curLength = i - start + 1;
+            maxLength = Math.max(maxLength, curLength);
+            lastIndice[curLetter-'a'] = i;
         }
         
-        // process last substring
-        if (s.length() - start > max) max = s.length() - start;
-        
-        return max;
+        return maxLength;
     }
 }
