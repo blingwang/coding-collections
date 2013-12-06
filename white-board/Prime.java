@@ -62,7 +62,7 @@ class Prime {
             }
         }
         
-        if (n > 2) factors.add(n); // only one factor > sqrt(n)
+        if (n > 1) factors.add(n); // only one factor > sqrt(n)
         
         return factors;
     }
