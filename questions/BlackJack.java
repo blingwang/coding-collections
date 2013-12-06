@@ -2,9 +2,9 @@ public class BlackJack {
     private int EvaluateHand(Hand hand)
     {
         int score = 0;
-        foreach (Card currentCard in hand)
+        for (Card currentCard in hand)
         {
-            switch (currentCard.Value)
+            switch (currentCard.value)
             {
                 case Value.Two:
                     score += 2;
@@ -54,7 +54,7 @@ public class BlackJack {
                     break;
                 }
                 
-                if (currentAceCheckCard.Value == Value.Ace)
+                if (currentAceCheckCard.value == Value.Ace)
                 {
                     score -= 10;
                 }
