@@ -52,6 +52,20 @@ class Prime {
         }
         return factors;
     }
+    
+    public static ArrayList<Integer> findFactors2(int n) {
+        ArrayList<Integer> factors = new ArrayList<Integer>();
+        for (int i = 2; i * i <= n; i++) {
+            while (n % i == 0) {
+               factors.add(i);
+               n = n / i;
+            }
+        }
+        
+        if (n > 2) factors.add(n); // only one factor > sqrt(n)
+        
+        return factors;
+    }
 
     //  based on the fact that beyond 2 and 3, all the prime numbers 
     //  are of the form 6n-1 or 6n+1
