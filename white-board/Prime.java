@@ -55,7 +55,8 @@ class Prime {
     
     public static ArrayList<Integer> findFactors2(int n) {
         ArrayList<Integer> factors = new ArrayList<Integer>();
-        for (int i = 2; i * i <= n; i++) {
+        
+        for (int i = 2; i <= n / i; i++) {
             while (n % i == 0) {
                factors.add(i);
                n = n / i;
