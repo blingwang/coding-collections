@@ -39,8 +39,36 @@ public class LongestValidParenthese {
         
         return maxLength;
     }
+    
+    public int longestValidParentheses2(String s) { // no extra space
+        return Math.max(findValidParentheses(s, 0, s.length(), 1, '('), 
+                        findValidParentheses(s, s.length()-1, -1, -1, ')'));
+    }
+    
+    private int findValidParentheses(String s, int start, int end, int step, char cc) {
+        int maxLength = 0;
+        int curLength = 0;
+        int count = 0;
+        
+        for (int i = start; i != end; i += step) {
+            if (s.charAt(i) == cc) {
+                count++;
+            } else if (count > 0) {
+                count--;
+                curLength += 2;
+                
+                if (count == 0) { // valid substring
+                    maxLength = Math.max(maxLength, curLength);
+                }
+            } else {
+                curLength = 0;
+            }
+        }
+        
+        return maxLength;
+    }
 
-    public int longestValidParentheses(String s) {
+    public int longestValidParentheses3(String s) {
         int maxLength = 0;
         int lastInvalidRight = -1;
         ArrayDeque<Integer> leftsStack = new ArrayDeque<Integer>();
