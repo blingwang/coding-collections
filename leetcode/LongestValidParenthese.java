@@ -1,44 +1,43 @@
 import java.util.*;
 public class LongestValidParenthese {
     public int longestValidParentheses(String s) {
-        int n = s.length();
-        boolean[] unmatched = new boolean[n];
+        boolean[] unmatched = new boolean[s.length()];
         
         int leftCount = 0;
-        for (int i = 0; i < n; i++) {
-            char c = s.charAt(i);
-            if (c == '(') {
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
                 leftCount++;
+            } else if (leftCount > 0){
+                leftCount--;
             } else {
-                if (leftCount > 0) leftCount--;
-                else unmatched[i] = true;
+                unmatched[i] = true;
             }
         }
         
         int rightCount = 0;
-        for (int i = n-1; i >= 0; i--) {
-            char c = s.charAt(i);
-            if (c == ')') {
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) == ')') {
                 rightCount++;
+            } else if (rightCount > 0) {
+                rightCount--;
             } else {
-                if (rightCount > 0) rightCount--;
-                else unmatched[i] = true;
+                unmatched[i] = true;
             }
         }
         
-        int count = 0, maxCount = 0;
-        for (int i = 0; i < n; i++) {
+        int maxLength = 0;
+        int curLength = 0;
+        for (int i = 0; i < s.length(); i++) {
             if (unmatched[i]) {
-                maxCount = Math.max(maxCount, count);
-                count = 0;
+                curLength = 0;
             } else {
-                count++;
+                curLength++;
             }
+            
+            maxLength = Math.max(maxLength, curLength);
         }
         
-        maxCount = Math.max(maxCount, count);
-        
-        return maxCount;
+        return maxLength;
     }
 
     public int longestValidParentheses(String s) {
