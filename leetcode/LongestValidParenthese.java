@@ -41,29 +41,30 @@ public class LongestValidParenthese {
         return maxCount;
     }
 
-    public int longestValidParentheses2(String s) {
-        int maxCount = 0;
-        int last = -1;
-        ArrayDeque<Integer> stack = new ArrayDeque<Integer>();
-
+    public int longestValidParentheses(String s) {
+        int maxLength = 0;
+        int lastInvalidRight = -1;
+        ArrayDeque<Integer> leftsStack = new ArrayDeque<Integer>();
+        
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (c == '(') {
-                stack.push(i);
+            if (s.charAt(i) == '(') {
+                leftsStack.push(i);
+            } else if (leftsStack.isEmpty()) {// no match
+                    lastInvalidRight = i;
             } else {
-                if (stack.isEmpty()) {
-                    last = i; // no match
-                } else {
-                    stack.pop(); 
-                    if (stack.isEmpty()) { // match to last unmatched right
-                        maxCount = Math.max(maxCount, i-last);
-                    } else { // match to last unmatched left
-                        maxCount = Math.max(maxCount, i-stack.peek());
-                    }
+                leftsStack.pop();
+                int curLength = 0;
+                
+                if (leftsStack.isEmpty()) {// to last invalid right
+                    curLength = i - lastInvalidRight; 
+                } else { // to last unmatched left
+                    curLength = i - leftsStack.peek();
                 }
+                
+                maxLength = Math.max(maxLength, curLength);
             }
         }
-
-        return maxCount;
+        
+        return maxLength;
     }
 }
