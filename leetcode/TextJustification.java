@@ -2,6 +2,7 @@ import java.util.*;
 public class TextJustification {
     public ArrayList<String> fullJustify(String[] words, int L) {
         ArrayList<String> result = new ArrayList<String>();
+        if (words.length == 0) return result;
         
         int start = 0, wordsLen = 0;    
         for (int i = 0; i < words.length; i++) {
@@ -12,6 +13,7 @@ public class TextJustification {
             }
             wordsLen += words[i].length();
         }  
+        
         result.add(buildLine(words, start, words.length-1, L, wordsLen, true));
         
         return result;
@@ -23,11 +25,14 @@ public class TextJustification {
         StringBuilder line = new StringBuilder();
         
         int wordCount = end - start + 1;
-        int spacesPerWord = (wordCount > 1) ? (L-wordsLen)/(wordCount-1) : 0;
-        int extraSpaces = (wordCount > 1) ? (L-wordsLen) % (wordCount-1) : 0;
-        if (leftJustified) {
-            spacesPerWord = 1;
-            extraSpaces = 0;
+        if (wordCount == 1) leftJustified = true;
+        
+        int spacesPerWord = 1;
+        int extraSpaces = 0;
+        
+        if (!leftJustified) {
+            spacesPerWord = (L-wordsLen)/(wordCount-1);
+            extraSpaces = (L-wordsLen) % (wordCount-1);
         }
         
         line.append(words[start]);
@@ -41,6 +46,7 @@ public class TextJustification {
         if (line.length() < L) {
             appendSpaces(line, L - line.length());
         }
+        
         return line.toString();
     }
 
