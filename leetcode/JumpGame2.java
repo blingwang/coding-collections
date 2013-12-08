@@ -5,8 +5,9 @@ public class JumpGame2 {
         int nextMax = 0;
         
         for (int i = 0; i < A.length; i++) {
+            if (i > nextMax) return -1;
+            
             if (i > curMax) { // one more degree
-                if (i > nextMax) return -1;
                 minSteps++;
                 curMax = nextMax;
             }
