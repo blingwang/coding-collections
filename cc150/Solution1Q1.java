@@ -19,16 +19,11 @@ public class Solution1Q1{
 
     // assume ASCII char set
     public boolean isUniqueChars2(String str){
-        if (str.length() > 256) {
-		return false;
-	}
+        if (str.length() > 256) return false;
 	
 	boolean[] isFound = new boolean[256];
 	for (int i = 0; i < str.length(); i++){
-		if (isFound[str.charAt(i)]) {
-			return false;
-		}
-		
+		if (isFound[str.charAt(i)]) return false;
 		isFound[str.charAt(i)] = true;
 	}
 	
