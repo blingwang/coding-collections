@@ -24,17 +24,20 @@ public class DecodeWays {
     }
     
     public int numDecodingsDP(String s) {// similar to fibonacci
-        if (s.length() == 0) return 0;
+        if (s.isEmpty()) return 0;
         int pre1 = 1, pre2 = 1; // we consider start as valid
         
         for (int i = 0; i < s.length(); i++) {
             int cur = 0;
+            
             if (s.charAt(i) > '0') cur += pre1;
             if (isValidTwoDigits(s, i-1)) cur += pre2;
             if (cur == 0) return 0; // also solves s starting with 0
+
             pre2 = pre1;
             pre1 = cur;        
         }
+        
         return pre1;
     }
     
