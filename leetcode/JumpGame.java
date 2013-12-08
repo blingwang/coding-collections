@@ -2,10 +2,12 @@ import java.util.*;
 public class JumpGame { 
     public boolean canJump(int[] A) {
         int maxJumpToIndex = 0;
+        
         for (int i = 0; i <= maxJumpToIndex; i++) {
             maxJumpToIndex = Math.max(maxJumpToIndex, i + A[i]);
             if (maxJumpToIndex >= A.length - 1) return true;
         }
+        
         return false;
     }
 
