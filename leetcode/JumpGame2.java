@@ -1,5 +1,5 @@
 public class JumpGame2 {
-    public int jump(int[] A) { // BFS
+    public int jump(int[] A) { // BFS level order
         int minSteps = 0;
         int curMax = 0; 
         int nextMax = 0;
@@ -7,7 +7,7 @@ public class JumpGame2 {
         for (int i = 0; i < A.length; i++) {
             if (i > nextMax) return -1;
             
-            if (i > curMax) { // one more degree
+            if (i > curMax) { // next level
                 minSteps++;
                 curMax = nextMax;
             }
