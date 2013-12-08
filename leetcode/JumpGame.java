@@ -1,5 +1,5 @@
 import java.util.*;
-public class JumpGame { 
+public class JumpGame { // BFS on graph: reachability
     public boolean canJump(int[] A) {
         assert(A.length != 0);
         int maxJumpToIndex = 0;
