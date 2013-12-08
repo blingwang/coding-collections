@@ -15,19 +15,12 @@ public class DecodeWays {
         if (s.charAt(beginIndex) != '0') {
             count += countDecodings(s, beginIndex+1);
         } 
-        if (startWithTwoDigitCode(s, beginIndex)){
+        if (isValidTwoDigits(s, beginIndex)){
             count += countDecodings(s, beginIndex+2);
         }
         
         cache.put(beginIndex, count);
         return count;
-    }
-
-    private boolean startWithTwoDigitCode(String s, int beginIndex) {
-        if (beginIndex + 2 > s.length()) return false;
-        if (s.charAt(beginIndex) == '1') return true;
-        if (s.charAt(beginIndex) == '2' && s.charAt(beginIndex+1) < '7') return true;
-        return false;
     }
     
     public int numDecodingsDP(String s) {// similar to fibonacci
