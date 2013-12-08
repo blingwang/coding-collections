@@ -1,6 +1,7 @@
 import java.util.*;
 public class JumpGame { 
     public boolean canJump(int[] A) {
+        assert(A.length != 0);
         int maxJumpToIndex = 0;
         
         for (int i = 0; i <= maxJumpToIndex; i++) {
