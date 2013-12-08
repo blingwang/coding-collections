@@ -5,7 +5,7 @@ public class Solution1Q5{
             return str;
         }
         
-        StringBuffer compressed = new StringBuffer();
+        StringBuilder compressed = new StringBuilder();
         char pre = str.charAt(0);
         int count = 1;
         
@@ -34,7 +34,7 @@ public class Solution1Q5{
             return str;
         }
 
-        StringBuffer mystr = new StringBuffer();
+        StringBuilder mystr = new StringBuilder();
         char last = str.charAt(0);
         int count = 1;
         for(int i = 1; i < str.length(); i++){
@@ -76,26 +76,28 @@ public class Solution1Q5{
     /*solution 3*/
     public String compressAlternate(String str){
         int size = countCompression(str);
-        if(size >= str.length()){
+        if (size >= str.length()) {
             return str;
         }
 
         char[] array = new char[size];
-        int index = 0;
+        int updateIndex = 0;
         char last = str.charAt(0);
         int count = 1;
+        
         for(int i = 1; i < str.length(); i++){
             if(str.charAt(i) == last){
                 count++;
             }else{
-                index = setChar(str, array, last, index, count);
+                index = setChar(str, array, last, updateIndex, count);
                 last = str.charAt(i);
                 count = 1;
             }
         }
         
-        index = setChar(str, array, last, index, count);
-        return String.valueOf(array);
+        updateIndex = setChar(str, array, last, updateIndex, count);
+        
+        return new String(array);
     }
 
     int setChar(String str, char[] array, char c, int index, int count){
@@ -105,6 +107,7 @@ public class Solution1Q5{
         for(char x : cnt){
             array[index++] = x;
         }
+        
         return index;
     }
 }
