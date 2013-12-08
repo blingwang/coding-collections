@@ -6,12 +6,12 @@ public class Solution1Q1{
 
         int checker = 0;
         for(int i = 0; i < str.length(); i++){
-            int val = str.charAt(i) - 'a';
-            if((checker & (1 << val)) > 0 ){
+            int charIndex = str.charAt(i) - 'a';
+            if((checker & (1 << charIndex)) > 0 ){
                 return false;
             }
 
-            checker |= (1 << val);
+            checker |= (1 << charIndex);
         }
         
         return true;
