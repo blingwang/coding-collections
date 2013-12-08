@@ -11,6 +11,19 @@ public class JumpGame {
         
         return false;
     }
+    
+    public boolean canJump2(int[] A) {
+        assert(A.length != 0);
+        int nextCanJump = A.length - 1;
+        
+        for (int i = A.length - 2; i >= 0; i--) {
+            if (i + A[i] >= nextCanJump) {
+                nextCanJump = i;
+            }
+        }
+        
+        return nextCanJump == 0;
+    }
 
     Set<Integer> canNotJumpIndices;
     public boolean canJumpSlow(int[] A) { // too slow, stack overflow
