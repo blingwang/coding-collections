@@ -1,10 +1,11 @@
 import java.util.*;
 public class Solution4Q2 {   
     public static boolean bfs(Node start, Node end) {
-        assert start != end;
-        ArrayDeque<Node> queue = new ArrayDeque<Node>();
+        assert(start != end);
+        Queue<Node> queue = new ArrayDeque<Node>();
         Set<Node> marked = new HashSet<Node>();
         
+        marked.add(start);
         queue.offer(start);
         
         while (!queue.isEmpty()) {
