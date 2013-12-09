@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Solution {
+    // to avoid using extra space, we can reverse first half in place
     public static boolean isPalindrome(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
