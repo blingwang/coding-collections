@@ -15,7 +15,6 @@ public class Solution2Q3 {
         ListNode next;
         ListNode(int x) {
             val = x;
-            next = null;
         }
     }
 }
