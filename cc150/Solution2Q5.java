@@ -1,5 +1,33 @@
 public class Solution2Q5{
     public static ListNode addLists(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode(-1);
+        ListNode pre = dummyHead;
+        int carrier = 0;
+        
+        while (l1 != null || l2 != null) {
+            int sum = carrier;
+            
+            if (l1 != null) {
+                sum += l1.val;
+                l1 = l1.next;
+            }
+            
+            if (l2 != null) {
+                sum += l2.val;
+                l2= l2.next;
+            }
+            
+            carrier = sum / 10;
+            pre.next = new ListNode(sum % 10);
+            pre = pre.next;
+        }
+        
+        if (carrier != 0) pre.next = new ListNode(carrier);
+        
+        return dummyHead.next;
+    }
+    
+    public static ListNode addLists2(ListNode l1, ListNode l2) {
         return addLists(l1, l2, 0);
     }
 
