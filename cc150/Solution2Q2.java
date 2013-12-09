@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Solution2Q2 {
-	public static ListNode kthToLast(ListNode head, int k) {
+    public static ListNode kthToLast(ListNode head, int k) {
 		assert(k >= 1);
         ListNode slow = head;
         ListNode fast = head;
