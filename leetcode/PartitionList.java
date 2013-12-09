@@ -1,9 +1,9 @@
 public class PartitionList {
     public ListNode partition(ListNode head, int x) {
-        ListNode lessHead = new ListNode(0);
-        ListNode greaterHead = new ListNode(0);
-        ListNode less = lessHead;
-        ListNode greater = greaterHead;
+        ListNode lessHeader = new ListNode(0);
+        ListNode greaterHeader = new ListNode(0);
+        ListNode less = lessHeader;
+        ListNode greater = greaterHeader;
         
         for (ListNode cur = head; cur != null; cur = cur.next) {
             if (cur.val < x) {
@@ -15,10 +15,10 @@ public class PartitionList {
             }
         }
         
-        less.next = greaterHead.next;
+        less.next = greaterHeader.next;
         greater.next = null;
         
-        return lessHead.next;
+        return lessHeader.next;
     }
 
     private class ListNode {
