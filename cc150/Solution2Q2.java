@@ -2,11 +2,11 @@ import java.util.*;
 
 public class Solution2Q2 {
     public static ListNode kthToLast(ListNode head, int k) {
-		assert(k >= 1);
+        assert(k >= 1);
         ListNode slow = head;
         ListNode fast = head;
 
-		// kth node jumps k steps to reach null
+        // kth node jumps k steps to reach null
         for (int i = 0; i < k; i++) {
             if (fast == null) return null;// < k nodes
             fast = fast.next;
