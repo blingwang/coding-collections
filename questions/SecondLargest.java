@@ -4,7 +4,8 @@ public class SecondLargest {
      * it will return Integer.MIN_VALUE if there aren't 
      * at least 2 elements in the array. It will also return 
      * Integer.MIN_VALUE if the array contains only 
-     * the same number.*/
+     * the same number.
+     */
     public static int secondHighest(int... nums) {
         int high1 = Integer.MIN_VALUE;
         int high2 = Integer.MIN_VALUE;
