@@ -4,7 +4,7 @@ public class Solution2Q5{
         ListNode pre = dummyHead;
         int carrier = 0;
         
-        while (l1 != null || l2 != null) {
+        while (l1 != null || l2 != null || carrier != 0) {
             int sum = carrier;
             
             if (l1 != null) {
@@ -21,8 +21,6 @@ public class Solution2Q5{
             pre.next = new ListNode(sum % 10);
             pre = pre.next;
         }
-        
-        if (carrier != 0) pre.next = new ListNode(carrier);
         
         return dummyHead.next;
     }
