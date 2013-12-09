@@ -1,40 +1,7 @@
 import java.util.*;
 public class Solution3Q7 {
-    private abstract class Animal {
-        private int order;
-        protected String name;
-        
-        public Animal(String name) {
-            this.name = name;
-        }
-
-        public void setOrder(int order) {
-            this.order = order;
-        }
-
-        public int getOrder() {
-            return order;
-        }
-
-        public boolean isOlderThan(Animal a) {
-            return this.order < a.getOrder();
-        }
-    }
-
-    private class Dog extends Animal {
-        public Dog(String name) {
-            super(name);
-        }
-    }
-
-    private class Cat extends Animal {
-        public Cat(String name) {
-            super(name);
-        }
-    }
-
-    Queue<Dog> dogs = new LinkedList<Dog>();
-    Queue<Cat> cats = new LinkedList<Cat>();
+    Queue<Dog> dogs = new ArrayDeque<Dog>();
+    Queue<Cat> cats = new ArrayDeque<Cat>();
     private int order = 0; // acts as timestamp
 
     public void enqueue(Dog dog) {// polymorphism by overloading
@@ -74,5 +41,38 @@ public class Solution3Q7 {
     
     public static void main(String[] args) {
         
+    }
+    
+    private abstract class Animal {
+        private int order;
+        protected String name;
+        
+        public Animal(String name) {
+            this.name = name;
+        }
+
+        public void setOrder(int order) {
+            this.order = order;
+        }
+
+        public int getOrder() {
+            return order;
+        }
+
+        public boolean isOlderThan(Animal a) {
+            return this.order < a.getOrder();
+        }
+    }
+
+    private class Dog extends Animal {
+        public Dog(String name) {
+            super(name);
+        }
+    }
+
+    private class Cat extends Animal {
+        public Cat(String name) {
+            super(name);
+        }
     }
 }
