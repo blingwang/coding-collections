@@ -94,11 +94,9 @@ public class Solution2Q5{
     // pad the list with zeros
     private static ListNode padList(ListNode l, int padding) {
         ListNode head = l;
-
         for (int i = 0; i < padding; i++) {
             head  = insertBefore(head, 0);
         }
-        
         return head;
     }
 
@@ -111,13 +109,9 @@ public class Solution2Q5{
     
     private static  int length(ListNode list) {
         int length = 0;
-        ListNode cur = list;
-        
-        while(cur != null) {
+        while(ListNode cur = list; cur != null; cur = cur.next) {
             length++;
-            cur = cur.next;
         }
-
         return length;
     }
 	
@@ -155,7 +149,6 @@ public class Solution2Q5{
         ListNode next;
         ListNode(int x) {
             val = x;
-            next = null;
         }
     }
 }
