@@ -34,11 +34,11 @@ public class Solution2Q4{
         while (node != null) {
             ListNode next = node.next;
             if (node.val < x) {
-                //insert node into start of before list
+                //insert node before start of before list
                 node.next = before;
                 before = node;
             } else {
-                // insert node into start of after list
+                // insert node before start of after list
                 node.next = after;
                 after = node;
             }
