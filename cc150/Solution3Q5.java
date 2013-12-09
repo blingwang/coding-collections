@@ -14,41 +14,41 @@ public class Solution3Q5 {
 }
 
 class MyQueue<E> {
-    ArrayDeque<E> newStack;
-    ArrayDeque<E> oldStack;
+    ArrayDeque<E> inStack;
+    ArrayDeque<E> outStack;
     
     public MyQueue() {
-        newStack = new ArrayDeque<E>();
-        oldStack = new ArrayDeque<E>();
+        inStack = new ArrayDeque<E>();
+        outStack = new ArrayDeque<E>();
     }
     
     public void enqueue(E value) {
-        newStack.push(value);
+        inStack.push(value);
     }
     
     public E dequeue() {
-        if (oldStack.isEmpty()) {
+        if (outStack.isEmpty()) {
             shiftStacks();
         }
         
-        return oldStack.pop();
+        return outStack.pop();
     }
     
     public E peek() {
-        if (oldStack.isEmpty()) {
+        if (outStack.isEmpty()) {
             shiftStacks();
         }
         
-        return oldStack.peek();
+        return outStack.peek();
     }
     
     public int size() {
-        return newStack.size() + oldStack.size();
+        return inStack.size() + outStack.size();
     }
     
     private void shiftStacks() {
-        while (!newStack.isEmpty()) {
-            oldStack.push(newStack.pop());
+        while (!inStack.isEmpty()) {
+            outStack.push(inStack.pop());
         }
     }
 }
