@@ -1,6 +1,8 @@
 public class Solution4Q7 { 
+    // if has parent pointer, store one path in hashmap, check the other path
     /* solution 1 */
     public static TreeNode lca(TreeNode root, TreeNode p, TreeNode q) {
+        assert(root != null);
         boolean pOnLeft = inBST(root.left, p);
         boolean qOnLeft = inBST(root.left, q);
         
