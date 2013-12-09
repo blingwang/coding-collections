@@ -1,19 +1,19 @@
 import java.util.*;
 public class Solution3Q6 {
     public static void sortStack(ArrayDeque<Integer> stack) {
-        ArrayDeque<Integer> aux = new ArrayDeque<Integer>();
+        ArrayDeque<Integer> auxStack = new ArrayDeque<Integer>(); 
         
-        while (!stack.isEmpty()) {
+        while (!stack.isEmpty()) {// insert each into aux(sorted)
             int top = stack.pop();
-            while (!aux.isEmpty() && top > aux.peek()) {
-                stack.push(aux.pop());
+            while (!auxStack.isEmpty() && top > auxStack.peek()) {
+                stack.push(auxStack.pop());
             }
-            aux.push(top);
+            auxStack.push(top);
         }
         
         // push back to original stack
-        while (!aux.isEmpty()) {
-            stack.push(aux.pop());
+        while (!auxStack.isEmpty()) {
+            stack.push(auxStack.pop());
         }
     }
     
