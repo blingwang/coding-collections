@@ -3,20 +3,16 @@ public class Solution4Q8 {
         if (t2 == null) {
             return true;
         }
-        
-        return subTree(t1,t2);
-    }
 
-    private static boolean subTree(TreeNode r1, TreeNode r2) {
-        if (r1 == null) {
+        if (t1 == null) {
             return false;
         }
 
-        if (r1.val == r2.val && matchTree(r1, r2)) {
+        if (matchTree(t1, t2)) {
             return true;
         }
 
-        return (subTree(r1.left, r2) || subTree(r1.right, r2));
+        return (containsTree(t1.left, t2) || containsTree(t1.right, t2));
     }
 
     private static boolean matchTree(TreeNode r1, TreeNode r2) {
