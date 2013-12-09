@@ -1,29 +1,46 @@
 import java.util.*;
 
 public class Solution2Q2 {
-    public static ListNode kthToLast(ListNode head, int k) {
-        ListNode n1 = head;
-        ListNode n2 = head;
+	public static ListNode kthToLast(ListNode head, int k) {
+		assert(k >= 1);
+        ListNode slow = head;
+        ListNode fast = head;
 
-        // move n2 forward k nodes into the list
-        for(int i = 0; i < k -1; i++) {// i < k?
-            if (n2 == null) return null; // error check
-            n2 = n2.next;
+		// kth node jumps k steps to reach null
+        for (int i = 0; i < k; i++) {
+            if (fast == null) return null;// < k nodes
+            fast = fast.next;
         }
 
-        if(n2 == null) return null;
-
-        // now move n1 and n2 at the same speed
-        // when n2 hits the end, n1 will be at the right element
-        while (n2.next != null) {
-            n1 = n1.next;
-            n2 = n2.next;
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
         }
 
-        return n1;
+        return slow;
     }
     
     public static ListNode kthToLast2(ListNode head, int k) {
+        ListNode slow = head;
+        ListNode fast = head;
+
+		// kth node jumps k-1 to reach end
+        for (int i = 0; i < k -1; i++) {
+            if (fast == null) return null;// < k-1 nodes
+            fast = fast.next;
+        }
+
+        if (fast == null) return null; // = k-1 nodes
+
+        while (fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        return slow;
+    }
+    
+    public static ListNode kthToLast3(ListNode head, int k) {
         if (k < 0) {
             return null;
         }
@@ -56,7 +73,7 @@ public class Solution2Q2 {
     	    cur = cur.next;
     	}
     	
-    	System.out.println(kthToLast2(head, -3).val);
+    	System.out.println(kthToLast2(head, 3).val);
     }
     
     /**
