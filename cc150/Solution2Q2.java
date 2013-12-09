@@ -50,7 +50,7 @@ public class Solution2Q2 {
     
     public static NthNode kthToLastRecur(ListNode head, int k) {
         if (head == null) {
-            return new NthNode(null, -1);
+            return new NthNode(null, 0);
         }
         
         NthNode nth = kthToLastRecur(head.next, k);
