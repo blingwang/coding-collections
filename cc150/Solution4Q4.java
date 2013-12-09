@@ -62,27 +62,28 @@ public class Solution4Q4 {
     
     public ArrayList<LinkedList<TreeNode>> bfs2(TreeNode root) {
         ArrayList<LinkedList<TreeNode>> result = new ArrayList<LinkedList<TreeNode>>();
+        if (root == null)  return result;
 
-        LinkedList<TreeNode> current = new LinkedList<TreeNode>();
-        if (root != null) current.add(root); // visit the root
+        ArrayDeque<TreeNode> current = new ArrayDeque<TreeNode>();
+        current.add(root);
 
         while (!current.isEmpty()){
-            // add previous level
-            result.add(current);
-            
+            result.add(current); // add previous level
             // visit next level
-            LinkedList<TreeNode> parents = current;
-            current = new LinkedList<TreeNode>();
+            ArrayDeque<TreeNode> parents = current;
+            current = new ArrayDeque<TreeNode>();
             
             for (TreeNode parent : parents) {
                 if (parent.left != null) {
                     current.add(parent.left);
                 }
+                
                 if (parent.right != null) {
                     current.add(parent.right);
                 }
             }
         }
+        
         return result;
     }
     
