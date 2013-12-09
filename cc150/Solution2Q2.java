@@ -6,7 +6,7 @@ public class Solution2Q2 {
         ListNode slow = head;
         ListNode fast = head;
 
-		// kth node jumps k steps to reach null node
+		// kth node jumps k steps to reach null
         for (int i = 0; i < k; i++) {
             if (fast == null) return null;// < k nodes
             fast = fast.next;
