@@ -23,8 +23,8 @@ public class Solution2Q2 {
     public static ListNode kthToLast2(ListNode head, int k) {
         ListNode slow = head;
         ListNode fast = head;
-
-		// kth node jumps k-1 to reach end
+        
+        // kth node jumps k-1 to reach end
         for (int i = 0; i < k -1; i++) {
             if (fast == null) return null;// < k-1 nodes
             fast = fast.next;
