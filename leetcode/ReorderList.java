@@ -36,17 +36,14 @@ public class ReorderList {
         return pre;
     }
     
-    // insert second half into first alternately
     private void mergeTwoHalves(ListNode first, ListNode second) {
-        ListNode current1 = first;
-        ListNode current2 = second;
-        
-        while (current2 != null) {
-            ListNode nextInSecond = current2.next;
-            current2.next = current1.next;
-            current1.next = current2;
-            current1 = current1.next.next;
-            current2 = nextInSecond;
+        // insert each node in second half into first alternately
+        while (second != null) {
+            ListNode nextInSecond = second.next;
+            second.next = first.next;
+            first.next = second;
+            first = first.next.next;
+            second = nextInSecond;
         }
     }
 }
