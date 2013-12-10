@@ -18,6 +18,8 @@ public class Solution4Q9 {
 
         findSum(root.left, sum, path);
         findSum(root.right, sum, path);
+        
+        path.remove(path.size() - 1);
     }
 
     private static void printPath(ArrayList<Integer> path, int start, int end) {
