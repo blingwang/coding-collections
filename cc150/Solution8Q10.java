@@ -13,7 +13,7 @@ class HashTable<K, V> {
     private static final int INIT_CAPACITY = 37;
     private int N; // # of entries
     private int M; // hash table size;
-    private Entry<K, V>[] table; // array of key-value pairs
+    private Entry<K, V>[] table; // buckets of entry lists
     
     public HashTable() {
         this(INIT_CAPACITY);
