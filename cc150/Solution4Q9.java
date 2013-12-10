@@ -30,11 +30,6 @@ public class Solution4Q9 {
         System.out.println();
     }
 
-    private static int depth(TreeNode root) {
-        if (root == null) return 0;
-        return Math.max(depth(root.left), depth(root.right)) + 1;
-    }
-
     public static TreeNode sortedArrayToBST(int[] a) {
         return sortedArrayToBST(a, 0, a.length - 1);
     }
