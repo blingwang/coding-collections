@@ -38,9 +38,7 @@ class Solution9Q3 {
         if (lo > hi) return -1;
         
         int mid = lo + (hi - lo) / 2;
-        if (a[mid] == mid) {
-            return mid;
-        } 
+        if (a[mid] == mid) return mid;
         
         // search left
         int result = findMagicIndexDup(a, lo, Math.min(mid-1, a[mid]));
