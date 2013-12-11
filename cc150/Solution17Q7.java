@@ -13,7 +13,7 @@ class Solution17Q7 {
         if (number == 0) {
             return "Zero";
         } else if (number < 0) {
-            return "Negative" + numToString(-1 * number);
+            return "Negative" + numToString(-number);
         }
 
         int count = 0;
