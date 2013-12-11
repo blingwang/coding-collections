@@ -16,6 +16,8 @@ public class ValidParentheses {
         
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
+            boolean isLeft = !map.containsKey(c);
+            
             if (isLeft(c)) {
                 stack.push(c);
             } else {
@@ -25,10 +27,6 @@ public class ValidParentheses {
         }
         
         return stack.isEmpty();
-    }
-    
-    private boolean isLeft(char c) {
-        return !map.containsKey(c);
     }
     
     public boolean isValid2(String s) {
