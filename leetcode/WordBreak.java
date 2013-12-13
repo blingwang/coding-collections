@@ -21,7 +21,6 @@ public class WordBreak {
     public boolean wordBreak(String s, Set<String> dict, 
                              Map<String, Boolean> cache) {
         if (cache.containsKey(s)) return cache.get(s);
-        
         if (dict.contains(s)) return true;
         
         for (int i = 1; i < s.length(); i++) {
@@ -33,7 +32,6 @@ public class WordBreak {
         }
         
         cache.put(s, false);
-        
         return false;
     }
 }
