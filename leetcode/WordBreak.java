@@ -13,6 +13,19 @@ public class WordBreak {
         return false;
     }
     
+    public boolean wordBreakSlow2(String s, Set<String> dict) {
+        if (dict.contains(s)) return true;
+        
+        for (int i = 1; i < s.length(); i++) {
+            if (wordBreak(s.substring(0, i), dict) && 
+                wordBreak(s.substring(i), dict)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     // memorization
     public boolean wordBreakWithCache(String s, Set<String> dict) {
         Map<String, Boolean> cache = new HashMap<String, Boolean>();
