@@ -70,7 +70,7 @@ public class LongParser {
 
         try {
             stringToLong("");
-            System.out.println("failure: +");
+            System.out.println("failure: empty string");
         } catch (NumberFormatException e) {
             System.out.println("success");
         }
