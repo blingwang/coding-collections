@@ -12,6 +12,9 @@ public class LongParser {
      *
      * Limitations: this method does not handle overflow
      * If the string contains a number beyond long value limits, it will overflow.
+     * 
+     * To check overflow, check against limit/10 before multiplication
+     * See: http://www.docjar.com/html/api/java/lang/Long.java.html
      *
      * @param s a string to be parsed to long
      * @return the long represented by the argument in decimal.
