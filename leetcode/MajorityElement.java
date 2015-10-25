@@ -1,5 +1,8 @@
 public class Solution {
-    /* Voting algorithm */
+    /* 
+    * Voting algorithm 
+    * Every time vote minus, it is the same that we remove the two numbers from the array.
+    */
     public int majorityElement(int[] nums) {
         int n = nums.length;
         int candidate = nums[0];
