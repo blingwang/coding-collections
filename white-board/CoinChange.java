@@ -17,6 +17,7 @@ class CoinChange {
         return count;
     }
 
+    // this only works for the so-called canonical coin systems, like the one used in US and many other countries
     public int[] makeChangeMinCountGreedy(int n) {// for {25,10,5,1}
         int[] changes = new int[coins.length];
         for(int i = 0; i < coins.length; i++) {
