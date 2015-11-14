@@ -1,11 +1,24 @@
-import xml.etree.ElementTree as ET
-root = ET.Element("a")
-root.text = 'text1 ' #First Text in the Element a
-b = ET.SubElement(root, "b")
-b.text = 'text2' #Text in the first b
-b.tail = ' text3 ' #Text immediately after the first b but before the second
-b = ET.SubElement(root, "b")
-b.text = 'text4'
-b.tail = ' text5'
-print ET.tostring(root)
-#This prints <a>text1 <b>text2</b> text3 <b>text4</b> text5</a>
+from xml.etree import ElementTree
+
+def indent(elem, level=0):
+    i = "\n" + level*"  "
+    if len(elem):
+        if not elem.text or not elem.text.strip():
+            elem.text = i + "  "
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+        for elem in elem:
+            indent(elem, level+1)
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+    else:
+        if level and (not elem.tail or not elem.tail.strip()):
+            elem.tail = i
+
+root = ElementTree.parse('/tmp/xmlfile').getroot()
+indent(root)
+ElementTree.dump(root)
+
+# element: tag, attributes, text, tail, list of children nodes.
+# text: text before list of children nodes
+# tail: text immediately after a node
