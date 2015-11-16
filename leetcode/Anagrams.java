@@ -15,6 +15,7 @@ public class Anagrams {
         
         List<List<String>> result = new ArrayList<>();
         for (List<String> anagramList : anagramTable.values()) {
+            // Another solution is using a tree set, then new ArrayList<T>(set)
             Collections.sort(anagramList);
             result.add(anagramList);
         }
