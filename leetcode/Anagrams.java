@@ -1,6 +1,27 @@
 import java.util.*;
 
 public class Anagrams {
+    // return sorted anagrams
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> anagramTable = new HashMap<>();
+        for (String str : strs) {
+            String key = getKey(str);
+            if (!anagramTable.containsKey(key)) {
+                anagramTable.put(key, new ArrayList<String>());
+            }
+            
+            anagramTable.get(key).add(str);
+        }
+        
+        List<List<String>> result = new ArrayList<>();
+        for (List<String> anagramList : anagramTable.values()) {
+            Collections.sort(anagramList);
+            result.add(anagramList);
+        }
+        
+        return result;
+    }
+    
     // corner cases: empty strings; distinct word
     public ArrayList<String> anagrams(String[] strs) {
         // Add words into hash table with sorted chars as key
