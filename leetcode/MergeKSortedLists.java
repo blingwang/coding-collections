@@ -1,33 +1,35 @@
 import java.util.*;
 public class MergeKSortedLists {
    public ListNode mergeKLists(ArrayList<ListNode> lists) {
-       if (lists == null || lists.isEmpty()) return null;
-       
-       ListNode dummyHead = new ListNode(-1);
-       
-       Comparator<ListNode> comparator = new Comparator<ListNode>() {
-           @Override
-           public int compare(ListNode n1, ListNode n2) {
-               if (n1.val < n2.val) return -1;
-               if (n1.val > n2.val) return 1;
-               return 0;
-           }
-       };
-       
-       PriorityQueue<ListNode> heap = new PriorityQueue<ListNode>(lists.size(), comparator);
-       for (ListNode node : lists) {
-           if (node != null) heap.add(node);
-       }
-       
-       ListNode pre = dummyHead;
-       while (!heap.isEmpty()) {
-           ListNode curMin = heap.poll();
-           pre.next = curMin;
-           pre = pre.next;
-           if (curMin.next != null) heap.add(curMin.next);
-       }
-       
-       return dummyHead.next;
+       if (lists == null || lists.length == 0) return null;
+        
+        ListNode dummyHead = new ListNode(-1);
+        
+        Comparator<ListNode> comparator = new Comparator<ListNode>() {
+            @Override
+            public int compare(ListNode n1, ListNode n2) {
+                if (n1.val < n2.val) return -1;
+                if (n1.val > n2.val) return 1;
+                return 0;
+            }
+        };
+        
+        PriorityQueue<ListNode> heap = new PriorityQueue<>(lists.length, comparator);
+        for (ListNode node : lists) {
+            if (node != null) heap.add(node);
+        }
+        
+        ListNode pre = dummyHead;
+        while (!heap.isEmpty()) {
+            ListNode min = heap.poll();
+            pre.next = min;
+            pre = pre.next;
+            if (min.next != null) {
+                heap.add(min.next);
+            }
+        }
+        
+        return dummyHead.next;
    }
    
    public ListNode mergeKListsInplace(ArrayList<ListNode> lists) {
