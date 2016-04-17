@@ -21,10 +21,10 @@ class TwoSum {
             }
         }
 
-        return pair;
+        throw new IllegalArgumentException("No two sum solution");;
     }
 
-    /* return two non-zero-based indexes */
+    /* return two indexes */
     public class Solution {
         public int[] twoSum(int[] nums, int target) {
             int[] result = {-1, -1};
