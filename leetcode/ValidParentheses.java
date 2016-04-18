@@ -30,29 +30,37 @@ public class ValidParentheses {
     }
     
     public boolean isValid2(String s) {
-        ArrayDeque<Character> stack = new ArrayDeque<Character>();
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            switch (c) {
-                case '(':
-                case '{':
-                case '[':
-                    stack.push(c);
-                    break;
-                case ')':
-                    if (stack.isEmpty() || stack.pop() != '(') return false;
-                    break;
-                case '}':
-                    if (stack.isEmpty() || stack.pop() != '{') return false;
-                    break;
-                case ']':
-                    if (stack.isEmpty() || stack.pop() != '[') return false;
-                    break;
-                default:
-                    break;
-                
+        public boolean isValid(String s) {
+            ArrayDeque<Character> stack = new ArrayDeque<>();
+            
+            for (int i = 0; i < s.length(); i++) {
+                switch (s.charAt(i)) {
+                    case '(':
+                    case '{':
+                    case '[':
+                        stack.push(s.charAt(i));
+                        break;
+                    case ')':
+                        if (stack.isEmpty() || stack.pop() != '(') {
+                            return false;
+                        }
+                        break;
+                    case '}':
+                        if (stack.isEmpty() || stack.pop() != '{') {
+                            return false;
+                        }
+                        break;
+                    case ']':
+                        if (stack.isEmpty() || stack.pop() != '[') {
+                            return false;
+                        }
+                        break;
+                    default:
+                        return false;
+                }
             }
+            
+            return stack.isEmpty();
         }
-        return stack.isEmpty();
     }
 }
