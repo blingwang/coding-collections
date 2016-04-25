@@ -34,7 +34,7 @@ public class ValidatePalindrome {
                 end--;
             }
             
-            if (start == end) return true;
+            if (start >= end) return true;
             
             if (Character.toLowerCase(s.charAt(start)) != Character.toLowerCase(s.charAt(end))) return false;
             
