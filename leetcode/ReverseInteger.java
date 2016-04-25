@@ -29,6 +29,10 @@ public class ReverseInteger {
             x /= 10;
         }
         
+        if (result < Integer.MIN_VALUE || result > Integer.MAX_VALUE) {
+            return 0;
+        }
+        
         return (int)result;
     }
 }
