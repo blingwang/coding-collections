@@ -1,6 +1,6 @@
 public class LRUCache {
     private Map<Integer, Entry> map;
-    private transient Entry header; // dummy head
+    private transient Entry header; // dummy head, transient var is not to be serialized
     private final int capacity;
     private int size;
     
