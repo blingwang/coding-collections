@@ -79,7 +79,7 @@ import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 public class LRUCache extends LinkedHashMap<Integer, Integer>{
-    int capacity;
+    private final int capacity;
 
     public LRUCache(int capacity) {
         super(capacity, 0.75f, true);
