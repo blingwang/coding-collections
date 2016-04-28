@@ -1,17 +1,14 @@
 public class Solution {
     public int calculate(String s) {
+        s = s.replaceAll("\\s", "");
         ArrayDeque<Integer> stack = new ArrayDeque<>();
         char preOp = '+';
         int i = 0;
         
         while (i < s.length()) {
-            while (i < s.length() && s.charAt(i) == ' ') i++;
-            if (i == s.length()) break;
-            
             int num = 0;
             while (i < s.length() && Character.isDigit(s.charAt(i))) {
-                num = num * 10 + (s.charAt(i) - '0');
-                i++;
+                num = num * 10 + (s.charAt(i++) - '0');
             }       
             
             if (preOp == '+') stack.push(num);
@@ -19,11 +16,8 @@ public class Solution {
             else if (preOp == '*') stack.push(stack.pop() * num);
             else if (preOp == '/') stack.push(stack.pop() / num);
             
-            while (i < s.length() && s.charAt(i) == ' ') i++;
             if (i == s.length()) break;
-            
-            preOp = s.charAt(i);
-            i++;
+            preOp = s.charAt(i++);
         }
         
         int result = 0;
