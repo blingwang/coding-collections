@@ -25,7 +25,7 @@ class QuickSort {
             while (j > lo && a[j].compareTo(pivot) > 0) j--;
 
             if (i >= j) break;
-            swap(a, i, j);
+            swap(a, i++, j--);
         }
 
         swap(a, lo, j);
