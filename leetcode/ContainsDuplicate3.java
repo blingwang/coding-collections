@@ -1,4 +1,5 @@
 public class Solution {
+    // Use value range as key. If the map already contains the same key, a valid pair is found. 
     public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
         if (nums.length < 2 || t < 0 || k < 1) return false;
         
@@ -11,7 +12,7 @@ public class Solution {
             if (buckets.containsKey(id-1) && nums[i] - buckets.get(id-1) < width) return true;
             if (buckets.containsKey(id+1) && buckets.get(id+1) - nums[i] < width) return true;
                 
-            buckets.put(id, nums[i]);
+            buckets.put(id, nums[i]); // each bucket contains at most one entry
             
             if (i >= k) buckets.remove(getBucketId(nums[i-k], width));
         }
