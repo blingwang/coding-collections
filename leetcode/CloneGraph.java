@@ -11,7 +11,7 @@ public class CloneGraph {
     public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
         if (node == null) return null;
         ArrayDeque<UndirectedGraphNode> queue = new ArrayDeque<UndirectedGraphNode>();
-        Map<Integer, UndirectedGraphNode> copyTable = new HashMap<Integer, UndirectedGraphNode>();
+        Map<Integer, UndirectedGraphNode> copyTable = new HashMap<>();
         
         queue.offer(node);
         UndirectedGraphNode graphCopy = new UndirectedGraphNode(node.label);
@@ -38,7 +38,7 @@ public class CloneGraph {
     }
     
     public UndirectedGraphNode cloneGraphDFS(UndirectedGraphNode node) {
-        Map<Integer, UndirectedGraphNode> copyTable = new HashMap<Integer, UndirectedGraphNode>();
+        Map<Integer, UndirectedGraphNode> copyTable = new HashMap<>();
         return clone(node, copyTable);
     }
     
