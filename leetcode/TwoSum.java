@@ -25,24 +25,23 @@ class TwoSum {
     }
 
     /* return two indexes */
-    public class Solution {
+    class Solution {
         public int[] twoSum(int[] nums, int target) {
-            int[] result = {-1, -1};
-            Map<Integer, Integer> indexMap = new HashMap<>();
-            
+            int[] pair = {-1, -1};
+            Map<Integer, Integer> valToIndex = new HashMap();
+
             for (int i = 0; i < nums.length; i++) {
-                int expected = target - nums[i];
-                
-                if (indexMap.containsKey(expected)) {
-                    result[0] = indexMap.get(expected);
-                    result[1] = i;
-                    return result;
+                int want = target - nums[i];
+
+                if (valToIndex.containsKey(want)) {
+                    pair[0] = valToIndex.get(want);
+                    pair[1] = i;
+                    return pair;
                 }
-                
-                indexMap.put(nums[i], i);
+
+                valToIndex.put(nums[i], i);
             }
-            
-            return result;
+
+            return pair;
         }
     }
-}
