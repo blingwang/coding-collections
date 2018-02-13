@@ -28,7 +28,7 @@ class TwoSum {
     class Solution {
         public int[] twoSum(int[] nums, int target) {
             int[] pair = {-1, -1};
-            Map<Integer, Integer> valToIndex = new HashMap();
+            Map<Integer, Integer> valToIndex = new HashMap<>();
 
             for (int i = 0; i < nums.length; i++) {
                 int want = target - nums[i];
