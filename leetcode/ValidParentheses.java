@@ -31,7 +31,7 @@ public class ValidParentheses {
     
     public boolean isValid2(String s) {
         public boolean isValid(String s) {
-            ArrayDeque<Character> stack = new ArrayDeque<>();
+            Deque<Character> stack = new ArrayDeque<>();
             
             for (int i = 0; i < s.length(); i++) {
                 switch (s.charAt(i)) {
