@@ -111,6 +111,7 @@ class Prime {
         return largestFactor;
     }
     
+    // see https://stackoverflow.com/questions/9625663/calculating-and-printing-the-nth-prime-number
     public static int kthPrime(int k) {
         int i, count;
         for(i = 2, count = 0; count < k; i++) {
