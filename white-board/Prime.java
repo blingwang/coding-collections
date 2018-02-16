@@ -96,6 +96,17 @@ class Prime {
 
         return largestFactor;
     }
+    
+    public static int kthPrime(int k) {
+        int i, count;
+        for(i = 2, count = 0; count < k; i++) {
+            if (isPrime(i)) {
+                count++;
+            }
+        }
+        // The candidate has been incremented once after the count reached n
+        return i - 1;
+    }
 
     public static void main(String[] args) {
         for (int i : findFactors(100)) {
