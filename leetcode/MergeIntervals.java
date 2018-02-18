@@ -1,5 +1,29 @@
 import java.util.*;
 public class MergeIntervals {
+    // Using lamda and keep original list
+    public List<Interval> merge(List<Interval> intervals) {
+        if (intervals.size() <=1) return intervals;
+        
+        intervals.sort((i1, i2) -> Integer.compare(i1.start, i2.start));
+        
+        List<Interval> mergedList = new ArrayList<>();
+        int preStart = intervals.get(0).start;
+        int preEnd = intervals.get(0).end;
+        
+        for (Interval cur : intervals) {
+            if (cur.start <= preEnd) {
+                preEnd = Math.max(cur.end, preEnd);
+            } else {
+                mergedList.add(new Interval(preStart, preEnd));
+                preStart = cur.start;
+                preEnd = cur.end;
+            }
+        }
+        
+        mergedList.add(new Interval(preStart, preEnd));
+        return mergedList;
+    }
+    
     public ArrayList<Interval> merge(ArrayList<Interval> intervals) {
         ArrayList<Interval> mergedList = new ArrayList<Interval>();
         if (intervals == null || intervals.size() == 0) return mergedList;
