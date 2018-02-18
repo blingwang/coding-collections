@@ -5,6 +5,37 @@ class Solution {
     public String minWindow(String s, String t) {
         if (s.length() < t.length()) return "";
         
+        int[] targetCount = new int[256];
+        for (int i = 0; i < t.length(); i++) {
+            targetCount[t.charAt(i)]++;
+        }
+        
+        int minStart = -1;
+        int minLength = Integer.MAX_VALUE;
+        int numCharsFound = 0;
+        for (int start = 0, end = 0; end < s.length(); end++) {
+            if (targetCount[s.charAt(end)] > 0) numCharsFound++;
+            targetCount[s.charAt(end)]--;
+            
+            
+            while (numCharsFound == t.length()) {
+                if (end - start + 1 < minLength) {
+                    minStart = start;
+                    minLength = end - start + 1;
+                }
+                
+                if (targetCount[s.charAt(start)] == 0) numCharsFound--;
+                targetCount[s.charAt(start)]++;
+                start++;
+            }
+        }
+        
+        return minStart == -1 ? "" : s.substring(minStart, minStart + minLength);
+    }
+    
+    public String minWindowUsingMap(String s, String t) {
+        if (s.length() < t.length()) return "";
+        
         Map<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < t.length(); i++) {
             char c = t.charAt(i);
