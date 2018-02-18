@@ -16,7 +16,6 @@ public class MergeIntervals {
         Collections.sort(intervals, comparator);
         
         Interval pre = intervals.get(0);
-        mergedList.add(pre);
         for (Interval cur : intervals) {
             if (cur.start <= pre.end) {
                 pre.end = Math.max(pre.end, cur.end);
@@ -26,6 +25,7 @@ public class MergeIntervals {
             }
         }
         
+        mergedList.add(pre);
         return mergedList;
     }
     
