@@ -17,7 +17,6 @@ class Solution {
             if (targetCount[s.charAt(end)] > 0) numCharsFound++;
             targetCount[s.charAt(end)]--;
             
-            
             while (numCharsFound == t.length()) {
                 if (end - start + 1 < minLength) {
                     minStart = start;
