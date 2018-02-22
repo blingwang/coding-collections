@@ -1,27 +1,25 @@
 public class ReverseInteger {
     public int reverse(int x) {
-        int sign = 1;
-        if (x < 0) {
-            if (x == Integer.MIN_VALUE) return x;
-            sign = -1;
-            x = -x;
+        int result = 0;
+
+        while (x != 0)
+        {
+            int tail = x % 10;
+            int newResult = result * 10 + tail;
+            
+            // If overflow exists, the new result will not equal previous one.
+            if ((newResult - tail) / 10 != result) {
+                return 0;
+            }
+            
+            result = newResult;
+            x = x / 10;
         }
-        
-        long result = 0;
-        
-        while (x != 0) {
-            result = result * 10 + x % 10;
-            x /= 10;
-        }
-        
-        if (result > Integer.MAX_VALUE) {
-            return sign < 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
-        }
-        
-        return (int)result * sign;
+
+        return result;
     }
     
-    public int reverse2(int x) {// let java do overflow check
+    public int reverse2(int x) {
         long result = 0;
         
         while(x != 0) { // java module returns negative
