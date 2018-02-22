@@ -62,3 +62,21 @@ public class NQueens {
         a[j] = temp;
     }
 }
+
+// N queens with just one solution in O(n)
+class NQueens {
+    public int[] solveNQueens(int n) {
+        if (n < 4) return null;
+        
+        int[] solution = new int[n];
+        for (int q = 1, i = 0; i < n; i++) {
+            solution[i] = q;
+            q += 2;
+            if (q >= n) {
+                q = 0;
+            }
+        }
+        
+        return solution;
+    }
+}
