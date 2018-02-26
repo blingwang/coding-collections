@@ -23,4 +23,21 @@ class Solution {
         nums[i] = nums[j];
         nums[j] = temp;
     }
+    
+    public int firstMissingPositiveUsingSet(int[] nums) {
+        Set<Integer> positives = new HashSet<>();
+        for (int i : nums) {
+            if (i > 0 ) {
+                positives.add(i);
+            }
+        }
+        
+        for (int i = 1; i <= positives.size(); i++) {
+            if (!positives.contains(i)) {
+                return i;
+            }
+        }
+        
+        return positives.size() + 1;
+    }
 }
