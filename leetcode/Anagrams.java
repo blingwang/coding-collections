@@ -1,6 +1,18 @@
 import java.util.*;
 
 public class Anagrams {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String s : strs) {
+            String key = getKey(s);
+            if (!map.containsKey(key)) {
+                map.put(key, new ArrayList<>());
+            }
+            map.get(key).add(s);            
+        }
+        return new ArrayList<List<String>>(map.values());
+    }
+    
     // return sorted anagrams
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> anagramTable = new HashMap<>();
