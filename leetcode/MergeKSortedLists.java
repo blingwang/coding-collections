@@ -1,5 +1,29 @@
 import java.util.*;
 public class MergeKSortedLists {
+   public ListNode mergeKListsPQ(ListNode[] lists) {
+        if (lists.length == 0) return null;
+
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((l1, l2) -> l1.val - l2.val);
+        for (ListNode node : lists) {
+            if (node != null) {
+                pq.add(node);
+            }
+        }
+
+        ListNode dummyHead = new ListNode(-1);
+        ListNode pre = dummyHead;
+        while (!pq.isEmpty()) {
+            ListNode min = pq.poll();
+            if (min.next != null) {
+                pq.add(min.next);
+            }
+            pre.next = min;
+            pre = pre.next;
+        }
+        
+        return dummyHead.next;
+    }
+   
    public ListNode mergeKLists(ArrayList<ListNode> lists) {
        if (lists == null || lists.length == 0) return null;
         
