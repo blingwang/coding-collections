@@ -28,3 +28,36 @@ public class EvaluateReversePolish {
         else throw new IllegalArgumentException("Invalid input.");
     }
 }
+
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        
+        int first, second;
+        for (String token : tokens) {
+            switch (token) {
+                case "+": 
+                    stack.push(stack.pop() + stack.pop());
+                    break;
+                case "-": 
+                    first = stack.pop();
+                    second = stack.pop();
+                    stack.push(second - first);
+                    break;
+                case "*":
+                    stack.push(stack.pop() * stack.pop());
+                    break;
+                case "/":
+                    first = stack.pop();
+                    second = stack.pop();
+                    stack.push(second / first);
+                    break;
+                default:
+                    stack.push(Integer.parseInt(token));
+                    break;
+            }
+        }
+        
+        return stack.pop();
+    }
+}
