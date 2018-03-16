@@ -9,6 +9,7 @@ Class Solution {
             if (Math.abs(root.val - target) < Math.abs(closest - target)) {
                 closest = root.val;
             }
+            
             if (target < root.val) {
                 root = root.left;
             } else {
