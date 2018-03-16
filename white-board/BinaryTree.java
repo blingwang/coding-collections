@@ -7,9 +7,9 @@ public class BinaryTree implements Iterable<TreeNode>{
     }
     
      
-    public void delete(Key key) {  root = delete(root, key);  }
+    public void delete(int key) {  root = delete(root, key);  }
     
-    private Node delete(Node x, Key key) {
+    private Node delete(TreeNode x, int key) {
        if (x == null) return null;
        int cmp = key.compareTo(x.key);
        if      (cmp < 0) x.left  = delete(x.left,  key);
@@ -27,7 +27,7 @@ public class BinaryTree implements Iterable<TreeNode>{
     
     public void deleteMin() {  root = deleteMin(root);  }
     
-    private Node deleteMin(Node x){
+    private Node deleteMin(TreeNode x){
        if (x.left == null) return x.right;
        x.left = deleteMin(x.left);
        x.count = 1 + size(x.left) + size(x.right);
