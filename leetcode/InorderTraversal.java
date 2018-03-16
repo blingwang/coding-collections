@@ -1,45 +1,41 @@
 import java.util.*;
 public class InorderTraversal {
-   public ArrayList<Integer> inorderTraversal(TreeNode root) {
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        ArrayDeque<TreeNode> stack = new ArrayDeque<TreeNode>();
-        TreeNode current = root; // current node to visit
-        
-        while (true) {
-            while (current != null) {// got to left end
-                stack.push(current);
-                current = current.left;
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<Integer>();
+
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode cur = root;
+
+        while(cur!=null || !stack.empty()){
+            while(cur!=null){
+                stack.add(cur);
+                cur = cur.left;
             }
-            
-            if (stack.isEmpty()) break; // done
-            
-            // visit parent: not to visit left for nodes from stack
-            // always pop when cur is null(left end or right end)
-            current = stack.pop(); 
-            result.add(current.val);
-            current = current.right; // visit right substree
+            cur = stack.pop();
+            list.add(cur.val);
+            cur = cur.right;
         }
-        
-        return result;
+
+        return list;
     }
    
-   public ArrayList<Integer> inorderTraversalRecur(TreeNode root) {
+    public ArrayList<Integer> inorderTraversalRecur(TreeNode root) {
        ArrayList<Integer> values = new ArrayList<Integer>();
        inorderTraversal(values, root);
        return values;
-   }
-   
-   private void inorderTraversal(ArrayList<Integer> values, TreeNode root) {
+    }
+
+    private void inorderTraversal(ArrayList<Integer> values, TreeNode root) {
        if (root == null) return;
        inorderTraversal(values, root.left);
        values.add(root.val);
        inorderTraversal(values, root.right);
-   }
+    }
 
-   private class TreeNode {
+    private class TreeNode {
        int val;
        TreeNode left;
        TreeNode right;
        TreeNode(int x) { val = x; }
-   }
+    }
 }
