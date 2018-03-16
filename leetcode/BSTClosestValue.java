@@ -17,4 +17,11 @@ Class Solution {
         }
         return closest;
     }
+    
+    public int closestValueRecursive(TreeNode root, double target) {
+        TreeNode child = root.val < target ? root.right : root.left;
+        if(child == null) return root.val;
+        int childClose = closestValue(child, target);
+        return Math.abs(target-childClose) > Math.abs(target-root.val) ? root.val : childClose;
+    }
 }
