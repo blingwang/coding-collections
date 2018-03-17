@@ -1,28 +1,16 @@
-import java.util.*;
-public class SimplifyPath {
+class Solution {
     public String simplifyPath(String path) {
-        if (path == null || !path.startsWith('/')) return null;
+        Set<String> skip = new HashSet<>(Arrays.asList("", ".", ".."));
+        Deque<String> deque = new ArrayDeque<>();
         
-        String[] fileNames = path.trim().split("/");
-        ArrayDeque<String> deque = new ArrayDeque<String>();
-        for (String fileName : fileNames) {
-            if (fileName.equals("") || fileName.equals(".")) {
-                // do nothing
-            } else if (fileName.equals("..")) {
-                if (!deque.isEmpty()) deque.removeLast();
-            } else {
-                deque.addLast(fileName);// do not use push/pop
+        for (String dir : path.split("/")) {
+            if (dir.equals("..") && !deque.isEmpty()) {
+                deque.removeLast();
+            } else if (!skip.contains(dir)) {
+                deque.addLast(dir);
             }
         }
         
-        if (deque.isEmpty()) return "/";
-        
-        StringBuilder simplified = new StringBuilder();
-        while (!deque.isEmpty()) {
-            simplified.append("/"); 
-            simplified.append(deque.removeFirst());
-        }
-        
-        return simplified.toString();
+        return "/" + String.join("/", deque);
     }
 }
