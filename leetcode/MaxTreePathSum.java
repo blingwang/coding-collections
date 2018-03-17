@@ -1,29 +1,42 @@
-public class MaxTreePathSum {
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    private static class MutableInt {
+        int val;
+        MutableInt(int val) {
+            this.val = val;
+        }
+    }
+    
+    /**
+     * A path from start to end, goes up on the tree for 0 or more steps, 
+     * then goes down for 0 or more steps. Once it goes down, it can’t go up. 
+     * Each path has a highest node, which is also the lowest common ancestor 
+     * of all other nodes on the path.
+     */    
     public int maxPathSum(TreeNode root) {
-        Data data = dfs(root);
-        return data.maxSum;
+        MutableInt maxValue = new MutableInt(Integer.MIN_VALUE);
+        maxPathDown(root, maxValue);
+        return maxValue.val;
     }
     
-    private Data dfs(TreeNode root) {// post order
-        Data data = new Data();
-        if (root == null) return data;
-        
-        Data left = dfs(root.left);
-        Data right = dfs(root.right);
-        
-        // partial path can be empty
-        data.partialPath = Math.max(0, Math.max(left.partialPath, right.partialPath) + root.val);
-        data.maxSum = max(left.maxSum, right.maxSum, left.partialPath + root.val + right.partialPath);
-        
-        return data;
-    }
-    
-    private int max(int a, int b, int c) {
-        return Math.max(Math.max(a, b), c);
-    }
-    
-    private class Data {
-        int partialPath = 0; // partialPath >= 0
-        int maxSum = Integer.MIN_VALUE;
+    /**
+     * A recursive method maxPathDown(TreeNode node) 
+     * (1) computes the maximum path sum with highest node is the input node, update maximum if necessary 
+     * (2) returns the maximum sum of the path that can be extended to input node’s parent.
+     */
+    private int maxPathDown(TreeNode root, MutableInt maxValue) {
+        if (root == null) return 0;
+        int left = Math.max(0, maxPathDown(root.left, maxValue));
+        int right = Math.max(0, maxPathDown(root.right, maxValue));
+        maxValue.val = Math.max(maxValue.val, left + root.val + right);
+        return Math.max(left, right) + root.val;
     }
 }
