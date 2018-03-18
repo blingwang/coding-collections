@@ -1,27 +1,16 @@
 public class MaximumSubarray {
-    public int maxSubArray(int[] A) {
-        assert(A.length >= 1);
-        int maxSum = Integer.MIN_VALUE;
-        int curSum = 0;
-        
-        for (int i = 0; i < A.length; i++) {
-            curSum = Math.max(curSum + A[i], A[i]);
-            maxSum = Math.max(curSum, maxSum);
-        }
-        
-        return maxSum;
-    }
-    
-    public int maxSubArray2(int[] A) { // modified Kadane's algorithm
-        int maxEndingHere = A[0], maxSoFar = A[0];
-        for (int i = 1; i < A.length; i++) {
-            maxEndingHere = Math.max(A[i], maxEndingHere + A[i]);
-            maxSoFar      = Math.max(maxSoFar, maxEndingHere);
+    // modified Kadane's algorithm
+    public int maxSubArray(int[] nums) {
+        int maxSoFar = nums[0]; 
+        int maxEndingHere = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            maxEndingHere = Math.max(nums[i], maxEndingHere + nums[i]);
+            maxSoFar = Math.max(maxSoFar, maxEndingHere);
         }
         return maxSoFar;
     }
     
-    public int maxSubArray3(int[] A) {// divide and conquer
+    public int maxSubArrayRecursive(int[] A) {// divide and conquer
         return maxSubArray(A, 0, A.length-1);
     }
     
