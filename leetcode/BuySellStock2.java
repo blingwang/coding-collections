@@ -1,4 +1,5 @@
 public class BuySellStock2 {
+    // Just accumulate all possible increases
     public int maxProfit(int[] prices) {
         if (prices.length < 2) return 0;
         
