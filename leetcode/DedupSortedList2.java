@@ -1,33 +1,35 @@
-public class DedupSortedList2 {
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         ListNode dummyHead = new ListNode(-1);
         ListNode pre = dummyHead;
-        ListNode current = head;
-        
-        while (current != null) {
-            if (current.next == null || current.val != current.next.val) {
-                pre.next = current;
-                pre = current;
-                current = current.next;
+        ListNode cur = head;
+        while (cur != null) {
+            if (cur.next != null && cur.val == cur.next.val) {
+                cur = skipDuplicates(cur);
             } else {
-                int dupValue = current.val;
-                while (current != null && current.val == dupValue) {
-                    current = current.next;
-                }
+                pre.next = cur;
+                pre = cur;
+                cur = cur.next;
             }
         }
         
         pre.next = null;
-        
         return dummyHead.next;
     }
-
-    private class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
+    
+    private ListNode skipDuplicates(ListNode head) {
+        int dupVal = head.val;
+        while (head != null && head.val == dupVal) {
+            head = head.next;
+        }    
+        return head;
     }
 }
