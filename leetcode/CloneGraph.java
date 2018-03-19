@@ -10,12 +10,13 @@ class UndirectedGraphNode {
 public class CloneGraph {
     public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
         if (node == null) return null;
+        
         ArrayDeque<UndirectedGraphNode> queue = new ArrayDeque<UndirectedGraphNode>();
         Map<Integer, UndirectedGraphNode> copyTable = new HashMap<>();
         
-        queue.offer(node);
         UndirectedGraphNode graphCopy = new UndirectedGraphNode(node.label);
         copyTable.put(node.label, graphCopy);
+        queue.offer(node);
         
         while (!queue.isEmpty()) {
             UndirectedGraphNode current = queue.poll();
@@ -38,19 +39,19 @@ public class CloneGraph {
     }
     
     public UndirectedGraphNode cloneGraphDFS(UndirectedGraphNode node) {
-        Map<Integer, UndirectedGraphNode> copyTable = new HashMap<>();
-        return clone(node, copyTable);
+        if (node == null) return null;
+        Map<Integer, UndirectedGraphNode> copies = new HashMap<>();
+        return clone(node, copies);
     }
     
-    private UndirectedGraphNode clone(UndirectedGraphNode node, Map<Integer, UndirectedGraphNode> copyTable) {
-        if (node == null) return null;
-        if (copyTable.containsKey(node.label)) return copyTable.get(node.label);
+    private UndirectedGraphNode clone(UndirectedGraphNode node, Map<Integer, UndirectedGraphNode> copies) {
+        if (copies.containsKey(node.label)) return copies.get(node.label);
         
         UndirectedGraphNode copy = new UndirectedGraphNode(node.label);
-        copyTable.put(node.label, copy);
+        copies.put(node.label, copy);
         
         for (UndirectedGraphNode n : node.neighbors) {
-            copy.neighbors.add(clone(n, copyTable));
+            copy.neighbors.add(clone(n, copies));
         }
         
         return copy;
