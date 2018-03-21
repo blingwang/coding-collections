@@ -1,39 +1,23 @@
 import java.util.*;
 
 public class BinaryTreeLevelOrder {
-    public ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
-        ArrayList<ArrayList<Integer>> levelList = new ArrayList<ArrayList<Integer>>();
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> levelList = new ArrayList<>();
         if (root == null) return levelList;
         
-        ArrayDeque<TreeNode> queue = new ArrayDeque<TreeNode>();
-        int currentCount = 0;
-        int nextCount = 0;
-        
+        Deque<TreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
-        nextCount++;
         
         while (!queue.isEmpty()) {
-            if (currentCount == 0) {
-                currentCount = nextCount;
-                nextCount = 0;
-                levelList.add(new ArrayList<Integer>());
+            int levelCount = queue.size();
+            List<Integer> curLevel = new ArrayList<>();
+            for (int i = 0; i < levelCount; i++) {
+                TreeNode cur = queue.poll();
+                curLevel.add(cur.val);
+                if (cur.left != null) queue.offer(cur.left);
+                if (cur.right != null) queue.offer(cur.right);
             }
-            
-            TreeNode node = queue.poll();
-            currentCount--;
-            
-            ArrayList<Integer> currentLevel = levelList.get(levelList.size() - 1);
-            currentLevel.add(node.val);
-            
-            if (node.left != null) {
-                queue.offer(node.left);
-                nextCount++;
-            }
-            
-            if (node.right != null) {
-                queue.offer(node.right);
-                nextCount++;
-            }
+            levelList.add(curLevel);
         }
         
         return levelList;
