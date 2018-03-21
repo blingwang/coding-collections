@@ -1,42 +1,37 @@
-import java.util.*;
-public class Permutations2 {
-    private int[] a;
-    private ArrayList<ArrayList<Integer>> permutations;
-
-    public ArrayList<ArrayList<Integer>> permuteUnique(int[] num) {
-        a = num;
-        permutations = new ArrayList<ArrayList<Integer>>();
-        enumerate(0);
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> permutations = new ArrayList<>();
+        enumerate(nums, 0, permutations);
         return permutations;
     }
-
-    private void enumerate(int k) {
-        if (k == a.length) {
-            process();
+    
+    private void enumerate(int[] nums, int curIndex, List<List<Integer>> permutations) {
+        if (curIndex == nums.length) {
+            permutations.add(createPermutation(nums));
             return;
         }
         
         HashSet<Integer> seen = new HashSet<Integer>();
-        for (int i = k; i < a.length; i++) {
-            if (seen.contains(a[i])) continue;
-            seen.add(a[i]);
-            exch(a, k, i);
-            enumerate(k+1);
-            exch(a, k, i);
+        for (int i = curIndex; i < nums.length; i++) {
+            if (seen.contains(nums[i])) continue;
+            seen.add(nums[i]);
+            swap(nums, curIndex, i);
+            enumerate(nums, curIndex + 1, permutations);
+            swap(nums, curIndex, i);
         }
     }
-
-    private void process() {       
-        ArrayList<Integer> perm = new ArrayList<Integer>();
-        for (int i : a) {
-            perm.add(i);
+    
+    private List<Integer> createPermutation(int[] nums) {
+        List<Integer> permutation = new ArrayList<>();
+        for (int i : nums) {
+            permutation.add(i);
         }
-        permutations.add(perm);
+        return permutation;
     }
-
-    private void exch(int[] array, int i, int j) {
-        int temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+    
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
