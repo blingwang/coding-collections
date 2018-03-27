@@ -1,18 +1,30 @@
 public class Solution {
-    public int missingNumber(int[] nums) {
-        int n = nums.length;
-        if (n == 0) return -1;
-        
-        int xor1 = 0;
-        for (int i = 1; i <= n; i++) {
-            xor1 ^= i;
+    // If the array is in order, I prefer Binary Search method. Otherwise, the XOR method is better.
+    public int missingNumber(int[] nums) { //xor
+        int res = nums.length;
+        for(int i=0; i< nums.length; i++){
+            res ^= i;
+            res ^= nums[i];
         }
-        
-        int xor2 = nums[0];
-        for (int i = 1; i < n; i++) {
-            xor2 ^= nums[i];
+        return res;
+    }
+    
+    public int missingNumberSum(int[] nums) { //sum
+        int len = nums.length;
+        int sum = (0+len)*(len+1)/2;
+        for(int i=0; i<len; i++)
+            sum-=nums[i];
+        return sum;
+    }
+
+    public int missingNumberBinarySearch(int[] nums) { //binary search
+        Arrays.sort(nums);
+        int left = 0, right = nums.length, mid= (left + right)/2;
+        while(left<right){
+            mid = (left + right)/2;
+            if(nums[mid]>mid) right = mid;
+            else left = mid+1;
         }
-        
-        return xor1^xor2;
+        return left;
     }
 }
